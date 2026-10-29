@@ -57,7 +57,40 @@ func (s *Server) Handler() http.Handler {
 		}
 		write(w, 201, v)
 	}))
-	mux.HandleFunc("POST /api/rounds/{id}/stop", s.mutate(func(w http.ResponseWriter, r *http.Request) { s.result(w, s.app.Stop(r.Context(), r.PathValue("id"))) }))
+	mux.HandleFunc("POST /api/rounds/{id}/stop", s.mutate(func(w http.ResponseWriter, r *http.Request) {
+		if r.ContentLength == 0 {
+			s.result(w, s.app.Stop(r.Context(), r.PathValue("id")))
+			return
+		}
+		var body struct {
+			Sequence int `json:"sequence"`
+			Coins    int `json:"coins"`
+		}
+		if !decode(w, r, &body) {
+			return
+		}
+		v, err := s.app.StopWithResult(r.Context(), r.PathValue("id"), body.Sequence, body.Coins)
+		if err != nil {
+			s.fail(w, err)
+			return
+		}
+		write(w, 200, v)
+	}))
+	mux.HandleFunc("POST /api/rounds/{id}/finish", s.mutate(func(w http.ResponseWriter, r *http.Request) {
+		var body struct {
+			Sequence int `json:"sequence"`
+			Coins    int `json:"coins"`
+		}
+		if !decode(w, r, &body) {
+			return
+		}
+		v, err := s.app.Finish(r.Context(), r.PathValue("id"), body.Sequence, body.Coins)
+		if err != nil {
+			s.fail(w, err)
+			return
+		}
+		write(w, 200, v)
+	}))
 	mux.HandleFunc("POST /api/rounds/{id}/telemetry", s.mutate(func(w http.ResponseWriter, r *http.Request) {
 		var body struct {
 			Sequence int `json:"sequence"`

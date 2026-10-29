@@ -2,7 +2,7 @@
 // loopback ports. This test exercises browser rehearsal, never real Twitch.
 import { chromium } from 'playwright-core';
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 const origin = process.env.RULESHIFT_BASE_URL ?? 'http://localhost:5174';
 const output = new URL('../../.local/browser-evidence/', import.meta.url);
@@ -31,6 +31,16 @@ try {
   await page.waitForFunction(() => document.querySelector('[data-testid="gravity"]')?.textContent?.includes('Normal'), undefined, { timeout: 6500 });
   await page.getByRole('button', { name: 'Stop round & clear effects' }).click();
   await page.waitForFunction(() => document.querySelector('[data-testid="game-event"]')?.textContent?.includes('All effects cleared'));
+  assert.match(await page.getByTestId('result-storage').textContent(), /browser only/);
+  const downloaded = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download round record' }).click();
+  const download = await downloaded;
+  const recordPath = new URL('rehearsal-round.json', output).pathname;
+  await download.saveAs(recordPath);
+  const record = JSON.parse(await readFile(recordPath, 'utf8'));
+  assert.equal(record.evidence_kind, 'LOCAL_REHEARSAL'); assert.equal(record.storage, 'browser_only');
+  assert.ok(record.controller_events.some(event => event.kind === 'gravity_flip' && event.coins === 3));
+  assert.ok(record.controller_events.some(event => event.kind === 'effect_expired' && event.gravity === 1));
   await page.reload({ waitUntil: 'networkidle' });
   await page.getByLabel('REHEARSAL MESSAGE').fill('!rule execute arbitrary code');
   await page.getByRole('button', { name: 'Send rehearsal message' }).click();

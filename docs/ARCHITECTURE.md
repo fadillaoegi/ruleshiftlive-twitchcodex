@@ -37,6 +37,13 @@ without a connected browser. Client effect and round deadlines expire after a
 background-tab pause. Repeated coin conditions refresh one effect deadline;
 normal gravity is always restored on expiry/stop. Both floor and platform
 undersides participate in collision. A held jump key cannot repeatedly jump.
+The controller submits one final score on stop or expiry and retries an immutable
+payload after uncertain responses. The application accepts natural completion
+only after the server deadline and accepts recovery for 30 more seconds. A
+single SQL update saves score, sequence, status and `result_saved` together;
+subsequent changes are rejected while identical retries return the same result.
+Finalization looks up the exact round ID, so delayed older reports cannot change
+a newer round. Server expiry alone leaves the final score marked unconfirmed.
 The next coin follows the current gravity surface, so another supported coin
 frequency or expired effect cannot strand an unreachable coin at the ceiling.
 
@@ -62,3 +69,9 @@ are bounded, unknown command fields rejected and chat never executed as code.
 Pixel visuals are code-native: a 5×7 SVG title, hand-authored robot/coin sprites,
 a half-resolution Canvas backing store with nearest-neighbour scaling, neon
 surface markers and static scanlines. No remote font or image service is needed.
+
+Controller exports include a bounded event tail and the number of dropped
+events. They distinguish browser rehearsal from a Twitch controller capture,
+and database acknowledgement from an unconfirmed local score. A capture never
+auto-certifies the live milestone. Event timestamps reflect controller
+observations; trigger records also include their scheduled effect deadlines.

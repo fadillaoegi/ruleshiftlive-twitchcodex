@@ -60,16 +60,18 @@ type RuleProposal struct {
 const RoundDuration = 75 * time.Second
 
 type Round struct {
-	ID         string         `json:"id"`
-	ProposalID string         `json:"proposal_id"`
-	Author     string         `json:"author"`
-	Source     string         `json:"source"`
-	Rule       RuleDefinition `json:"rule"`
-	Status     string         `json:"status"`
-	StartedAt  time.Time      `json:"started_at"`
-	EndsAt     time.Time      `json:"ends_at"`
-	Coins      int            `json:"coins"`
-	Sequence   int            `json:"sequence"`
+	ID          string         `json:"id"`
+	ProposalID  string         `json:"proposal_id"`
+	MessageID   string         `json:"message_id"`
+	Author      string         `json:"author"`
+	Source      string         `json:"source"`
+	Rule        RuleDefinition `json:"rule"`
+	Status      string         `json:"status"`
+	StartedAt   time.Time      `json:"started_at"`
+	EndsAt      time.Time      `json:"ends_at"`
+	Coins       int            `json:"coins"`
+	Sequence    int            `json:"sequence"`
+	ResultSaved bool           `json:"result_saved"`
 }
 
 type Snapshot struct {
@@ -84,5 +86,5 @@ func NewRound(id string, p RuleProposal, now time.Time) (Round, error) {
 	if err := p.Rule.Validate(); err != nil {
 		return Round{}, err
 	}
-	return Round{ID: id, ProposalID: p.ID, Author: p.Author, Source: p.Source, Rule: *p.Rule, Status: "running", StartedAt: now, EndsAt: now.Add(RoundDuration)}, nil
+	return Round{ID: id, ProposalID: p.ID, MessageID: p.MessageID, Author: p.Author, Source: p.Source, Rule: *p.Rule, Status: "running", StartedAt: now, EndsAt: now.Add(RoundDuration)}, nil
 }

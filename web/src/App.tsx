@@ -6,6 +6,9 @@ import { parseRehearsal, summary } from './game/types.ts';
 import type { Proposal, Round, ServerState } from './game/types.ts';
 import { PixelText } from './PixelText.tsx';
 import { APIError, requestJSON } from './api.ts';
+import { ResultSync } from './game/result-sync.ts';
+import type { ResultState } from './game/result-sync.ts';
+import { controllerRecord } from './game/record.ts';
 
 type Mode = 'rehearsal' | 'twitch';
 const EXAMPLE = '!rule Every third coin flips gravity for 4 seconds';
@@ -22,8 +25,10 @@ export function App() {
   const [event, setEvent] = useState('The next rule is up to chat.');
   const [error, setError] = useState(() => new URLSearchParams(location.search).get('twitch') === 'denied' ? 'Twitch authorization was declined. You can reconnect when ready.' : '');
   const [busy, setBusy] = useState(false);
+  const [resultState, setResultState] = useState<ResultState>('idle');
   const csrf = useRef('');
   const engine = useRef<Engine | null>(null);
+  const resultSync = useRef<ResultSync | null>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const input = useRef<Input>({ left: false, right: false, jump: false });
   const clockOffset = useRef(0);
@@ -37,6 +42,7 @@ export function App() {
     setServer(state); setBackendOnline(true);
     const running = engine.current;
     if (running?.round.source === 'twitch' && state.round?.id === running.round.id && state.round.status === 'stopped') running.stop();
+    if (running?.round.source === 'twitch' && state.round?.id === running.round.id && resultSync.current?.observe(state.round)) setResultState(resultSync.current.state);
   }, []);
 
   useEffect(() => {
@@ -61,6 +67,8 @@ export function App() {
     catch (error) { if (error instanceof APIError && (error.status === 403 || error.status === 401)) csrf.current = ''; throw error; }
   }, []);
 
+  if (!resultSync.current) resultSync.current = new ResultSync((path, body) => mutate<Round>(path, body));
+
   useEffect(() => {
     let frame = 0;
     let lastPaint = 0;
@@ -70,6 +78,10 @@ export function App() {
       const now = Date.now() + (current?.round.source === 'twitch' ? clockOffset.current : 0);
       if (current) {
         const next = current.tick(now, input.current);
+        if (current.status !== 'running' && current.round.source === 'twitch' && resultSync.current?.state === 'idle') {
+          resultSync.current.queue(current.round, current.status === 'finished' ? 'finish' : 'stop', ++sequence.current, current.coins);
+          setResultState(resultSync.current.state);
+        }
         if (time - lastPaint > 70) { setView(next); setEvent(current.lastEvent); lastPaint = time; }
       }
       if (ctx) render(ctx, current, now);
@@ -92,9 +104,20 @@ export function App() {
     let inFlight = false;
     const timer = setInterval(async () => {
       const current = engine.current;
-      if (!current || current.round.source !== 'twitch' || current.status !== 'running' || inFlight) return;
+      if (!current || current.round.source !== 'twitch' || inFlight) return;
+      const now = Date.now() + clockOffset.current;
+      // Hidden-tab animation frames may pause. Checking an elapsed deadline
+      // performs no physics, but still allows timely final score delivery.
+      if (current.status === 'running' && now >= Date.parse(current.round.ends_at)) current.tick(now, { left: false, right: false, jump: false });
+      if (current.status !== 'running' && resultSync.current?.state === 'idle') {
+        resultSync.current.queue(current.round, current.status === 'finished' ? 'finish' : 'stop', ++sequence.current, current.coins);
+        setResultState(resultSync.current.state);
+      }
       inFlight = true;
-      try { await mutate(`/api/rounds/${current.round.id}/telemetry`, { sequence: ++sequence.current, coins: current.coins }); }
+      try {
+        if (current.status === 'running') await mutate(`/api/rounds/${current.round.id}/telemetry`, { sequence: ++sequence.current, coins: current.coins });
+        else { await resultSync.current?.flush(Date.now() + clockOffset.current); setResultState(resultSync.current?.state ?? 'idle'); }
+      }
       catch (e) { if (current.status === 'running') setError((e as Error).message); }
       finally { inFlight = false; }
     }, 1000);
@@ -105,8 +128,13 @@ export function App() {
   const approved = proposals.find(p => p.status === 'approved');
   const roundRunning = view.status === 'running' || (mode === 'twitch' && server?.round?.status === 'running');
   const liveReady = backendOnline && server?.database === 'connected';
+  const resultPending = resultState === 'pending' || resultState === 'saving';
+  const transitionBlocked = !!roundRunning || resultPending;
+  const remoteOnlyRound = mode === 'twitch' && server?.round?.status === 'running' && server.round.id !== engine.current?.round.id;
   const rule = approved?.rule ?? engine.current?.round.rule;
   const pending = proposals.filter(p => p.status === 'pending').length;
+  const completed = engine.current && view.status !== 'running' ? engine.current : null;
+  const confirmedResult = completed && resultSync.current?.confirmed?.id === completed.round.id ? resultSync.current.confirmed : null;
 
   async function action(task: () => Promise<void>) {
     setError(''); setBusy(true);
@@ -126,6 +154,7 @@ export function App() {
     setEvent('Rehearsal message received. Review it before approval.');
   }
   async function decide(id: string, decision: 'approved' | 'vetoed') {
+    if (decision === 'approved' && resultPending) throw new Error('Wait for the previous round result to be confirmed.');
     if (mode === 'rehearsal') {
       setLocalProposals(current => current.map(p => p.id === id ? { ...p, status: decision } : decision === 'approved' && p.status === 'approved' ? { ...p, status: 'pending' } : p));
     } else {
@@ -135,16 +164,18 @@ export function App() {
     setEvent(decision === 'approved' ? 'Rule approved. Start the next round when ready.' : 'Proposal vetoed by the streamer.');
   }
   async function start() {
+    if (resultPending) throw new Error('The previous round result is still waiting for confirmation.');
     if (!approved?.rule) return;
     let round: Round;
     if (mode === 'rehearsal') {
       const now = Date.now();
-      round = { id: crypto.randomUUID(), proposal_id: approved.id, author: approved.author, source: 'rehearsal', rule: approved.rule, status: 'running', started_at: new Date(now).toISOString(), ends_at: new Date(now + 75000).toISOString(), coins: 0, sequence: 0 };
+      round = { id: crypto.randomUUID(), proposal_id: approved.id, message_id: approved.message_id, author: approved.author, source: 'rehearsal', rule: approved.rule, status: 'running', started_at: new Date(now).toISOString(), ends_at: new Date(now + 75000).toISOString(), coins: 0, sequence: 0 };
       setLocalProposals(current => current.map(p => p.id === approved.id ? { ...p, status: 'used' } : p));
     } else {
       round = await mutate<Round>('/api/rounds', { proposal_id: approved.id });
     }
     engine.current = new Engine(round); sequence.current = 0;
+    resultSync.current = new ResultSync((path, body) => mutate<Round>(path, body)); setResultState('idle');
     setView(engine.current.view(Date.parse(round.started_at))); canvas.current?.focus();
     // A lost refresh after a successful Start must not leave a running backend
     // round without its local simulation. Polling reconciles state separately.
@@ -153,12 +184,32 @@ export function App() {
   async function stop() {
     engine.current?.stop(); // Stop physics immediately, including during an API outage.
     if (mode === 'twitch') {
-      const id = engine.current?.round.id ?? server?.round?.id;
+      // A Start response may have been lost, or the running round belongs to
+      // another tab. Stop the actual server round instead of a stale engine.
+      if (server?.round?.status === 'running' && server.round.id !== engine.current?.round.id) {
+        await mutate(`/api/rounds/${server.round.id}/stop`); await refresh(); return;
+      }
+      if (engine.current) {
+        const current = engine.current;
+        resultSync.current?.queue(current.round, current.status === 'finished' ? 'finish' : 'stop', ++sequence.current, current.coins);
+        setResultState(resultSync.current?.state ?? 'idle');
+        await resultSync.current?.flush(Date.now() + clockOffset.current, true); setResultState(resultSync.current?.state ?? 'idle'); return;
+      }
+      const id = server?.round?.id;
       if (id) { try { await mutate(`/api/rounds/${id}/stop`); await refresh(); } catch { throw new Error('Stopped locally. Backend confirmation pending; retry Stop round when connected.'); } }
     }
   }
   function changeMode(next: Mode) {
+    if (resultPending) return;
     engine.current = null; input.current = { left: false, right: false, jump: false }; setView(EMPTY); setMode(next); setError(''); setEvent('The next rule is up to chat.');
+    resultSync.current = new ResultSync((path, body) => mutate<Round>(path, body)); setResultState('idle');
+  }
+
+  function downloadResult() {
+    if (!engine.current || engine.current.status === 'running') return;
+    const record = controllerRecord(engine.current, resultSync.current?.confirmed ?? null);
+    const url = URL.createObjectURL(new Blob([JSON.stringify(record, null, 2) + '\n'], { type: 'application/json' }));
+    const link = document.createElement('a'); link.href = url; link.download = `ruleshift-${record.evidence_kind.toLowerCase()}-${engine.current.round.id}.json`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   return <div className="app-shell">
@@ -171,10 +222,12 @@ export function App() {
     <main>
       <div className="intro flex flex-wrap items-end justify-between gap-5">
         <div><p className="eyebrow">[ AUDIENCE OVERRIDE // RULESHIFT LIVE ]</p><h1 className="pixel-title" aria-label="Chat writes the rules. You survive them."><span><PixelText text="Chat writes the rules." gridWidth={131} /></span><span><PixelText text="You survive them." gridWidth={131} /></span></h1><p className="intro-copy">One arena. One audience-made rule. 75 seconds to adapt.</p></div>
-        <div className="mode-picker" aria-label="Message source"><button className={mode === 'rehearsal' ? 'selected' : ''} disabled={!!roundRunning || busy} onClick={() => changeMode('rehearsal')}>◈ Rehearsal</button><button className={mode === 'twitch' ? 'selected' : ''} disabled={!!roundRunning || busy} onClick={() => changeMode('twitch')}>▣ Twitch live</button></div>
+        <div className="mode-picker" aria-label="Message source"><button className={mode === 'rehearsal' ? 'selected' : ''} disabled={transitionBlocked || busy} onClick={() => changeMode('rehearsal')}>◈ Rehearsal</button><button className={mode === 'twitch' ? 'selected' : ''} disabled={transitionBlocked || busy} onClick={() => changeMode('twitch')}>▣ Twitch live</button></div>
       </div>
 
       <div className={`source-banner ${mode === 'twitch' ? 'twitch-banner' : ''}`}><span className="source-pill">{mode === 'rehearsal' ? 'LOCAL REHEARSAL' : 'TWITCH SOURCE'}</span><span>{mode === 'rehearsal' ? 'Practice the full rule flow in your browser. No Twitch message or AI inference is used.' : `${backendOnline ? server?.twitch.detail ?? 'Waiting for Twitch status.' : 'Backend unavailable. Twitch connection status cannot be verified.'} ${!liveReady ? 'PostgreSQL access is required for live controls.' : ''}`}</span></div>
+
+      {remoteOnlyRound && <div className="error-banner" role="status">A live round is running without a simulation in this tab. Use its original controller, or Stop round here before starting another.</div>}
 
       <div className="studio-grid">
         <section className="arena-panel" aria-label="Game arena">
@@ -189,7 +242,7 @@ export function App() {
           <section className="control-card rule-card"><p className="eyebrow">THE RULE IN PLAY</p><div className="rule-symbol">↕</div><h2>{rule ? summary(rule) : 'A new twist is\nwaiting in chat.'}</h2><p>{engine.current ? <>Created by <strong>{engine.current.round.author}</strong></> : approved ? <>Proposed by <strong>{approved.author}</strong></> : 'Let your audience make the next move.'}</p>
             <div className="contract"><div><span>WHEN</span><strong>{rule ? `Every ${rule.trigger.every} coins` : 'Coin condition'}</strong></div><span>↓</span><div><span>THEN</span><strong>{rule ? `Reverse gravity · ${rule.effect.duration_ms / 1000}s` : 'Timed gravity flip'}</strong></div></div>
             <p className="effect-policy">A repeat trigger refreshes the timer. Gravity returns to normal when the effect or round ends.</p>
-            <button className="primary-button" disabled={!approved || !!roundRunning || busy || (mode === 'twitch' && !liveReady)} onClick={() => void action(start)}>Start approved round <span>↗</span></button>
+            <button className="primary-button" disabled={!approved || transitionBlocked || busy || (mode === 'twitch' && !liveReady)} onClick={() => void action(start)}>Start approved round <span>↗</span></button>
             <button className="stop-button" disabled={!roundRunning || busy} onClick={() => void action(stop)}>■ Stop round & clear effects</button>
           </section>
           <section className="connection-card"><div className="connection-title"><strong>Signal check</strong><span className="subtle">SINGLE CHANNEL</span></div><div><span>Backend</span><span className={backendOnline ? 'mint' : 'subtle'}>{backendOnline ? '● Reachable' : '○ Offline'}</span></div><div><span>PostgreSQL</span><span className={liveReady ? 'mint' : 'amber'}>{liveReady ? '● Connected' : '○ Pending access'}</span></div><div><span>Twitch</span><span className={backendOnline && server?.twitch.state === 'connected' ? 'mint' : 'subtle'}>{backendOnline ? server?.twitch.state.replaceAll('_', ' ') ?? 'pending' : 'status unavailable'}</span></div><div><span>Interpreter</span><span className="subtle">Limited parser · no AI</span></div>
@@ -199,10 +252,22 @@ export function App() {
         </aside>
       </div>
 
+      {completed && <section className="result-card" aria-label="Round result">
+        <div><p className="eyebrow">[ ROUND CLOSED // {completed.round.source === 'rehearsal' ? 'LOCAL REHEARSAL' : 'TWITCH SOURCE'} ]</p><h2>Round result <span>{confirmedResult?.status ?? view.status}</span></h2>
+          <p className="result-metrics"><strong>{confirmedResult?.coins ?? view.coins}</strong> coins <span>/</span> <strong>{view.triggers}</strong> gravity shifts <span>/</span> rule by <strong>{completed.round.author}</strong></p>
+          <p data-testid="result-storage" className={resultState === 'saved' ? 'mint' : 'amber'}>{completed.round.source === 'rehearsal' ? 'Local rehearsal · browser only' : resultState === 'saved' ? 'Saved to PostgreSQL' : resultState === 'failed' ? 'Result not confirmed. Download the local record.' : 'Waiting for PostgreSQL confirmation…'}</p>
+          {completed.round.source === 'twitch' && resultSync.current?.error && <p className="result-error">{resultSync.current.error}</p>}
+          <p className="result-note">The download includes attribution, message ID and captured game events. Twitch records still require manual live verification.</p>
+        </div>
+        <div className="result-actions"><button className="secondary-button" onClick={downloadResult}>Download round record ↓</button>
+          {completed.round.source === 'twitch' && resultPending && <button className="secondary-button" disabled={busy} onClick={() => void action(async () => { await resultSync.current?.flush(Date.now() + clockOffset.current, true); setResultState(resultSync.current?.state ?? 'idle'); })}>Retry saving</button>}
+        </div>
+      </section>}
+
       <section className="proposal-section"><div className="queue-heading"><div><p className="eyebrow">AUDIENCE → ARENA</p><h2>Chat’s next plot twist <span>{pending}</span></h2></div><p>You approve it. The game obeys it.</p></div>
         {error && <div className="error-banner" role="alert">{error}</div>}
         {mode === 'rehearsal' ? <form className="rehearsal-form" onSubmit={e => { e.preventDefault(); rehearse(); }}><label htmlFor="message">REHEARSAL MESSAGE</label><div><input id="message" value={message} onChange={e => setMessage(e.target.value)} maxLength={500} autoComplete="off" /><button type="submit" className="secondary-button">Send rehearsal message <span>↵</span></button></div></form> : <div className="chat-instructions">Send from your Twitch channel: <code>{EXAMPLE}</code><span>Only supported proposals can be approved. One rule per round.</span></div>}
-        <div className="proposal-list">{proposals.length === 0 ? <div className="empty-queue"><span>✳</span><div><strong>Good rules start with a wild idea.</strong><p>{mode === 'rehearsal' ? 'Send the example message above, review the rule, then approve it.' : 'Connect your account and send a real !rule message in your channel.'}</p></div></div> : proposals.map(p => <article className={`proposal ${p.status}`} key={p.id}><div className="avatar">{p.author.slice(0, 1).toUpperCase()}</div><div className="proposal-body"><div className="proposal-meta"><strong>{p.author}</strong><span>{p.source === 'twitch' ? 'TWITCH MESSAGE' : 'LOCAL REHEARSAL'}</span><span className="proposal-status">{p.status}</span></div><p className="proposal-text">{p.text}</p><p className="proposal-summary">{p.rule ? `↳ ${summary(p.rule)}` : p.reason}</p></div><div className="proposal-actions">{p.status === 'pending' && <button className="approve-button" disabled={!!roundRunning || busy || (mode === 'twitch' && !liveReady)} onClick={() => void action(() => decide(p.id, 'approved'))}>✓ Approve rule</button>}{(p.status === 'pending' || p.status === 'approved') && <button className="veto-button" disabled={busy} onClick={() => void action(() => decide(p.id, 'vetoed'))}>Veto</button>}</div></article>)}</div>
+        <div className="proposal-list">{proposals.length === 0 ? <div className="empty-queue"><span>✳</span><div><strong>Good rules start with a wild idea.</strong><p>{mode === 'rehearsal' ? 'Send the example message above, review the rule, then approve it.' : 'Connect your account and send a real !rule message in your channel.'}</p></div></div> : proposals.map(p => <article className={`proposal ${p.status}`} key={p.id}><div className="avatar">{p.author.slice(0, 1).toUpperCase()}</div><div className="proposal-body"><div className="proposal-meta"><strong>{p.author}</strong><span>{p.source === 'twitch' ? 'TWITCH MESSAGE' : 'LOCAL REHEARSAL'}</span><span className="proposal-status">{p.status}</span></div><p className="proposal-text">{p.text}</p><p className="proposal-summary">{p.rule ? `↳ ${summary(p.rule)}` : p.reason}</p></div><div className="proposal-actions">{p.status === 'pending' && <button className="approve-button" disabled={transitionBlocked || busy || (mode === 'twitch' && !liveReady)} onClick={() => void action(() => decide(p.id, 'approved'))}>✓ Approve rule</button>}{(p.status === 'pending' || p.status === 'approved') && <button className="veto-button" disabled={busy} onClick={() => void action(() => decide(p.id, 'vetoed'))}>Veto</button>}</div></article>)}</div>
       </section>
       <footer><span>RULESHIFT LIVE <span className="footer-star">✳</span> BUILT FOR A LITTLE AUDIENCE CHAOS.</span><span>Milestone 01 · Conditional gravity · {mode === 'rehearsal' ? 'Rehearsal source' : 'Twitch source'}</span></footer>
     </main>

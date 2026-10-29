@@ -13,6 +13,7 @@ import (
 	"ruleshift.live/backend/internal/testsupport"
 	"strings"
 	"testing"
+	"time"
 )
 
 func setup() (*application.Service, *Server, http.Handler) {
@@ -123,5 +124,35 @@ func TestOAuthCallbackCrossSiteStateValidation(t *testing.T) {
 	h.ServeHTTP(w, r)
 	if w.Code != 400 || !strings.Contains(w.Body.String(), "Invalid OAuth state") {
 		t.Fatal("callback must reach cookie-bound state validation", w.Code, w.Body.String())
+	}
+}
+
+func TestHTTPFinalScoreAndRetry(t *testing.T) {
+	app, _, h := setup()
+	now := time.Now().UTC()
+	app.Now = func() time.Time { return now }
+	p, _ := app.Ingest(context.Background(), "final-message", "final-viewer", "Viewer", "!rule Every third coin flips gravity for 4 seconds")
+	app.Decide(context.Background(), p.ID, "approved")
+	round, _ := app.Start(context.Background(), p.ID)
+	cookie, csrf := bootstrap(t, h)
+	path := "/api/rounds/" + round.ID + "/finish"
+	payload := `{"sequence":1,"coins":3}`
+	if w := request(h, "POST", path, payload, cookie, csrf); w.Code != 409 {
+		t.Fatal("early finish accepted")
+	}
+	now = now.Add(domain.RoundDuration)
+	for range 2 {
+		w := request(h, "POST", path, payload, cookie, csrf)
+		if w.Code != 200 {
+			t.Fatal(w.Code, w.Body.String())
+		}
+		var result domain.Round
+		json.Unmarshal(w.Body.Bytes(), &result)
+		if !result.ResultSaved || result.Coins != 3 || result.MessageID != "final-message" {
+			t.Fatal("final result incomplete")
+		}
+	}
+	if w := request(h, "POST", path, `{"sequence":2,"coins":99}`, cookie, csrf); w.Code != 409 {
+		t.Fatal("repeated finish changed score")
 	}
 }

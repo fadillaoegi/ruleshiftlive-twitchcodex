@@ -33,6 +33,14 @@ implementation session without copying private transcript contents or secrets.
   the successful-Start/failed-refresh edge case. Latest checks: 29 Go tests
   including subtests and 19 web tests passed, alongside vet and build. Real
   PostgreSQL 18, Twitch and browser/OBS verification remain pending.
+- On the next continuation, fixed final-score loss at stop/expiry, added
+  immutable completion with identical retries and old-round isolation, and
+  preserved the chat message ID in the round. Added a result panel and bounded,
+  source-labeled controller record download; rehearsal never claims live use.
+- Extended the synthetic chat-to-physics proof back into Go finalization using
+  a clearly labeled test repository. Latest actual checks: 35 Go tests including
+  subtests, 29 web tests, vet and build passed. PostgreSQL 18 integration remains
+  skipped; Docker socket access is still denied and no backend `.env` exists.
 
 ## Session identity and reproducibility
 

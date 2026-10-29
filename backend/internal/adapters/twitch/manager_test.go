@@ -309,6 +309,8 @@ func TestFixtureChatToActualPhysicsEngine(t *testing.T) {
 		t.Skip("cross-runtime fixture requires Node 24+")
 	}
 	m, app, sock, _ := fixtureManager(t)
+	now := time.Now().UTC()
+	app.Now = func() time.Time { return now }
 	calls := make(chan error, 1)
 	m.sink = func(ctx context.Context, message, viewer, author, text string) (*domain.RuleProposal, error) {
 		p, err := app.Ingest(ctx, message, viewer, author, text)
@@ -349,10 +351,11 @@ func TestFixtureChatToActualPhysicsEngine(t *testing.T) {
 		t.Fatalf("actual engine fixture failed: %v\n%s", err, output)
 	}
 	var result struct {
-		Kind     string `json:"evidence_kind"`
-		Status   string `json:"status"`
-		Upward   bool   `json:"upward_motion"`
-		Restored bool   `json:"exact_expiry_restores_gravity"`
+		Kind       string `json:"evidence_kind"`
+		Status     string `json:"status"`
+		Upward     bool   `json:"upward_motion"`
+		Restored   bool   `json:"exact_expiry_restores_gravity"`
+		FinalCoins int    `json:"final_coins"`
 	}
 	if err = json.Unmarshal(output, &result); err != nil {
 		t.Fatal(err)
@@ -360,7 +363,30 @@ func TestFixtureChatToActualPhysicsEngine(t *testing.T) {
 	if result.Kind != "PROTOCOL_FIXTURE" || result.Status != "passed" || !result.Upward || !result.Restored {
 		t.Fatal("physics fixture did not prove the complete conditional effect")
 	}
+	if err = app.Report(ctx, round.ID, 1, 2); err != nil {
+		t.Fatal(err)
+	}
+	now = round.EndsAt
+	if _, err = app.State(ctx); err != nil {
+		t.Fatal(err)
+	}
+	final, err := app.Finish(ctx, round.ID, 2, result.FinalCoins)
+	if err != nil || !final.ResultSaved || final.Coins != 3 {
+		t.Fatal("last physics score was not finalized by backend", err)
+	}
+	if _, err = app.Finish(ctx, round.ID, 2, result.FinalCoins); err != nil {
+		t.Fatal("final report retry failed", err)
+	}
 	if path := os.Getenv("RULESHIFT_VERTICAL_EVIDENCE"); path != "" {
+		var evidence map[string]any
+		if err = json.Unmarshal(output, &evidence); err != nil {
+			t.Fatal(err)
+		}
+		evidence["backend_confirmation"] = map[string]any{"source": "test_repository_double", "result_saved": final.ResultSaved, "coins": final.Coins, "message_id": final.MessageID}
+		output, err = json.MarshalIndent(evidence, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
 		if err = os.WriteFile(path, append(bytes.TrimSpace(output), '\n'), 0644); err != nil {
 			t.Fatal(err)
 		}

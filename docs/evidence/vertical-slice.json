@@ -1,1 +1,48 @@
-{"evidence_kind":"PROTOCOL_FIXTURE","status":"passed","recorded_at":"2026-10-29T13:14:33.963Z","source":"Synthetic EventSub adapter → Go approval/round → actual TypeScript Engine; no real Twitch or database","author":"Fixture viewer","rule":{"version":1,"trigger":{"kind":"coin_collected","every":3},"effect":{"kind":"gravity_flip","duration_ms":4000}},"trace":[{"elapsed_ms":240,"coins":1,"gravity":1},{"elapsed_ms":640,"coins":2,"gravity":1},{"elapsed_ms":1040,"coins":3,"gravity":-1}],"trigger_elapsed_ms":1040,"effect_duration_ms":4000,"upward_motion":true,"exact_expiry_restores_gravity":true,"stop_clears_effect":true,"automatic_round_end":true}
+{
+  "author": "Fixture viewer",
+  "automatic_round_end": true,
+  "backend_confirmation": {
+    "coins": 3,
+    "message_id": "synthetic-chat-01",
+    "result_saved": true,
+    "source": "test_repository_double"
+  },
+  "effect_duration_ms": 4000,
+  "evidence_kind": "PROTOCOL_FIXTURE",
+  "exact_expiry_restores_gravity": true,
+  "final_coins": 3,
+  "recorded_at": "2026-10-29T13:54:19.220Z",
+  "rule": {
+    "effect": {
+      "duration_ms": 4000,
+      "kind": "gravity_flip"
+    },
+    "trigger": {
+      "every": 3,
+      "kind": "coin_collected"
+    },
+    "version": 1
+  },
+  "source": "Synthetic EventSub adapter → Go approval/round → actual TypeScript Engine; no real Twitch or database",
+  "status": "passed",
+  "stop_clears_effect": true,
+  "trace": [
+    {
+      "coins": 1,
+      "elapsed_ms": 240,
+      "gravity": 1
+    },
+    {
+      "coins": 2,
+      "elapsed_ms": 640,
+      "gravity": 1
+    },
+    {
+      "coins": 3,
+      "elapsed_ms": 1040,
+      "gravity": -1
+    }
+  ],
+  "trigger_elapsed_ms": 1040,
+  "upward_motion": true
+}

@@ -17,6 +17,7 @@ import (
 // defense against duplicate messages and multiple running rounds.
 type Repository interface {
 	Snapshot(context.Context) (domain.Snapshot, error)
+	RoundByID(context.Context, string) (domain.Round, error)
 	HasMessage(context.Context, string, string) (bool, error)
 	LastProposalAt(context.Context, string, string) (time.Time, error)
 	InsertProposal(context.Context, domain.RuleProposal) error
@@ -24,6 +25,7 @@ type Repository interface {
 	InsertRound(context.Context, domain.Round) error
 	EndRound(context.Context, string, string) error
 	Telemetry(context.Context, string, int, int) error
+	FinalizeRound(context.Context, string, string, int, int) error
 }
 
 type Interpreter interface {
@@ -179,17 +181,61 @@ func (s *Service) Start(ctx context.Context, proposalID string) (*domain.Round, 
 func (s *Service) Stop(ctx context.Context, id string) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	v, err := s.state(ctx)
+	r, err := s.repo.RoundByID(ctx, id)
 	if err != nil {
 		return err
 	}
-	if v.Round == nil || v.Round.ID != id {
-		return domain.ErrNotFound
+	if r.ResultSaved {
+		return nil
 	}
-	if v.Round.Status != "running" {
-		return domain.ErrConflict
+	_, err = s.finalize(ctx, r, "stopped", r.Sequence+1, r.Coins)
+	return err
+}
+
+// Finish accepts the controller's last informational score exactly once. Server
+// expiry is authoritative; a client cannot finish early. An acknowledgement lost
+// in transit can be retried with the identical sequence and score.
+func (s *Service) Finish(ctx context.Context, id string, sequence, coins int) (*domain.Round, error) {
+	return s.complete(ctx, id, "finished", sequence, coins)
+}
+func (s *Service) StopWithResult(ctx context.Context, id string, sequence, coins int) (*domain.Round, error) {
+	return s.complete(ctx, id, "stopped", sequence, coins)
+}
+func (s *Service) complete(ctx context.Context, id, status string, sequence, coins int) (*domain.Round, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	r, err := s.repo.RoundByID(ctx, id)
+	if err != nil {
+		return nil, err
 	}
-	return s.repo.EndRound(ctx, id, "stopped")
+	return s.finalize(ctx, r, status, sequence, coins)
+}
+func (s *Service) finalize(ctx context.Context, r domain.Round, status string, sequence, coins int) (*domain.Round, error) {
+	if r.ResultSaved {
+		if sequence == r.Sequence && coins == r.Coins {
+			return &r, nil
+		}
+		return nil, domain.ErrConflict
+	}
+	now := s.Now()
+	if now.After(r.EndsAt.Add(30*time.Second)) || sequence <= r.Sequence || sequence > 100000 || coins < r.Coins || coins > 10000 {
+		return nil, domain.ErrConflict
+	}
+	if status == "finished" && (now.Before(r.EndsAt) || r.Status == "stopped") {
+		return nil, domain.ErrConflict
+	}
+	// If Stop races the deadline, preserve the server's finished outcome.
+	if !now.Before(r.EndsAt) || r.Status == "finished" {
+		status = "finished"
+	}
+	if err := s.repo.FinalizeRound(ctx, r.ID, status, sequence, coins); err != nil {
+		return nil, err
+	}
+	r.Status = status
+	r.Sequence = sequence
+	r.Coins = coins
+	r.ResultSaved = true
+	return &r, nil
 }
 func (s *Service) Report(ctx context.Context, id string, sequence, coins int) error {
 	s.mu.Lock()

@@ -10,6 +10,13 @@ import (
 
 type Repository struct{}
 
+func (Repository) RoundByID(context.Context, string) (domain.Round, error) {
+	return domain.Round{}, domain.ErrUnavailable
+}
+func (Repository) FinalizeRound(context.Context, string, string, int, int) error {
+	return domain.ErrUnavailable
+}
+
 func (Repository) Snapshot(context.Context) (domain.Snapshot, error) {
 	return domain.Snapshot{Proposals: []domain.RuleProposal{}}, domain.ErrUnavailable
 }

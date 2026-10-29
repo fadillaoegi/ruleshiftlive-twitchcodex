@@ -44,4 +44,5 @@ console.log(JSON.stringify({
   trigger_elapsed_ms: triggerAt - start, effect_duration_ms: deadline - triggerAt,
   upward_motion: true, exact_expiry_restores_gravity: true,
   stop_clears_effect: true, automatic_round_end: true,
+  final_coins: game.coins,
 }));

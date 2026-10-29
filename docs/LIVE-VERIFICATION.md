@@ -46,6 +46,15 @@ Only `user:read:chat` is requested. Tokens remain in server memory.
    rapid second proposal from one viewer and observe the ten-second cooldown.
 10. Disconnect Twitch, then reconnect. Show the status transition; do not imply
     messages sent during a lost connection will be replayed.
+11. On stop and automatic expiry, wait for **Saved to PostgreSQL**, then download
+    the round record. Confirm `message_id` matches the real proposal and final
+    coins include the last collected coin. Check the stored `result_saved`
+    column through your existing PostgreSQL 18 instance. The download must be
+    `TWITCH_CONTROLLER_RECORD`, still requiring this manual live review.
+12. In rehearsal, download a result and confirm it says `LOCAL_REHEARSAL` and
+    `browser_only`. A pending/failed database acknowledgement must not appear as
+    saved. Keep the controller open during retries; recovery lasts until 30
+    seconds after the server deadline. No automatic retry reopens a closed round.
 
 Keep one controller tab. OBS Window Capture of that same tab is suitable for
 the first milestone. A separate synchronized overlay is still future scope;

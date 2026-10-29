@@ -27,6 +27,10 @@ EventSub fixture tests passed. Browser/OBS verification remains pending.
   approval/veto, one approved rule and one active round.
 - Conditional gravity reversal with real acceleration, solid surfaces, expiry,
   overlap handling, immediate stop and proposer credit.
+- Final-score delivery on stop/expiry, identical retries and immutable closed
+  results; a clear distinction between saved, pending and rehearsal results.
+- Downloadable source-labeled round records with message attribution and a
+  bounded controller event trace for later live verification.
 - Clearly labeled browser rehearsal, independent of credentials and persistence.
 - Original pixel sprites, bitmap lettering and a neon cyberpunk arena. No remote
   fonts, stock art, external assets or heavy GPU dependencies.
@@ -118,6 +122,19 @@ cookie returns to the same host. Keep one backend instance and one controller
 tab. Reloading a live controller does not reconstruct player movement; stop the
 existing round and start a new approved proposal.
 
+After a live round, keep the controller open until the result says **Saved to
+PostgreSQL**. The final score is sent separately from periodic telemetry so a
+last-second coin is not lost. A lost acknowledgement can be retried with the
+same payload. Pending delivery stays in this tab's memory; reloading or closing
+the tab can lose it. Recovery accepts a final report until 30 seconds after the
+server deadline; older unconfirmed results remain downloadable locally.
+
+**Download round record** exports the rule, author, originating message ID,
+outcome and last 64 observed controller events, with a dropped-event count.
+Rehearsal files are `LOCAL_REHEARSAL` and browser-only. Twitch files are
+`TWITCH_CONTROLLER_RECORD` and require manual live verification; their JSON
+does not certify Twitch delivery or turn local scores into trusted scores.
+
 ## Real Twitch verification
 
 Follow [the live verification runbook](docs/LIVE-VERIFICATION.md). Register an app
@@ -157,6 +174,7 @@ Use `CHROME_PATH` for another Chromium executable. The script checks approval,
 movement-triggered reversal, automatic restoration, stop, unsupported proposals,
 source separation, horizontal overflow and captures desktop/mobile images under
 `.local/browser-evidence/`. **This browser script has not run in this sandbox.**
+It also checks that a downloaded rehearsal record remains labeled browser-only.
 
 `node scripts/verify.mjs` runs all four checks and loads configuration from the
 backend `.env`. It also records a synthetic EventSub → Go approval → actual

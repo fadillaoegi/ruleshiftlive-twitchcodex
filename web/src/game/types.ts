@@ -17,6 +17,7 @@ export interface Proposal {
 export interface Round {
   id: string;
   proposal_id: string;
+  message_id?: string;
   author: string;
   source: 'twitch' | 'rehearsal';
   rule: RuleDefinition;
@@ -25,6 +26,7 @@ export interface Round {
   ends_at: string;
   coins: number;
   sequence: number;
+  result_saved?: boolean;
 }
 export interface ServerState {
   database: 'connected' | 'unavailable';

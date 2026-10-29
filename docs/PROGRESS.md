@@ -26,6 +26,7 @@ caches will be used. No paid services or unrelated project credentials are used.
 | Frontend transport failure handling | Passed — 6 tests |
 | EventSub protocol fixtures | Passed — synthetic, not live evidence |
 | Backend → actual game engine | Passed — cross-runtime protocol fixture, not live |
+| Final-score retry and round records | Passed locally — real database/browser verification pending |
 | AI inference | Not implemented; provider access/budget unverified |
 | Browser, OBS and 720p live playtest | Pending — sandbox denies localhost listeners |
 
@@ -114,7 +115,7 @@ Completed independent work:
   restored Twitch mode after OAuth return, and initialized successful rounds
   before optional status refresh so a refresh failure cannot prevent gameplay.
 
-Latest local verification: **29 Go tests including subtests (16 top-level), 19
+Verification for that continuation: **29 Go tests including subtests (16 top-level), 19
 web tests, Go vet and production build passed**. Real PostgreSQL 18 integration
 remains skipped. Browser/OBS, real Twitch consent/chat and AI are still pending.
 No AI/temporary-platform/overlay expansion has started before the live gate.
@@ -123,3 +124,41 @@ Next external prerequisite: a session permitted to access the existing Docker
 instance and loopback ports, plus private database/Twitch configuration in
 `backend/.env`. Then run `node scripts/doctor.mjs`, `node scripts/verify.mjs` and
 `node scripts/dev.mjs --live`, and execute the live runbook.
+
+## Continuation — final result delivery and source-labeled records
+
+Rechecked Docker access and local configuration: `docker ps` still returns
+permission denied, and `backend/.env` is absent. The real Twitch/PostgreSQL 18
+milestone remains pending. No container or volume was changed.
+
+Fixed a first-milestone lifecycle gap: periodic telemetry could miss a coin
+collected just before stop/expiry. A final report now atomically closes the
+round with its last score and an immutable `result_saved` flag. Completion is
+server-timed, accepts bounded recovery, tolerates identical retries after a lost
+acknowledgement, and addresses the exact round ID. Delayed reports cannot modify
+a newer round. Migration 002 also preserves the originating chat message ID.
+
+The frontend queues a stable final payload, retries while the controller remains
+open, reconciles confirmations from polling and shows saved/pending/failed state.
+Starting another round is blocked while a result is unresolved. A hidden-tab
+deadline check can close a round without running a second physics simulation.
+The Stop action now targets the actual server round when the local tab lacks
+its simulation, including a lost Start-response scenario.
+
+Added a pixel-styled round result panel and JSON download with attribution,
+message ID, outcome and a bounded controller-event tail/dropped count. Exports
+are explicitly `LOCAL_REHEARSAL` or `TWITCH_CONTROLLER_RECORD`. A Twitch record
+always requires manual live review; only a matching backend acknowledgement
+marks storage confirmed. Rehearsal records never claim PostgreSQL or live use.
+
+The synthetic cross-runtime test now carries its actual engine score back to
+the backend and verifies retryable finalization in the test repository. Latest
+checks: **35 Go tests including subtests (22 top-level), 29 web tests, Go vet
+and production build passed**. Real PostgreSQL 18 integration is still skipped.
+The browser script now checks rehearsal downloads but remains unexecuted because
+no preview is available. No browser/OBS screenshot or real Twitch event is claimed.
+
+Pending result delivery lives in controller memory; closing/reloading can lose
+it. The server accepts recovery until 30 seconds after its deadline. Longer
+offline periods leave a clearly unconfirmed local record. These limitations
+are documented in the README and live runbook.

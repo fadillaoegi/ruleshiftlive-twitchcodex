@@ -12,6 +12,7 @@ export const PLATFORMS = [
   { x: 650, y: 150, w: 140, h: 14 },
 ];
 export interface Input { left: boolean; right: boolean; jump: boolean }
+export interface GameEvent { kind: 'coin_collected' | 'gravity_flip' | 'effect_expired' | 'round_stopped' | 'round_finished'; at: string; coins: number; gravity: 1 | -1; effect_ends_at?: string }
 export interface GameView {
   coins: number;
   gravity: 1 | -1;
@@ -33,6 +34,8 @@ export class Engine {
   effectUntil = 0;
   status: GameView['status'] = 'running';
   lastEvent = 'Collect coins. Let chat change the rules.';
+  events: GameEvent[] = [];
+  eventsDropped = 0;
   private lastTime: number;
   private jumpWasDown = false;
 
@@ -49,25 +52,33 @@ export class Engine {
   private gravityTo(value: 1 | -1): void {
     if (this.gravity !== value) { this.gravity = value; this.player.grounded = false; }
   }
+  private record(kind: GameEvent['kind'], now: number): void {
+    this.events.push({ kind, at: new Date(now).toISOString(), coins: this.coins, gravity: this.gravity, ...(this.effectUntil ? { effect_ends_at: new Date(this.effectUntil).toISOString() } : {}) });
+    if (this.events.length > 64) { this.events.shift(); this.eventsDropped++; }
+  }
   private deadlines(now: number): void {
     if (this.status !== 'running') return;
     if (now >= Date.parse(this.round.ends_at)) {
       this.status = 'finished'; this.effectUntil = 0; this.gravityTo(1); this.player.vx = 0; this.player.vy = 0;
       this.lastEvent = this.coins >= 12 ? 'Round complete. You beat chat’s challenge!' : 'Round complete. Give chat another chance.';
+      this.record('round_finished', now);
     } else if (this.effectUntil > 0 && now >= this.effectUntil) {
       this.effectUntil = 0; this.gravityTo(1); this.lastEvent = 'Effect expired. Gravity restored.';
+      this.record('effect_expired', now);
     }
   }
   collect(now: number): boolean {
     this.deadlines(now);
     if (this.status !== 'running') return false;
     this.coins++;
+    this.record('coin_collected', now);
     if (this.coins % this.round.rule.trigger.every === 0) {
       // Refresh, never toggle or stack. Expiry always restores +1 gravity.
       this.triggers++;
       this.gravityTo(-1);
       this.effectUntil = Math.min(now + this.round.rule.effect.duration_ms, Date.parse(this.round.ends_at));
       this.lastEvent = `Coin ${this.coins} → gravity reversed! Rule by ${this.round.author}.`;
+      this.record('gravity_flip', now);
       return true;
     }
     this.lastEvent = `Coin ${this.coins} collected. ${this.round.rule.trigger.every - this.coins % this.round.rule.trigger.every} until gravity flips.`;
@@ -77,6 +88,7 @@ export class Engine {
     if (this.status !== 'running') return;
     this.status = 'stopped'; this.effectUntil = 0; this.gravityTo(1); this.player.vx = 0; this.player.vy = 0;
     this.lastEvent = 'Streamer stopped the round. All effects cleared.';
+    this.record('round_stopped', Math.max(this.lastTime, Date.parse(this.events.at(-1)?.at ?? this.round.started_at)));
   }
   tick(now: number, input: Input): GameView {
     this.deadlines(now);

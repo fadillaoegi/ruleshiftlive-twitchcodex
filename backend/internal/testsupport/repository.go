@@ -14,6 +14,7 @@ type Repository struct {
 	mu        sync.Mutex
 	proposals []domain.RuleProposal
 	round     *domain.Round
+	history   map[string]domain.Round
 }
 
 func (r *Repository) Snapshot(context.Context) (domain.Snapshot, error) {
@@ -81,11 +82,55 @@ func (r *Repository) InsertRound(_ context.Context, v domain.Round) error {
 	if r.round != nil && r.round.Status == "running" {
 		return domain.ErrConflict
 	}
+	if r.history == nil {
+		r.history = map[string]domain.Round{}
+	}
+	if r.round != nil {
+		r.history[r.round.ID] = *r.round
+	}
 	r.round = &v
 	for i := range r.proposals {
 		if r.proposals[i].ID == v.ProposalID {
 			r.proposals[i].Status = "used"
 		}
+	}
+	return nil
+}
+func (r *Repository) RoundByID(_ context.Context, id string) (domain.Round, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	if r.round != nil && r.round.ID == id {
+		return *r.round, nil
+	}
+	if v, ok := r.history[id]; ok {
+		return v, nil
+	}
+	return domain.Round{}, domain.ErrNotFound
+}
+func (r *Repository) FinalizeRound(_ context.Context, id, status string, sequence, coins int) error {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	var v domain.Round
+	if r.round != nil && r.round.ID == id {
+		v = *r.round
+	} else {
+		var ok bool
+		v, ok = r.history[id]
+		if !ok {
+			return domain.ErrNotFound
+		}
+	}
+	if v.ResultSaved || sequence <= v.Sequence || coins < v.Coins {
+		return domain.ErrConflict
+	}
+	v.Status = status
+	v.Sequence = sequence
+	v.Coins = coins
+	v.ResultSaved = true
+	if r.round != nil && r.round.ID == id {
+		*r.round = v
+	} else {
+		r.history[id] = v
 	}
 	return nil
 }

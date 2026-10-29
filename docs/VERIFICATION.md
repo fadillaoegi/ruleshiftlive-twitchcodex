@@ -7,10 +7,10 @@ caches were used; neither test suite needs a paid provider.
 
 | Check | Observed result |
 | --- | --- |
-| `go test -race -count=1 -json ./...` | Passed: 16 top-level tests, 29 including subtests |
+| `go test -race -count=1 -json ./...` | Passed: 22 top-level tests, 35 including subtests |
 | Real PostgreSQL 18 integration | **Skipped**, missing `TEST_DATABASE_URL` and Docker access |
 | `go vet ./...` | Passed |
-| `npm test` | Passed: 19 tests (13 engine/contract, 6 HTTP transport) |
+| `npm test` | Passed: 29 tests (13 engine/contract, 6 HTTP transport, 7 result delivery, 3 records) |
 | `npm run build` | Passed: strict TypeScript check and Vite production bundle |
 | Local HTTP preview | **Blocked**, both listener attempts denied by sandbox |
 | Browser rehearsal script | **Pending**, no permitted preview server |
@@ -50,13 +50,27 @@ Go approval and round creation into the actual TypeScript engine over stdin.
 The [recorded trace](evidence/vertical-slice.json) shows normal gravity at coins
 one/two and reversal at coin three, 1,040 ms into simulated movement. It checks
 actual upward acceleration, expiry at 4,000 ms after triggering, stop cleanup and
-automatic round completion. It is explicitly `PROTOCOL_FIXTURE` evidence with a
+automatic round completion. It now also carries the final engine score back to
+Go, preserving a last coin missing from periodic telemetry, then retries the
+same completion. `backend_confirmation.source` is `test_repository_double`,
+never PostgreSQL. It is explicitly `PROTOCOL_FIXTURE` evidence with a
 repository double; it proves neither live Twitch nor real PostgreSQL persistence.
+
+Final-result tests cover early finish rejection, last-score preservation after
+server expiry, atomic stop with score, immutable closure, identical retry,
+older-round isolation, recovery bounds, and Stop racing the authoritative
+deadline. HTTP tests verify the finish contract, including the chat message ID.
+Client tests cover identical payload retries, one in-flight write, confirmation
+matching, lost-response recovery by polling, expired recovery and source
+separation. Export tests check detached/bounded event capture, correct source
+labels, and that rehearsal cannot claim database or live verification.
 
 The opt-in PostgreSQL test first checks the existing server is major version 18,
 then creates a unique schema in a dedicated `_test`
 database. It checks idempotent migration, unique message constraint, persisted
 cooldown across service instances, approval/round creation, telemetry and stop.
+It also checks persisted final confirmation/message attribution and rejection
+of a second final result. Migration 002 adds those fields idempotently.
 Those behaviors remain unverified against PostgreSQL until that test runs.
 
 The observed [environment report](evidence/environment.json) contains only

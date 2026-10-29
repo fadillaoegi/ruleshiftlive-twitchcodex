@@ -39,7 +39,7 @@ func Open(ctx context.Context, url string) (*Repository, error) {
 	return r, nil
 }
 func (r *Repository) Migrate(ctx context.Context) error {
-	sql, err := migrations.ReadFile("migrations/001_initial.sql")
+	entries, err := migrations.ReadDir("migrations")
 	if err != nil {
 		return err
 	}
@@ -52,8 +52,19 @@ func (r *Repository) Migrate(ctx context.Context) error {
 	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(7275341)"); err != nil {
 		return err
 	}
-	if _, err = tx.Exec(ctx, string(sql)); err != nil {
-		return err
+	// Embedded directory entries are sorted by name. Each migration is
+	// idempotent, including upgrades of already-created local databases.
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		sql, err := migrations.ReadFile("migrations/" + entry.Name())
+		if err != nil {
+			return err
+		}
+		if _, err = tx.Exec(ctx, string(sql)); err != nil {
+			return err
+		}
 	}
 	return tx.Commit(ctx)
 }
@@ -81,20 +92,33 @@ func (r *Repository) Snapshot(ctx context.Context) (domain.Snapshot, error) {
 	if err = rows.Err(); err != nil {
 		return v, err
 	}
-	var round domain.Round
-	var rule []byte
-	err = r.Pool.QueryRow(ctx, `SELECT id,proposal_id,author,source,rule,status,started_at,ends_at,coins,sequence FROM rounds ORDER BY (status='running') DESC, started_at DESC, id DESC LIMIT 1`).Scan(&round.ID, &round.ProposalID, &round.Author, &round.Source, &rule, &round.Status, &round.StartedAt, &round.EndsAt, &round.Coins, &round.Sequence)
-	if errors.Is(err, pgx.ErrNoRows) {
+	round, err := scanRound(r.Pool.QueryRow(ctx, `SELECT id,proposal_id,message_id,author,source,rule,status,started_at,ends_at,coins,sequence,result_saved FROM rounds ORDER BY (status='running') DESC, started_at DESC, id DESC LIMIT 1`))
+	if errors.Is(err, domain.ErrNotFound) {
 		return v, nil
 	}
 	if err != nil {
 		return v, err
 	}
-	if err = json.Unmarshal(rule, &round.Rule); err != nil {
-		return v, err
-	}
 	v.Round = &round
 	return v, nil
+}
+func scanRound(row pgx.Row) (domain.Round, error) {
+	var r domain.Round
+	var rule []byte
+	err := row.Scan(&r.ID, &r.ProposalID, &r.MessageID, &r.Author, &r.Source, &rule, &r.Status, &r.StartedAt, &r.EndsAt, &r.Coins, &r.Sequence, &r.ResultSaved)
+	if errors.Is(err, pgx.ErrNoRows) {
+		return r, domain.ErrNotFound
+	}
+	if err != nil {
+		return r, err
+	}
+	if err = json.Unmarshal(rule, &r.Rule); err != nil {
+		return r, err
+	}
+	return r, nil
+}
+func (r *Repository) RoundByID(ctx context.Context, id string) (domain.Round, error) {
+	return scanRound(r.Pool.QueryRow(ctx, `SELECT id,proposal_id,message_id,author,source,rule,status,started_at,ends_at,coins,sequence,result_saved FROM rounds WHERE id=$1`, id))
 }
 func (r *Repository) HasMessage(ctx context.Context, source, id string) (bool, error) {
 	var found bool
@@ -162,7 +186,7 @@ func (r *Repository) InsertRound(ctx context.Context, v domain.Round) error {
 	if err != nil {
 		return err
 	}
-	_, err = tx.Exec(ctx, `INSERT INTO rounds(id,proposal_id,author,source,rule,status,started_at,ends_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8)`, v.ID, v.ProposalID, v.Author, v.Source, rule, v.Status, v.StartedAt, v.EndsAt)
+	_, err = tx.Exec(ctx, `INSERT INTO rounds(id,proposal_id,message_id,author,source,rule,status,started_at,ends_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`, v.ID, v.ProposalID, v.MessageID, v.Author, v.Source, rule, v.Status, v.StartedAt, v.EndsAt)
 	if err != nil {
 		return err
 	}
@@ -175,4 +199,14 @@ func (r *Repository) EndRound(ctx context.Context, id, status string) error {
 func (r *Repository) Telemetry(ctx context.Context, id string, sequence, coins int) error {
 	_, err := r.Pool.Exec(ctx, "UPDATE rounds SET sequence=$2,coins=$3 WHERE id=$1 AND status='running' AND sequence<$2", id, sequence, coins)
 	return err
+}
+func (r *Repository) FinalizeRound(ctx context.Context, id, status string, sequence, coins int) error {
+	result, err := r.Pool.Exec(ctx, `UPDATE rounds SET status=$2,sequence=$3,coins=$4,result_saved=true WHERE id=$1 AND result_saved=false AND sequence<$3 AND coins<=$4`, id, status, sequence, coins)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() != 1 {
+		return domain.ErrConflict
+	}
+	return nil
 }

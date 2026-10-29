@@ -100,4 +100,11 @@ func TestPostgreSQLIntegration(t *testing.T) {
 	if v.Round.Status != "stopped" {
 		t.Fatal("stop not persisted")
 	}
+	if !v.Round.ResultSaved || v.Round.MessageID != "fixture-message" {
+		t.Fatal("final score or chat attribution not persisted")
+	}
+	// A lost HTTP acknowledgement must not permit a second final result.
+	if err = repo.FinalizeRound(ctx, r.ID, "stopped", 100, 99); !errors.Is(err, domain.ErrConflict) {
+		t.Fatal("database allowed a closed result to change", err)
+	}
 }
