@@ -1,0 +1,15 @@
+[
+  {"text":"!rule Every third coin flips gravity for 4 seconds","valid":true,"every":3,"duration_ms":4000},
+  {"text":"  !RULE Every 2 coins flips gravity for 1 second.  ","valid":true,"every":2,"duration_ms":1000},
+  {"text":"!rule Every 10 coins flips gravity for 6 seconds","valid":true,"every":10,"duration_ms":6000},
+  {"text":"!rule Every 1 coin flips gravity for 4 seconds","valid":false},
+  {"text":"!rule Every 11 coins flips gravity for 4 seconds","valid":false},
+  {"text":"!rule Every 3 coins flips gravity for 0 seconds","valid":false},
+  {"text":"!rule Every 3 coins flips gravity for 7 seconds","valid":false},
+  {"text":"!rule Every 3 coins flips gravity for 1.5 seconds","valid":false},
+  {"text":"!rule Every 3 coins flips gravity for 2305843009213693953 seconds","valid":false},
+  {"text":"!rule Every 999999999999999999999 coins flips gravity for 4 seconds","valid":false},
+  {"text":"!rule Every jump creates a platform for 2 seconds","valid":false},
+  {"text":"!rule Every third coin flips gravity for 4 seconds; fetch('/secrets')","valid":false},
+  {"text":"Hello chat","valid":false}
+]

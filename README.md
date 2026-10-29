@@ -1,0 +1,173 @@
+# RuleShift Live
+
+**Chat writes the rules. You survive them.**
+
+A pixel retro cyberpunk browser game for Twitch streamers. Viewers propose
+conditional rules, the streamer approves one, and the rule changes actual
+gravity and collisions during a 75-second round. Collect 12 coins and survive
+until the timer ends. Audience attribution stays visible alongside the rule.
+
+The product hypothesis is that viewers want their creativity to shape moments
+on stream, while streamers need an activity that is easy to explain and control.
+Engagement improvements have not been measured.
+
+This is the first-milestone implementation for Codex × TwitchCon. **Real Twitch
+verification is pending.** No Twitch credentials or accessible PostgreSQL server
+were available in the implementation session; its sandbox also denied localhost
+listeners, Docker socket access and terminal DNS. Unit, in-process HTTP and
+EventSub fixture tests passed. Browser/OBS verification remains pending.
+
+## Implemented scope
+
+- React + TypeScript + Vite + Tailwind CSS, with a Canvas 2D game.
+- Go with inward-pointing Clean Architecture boundaries and PostgreSQL storage.
+- Twitch authorization-code OAuth, backend-only tokens, validation/refresh and
+  EventSub WebSocket chat intake for the signed-in broadcaster's own channel.
+- A bounded proposal queue, message-ID deduplication, viewer cooldown, explicit
+  approval/veto, one approved rule and one active round.
+- Conditional gravity reversal with real acceleration, solid surfaces, expiry,
+  overlap handling, immediate stop and proposer credit.
+- Clearly labeled browser rehearsal, independent of credentials and persistence.
+- Original pixel sprites, bitmap lettering and a neon cyberpunk arena. No remote
+  fonts, stock art, external assets or heavy GPU dependencies.
+
+Interpretation currently uses a **limited parser, not AI**:
+
+```text
+!rule Every third coin flips gravity for 4 seconds
+!rule Every 2 coins flips gravity for 3 seconds
+```
+
+Supported frequencies are 2–10 coins; durations are whole seconds from 1–6.
+Repeated triggers refresh the timer. They never toggle gravity back, accumulate
+timers or leave gravity reversed after the effect or round ends. Unsupported
+requests remain unexecutable. Chat text is never run as code.
+
+## Run locally
+
+Requirements: Node 24+, Go 1.26+, and PostgreSQL 17 (or the provided Docker
+Compose service). Run these commands **from `ruleshift-live/`** unless noted.
+The default web URL is `http://localhost:5174`; backend is loopback-only on 8080.
+Port 5173 belongs to another local application and is intentionally avoided.
+
+First terminal, start the web client:
+
+```sh
+cd web
+npm ci
+npm run dev
+```
+
+Open **http://localhost:5174**. In Rehearsal, send the example message, approve
+the proposal and start the round. Use A/D or arrow keys to move and Space to
+jump. Click the arena to focus controls. Rehearsal runs in browser memory and
+does not create live records in PostgreSQL; reloading resets it. The app shows
+the backend/database as unavailable until configured.
+
+Second terminal, start PostgreSQL using your existing instance, or:
+
+```sh
+read -rs 'RULESHIFT_DB_PASSWORD?Local PostgreSQL password: '
+export RULESHIFT_DB_PASSWORD
+docker compose up -d postgres
+```
+
+The password prompt above uses zsh, the implementation machine's shell. For a
+different shell, set `RULESHIFT_DB_PASSWORD` privately in your usual way.
+Compose binds the database to loopback and uses a persistent Docker volume.
+Do not run `docker compose down -v` if you want to retain proposals/results.
+
+Configure the backend privately:
+
+```sh
+cp backend/.env.example backend/.env
+```
+
+Edit `backend/.env` locally with your database URL and Twitch app credentials.
+Example **configuration shapes**, with placeholders rather than credentials:
+
+```dotenv
+DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:5432/ruleshift?sslmode=disable'
+HTTP_ADDR='127.0.0.1:8080'
+WEB_ORIGIN='http://localhost:5174'
+TWITCH_CLIENT_ID='YOUR_APP_CLIENT_ID'
+TWITCH_CLIENT_SECRET='YOUR_APP_CLIENT_SECRET'
+TWITCH_REDIRECT_URI='http://localhost:8080/auth/twitch/callback'
+```
+
+URL-encode special characters in database credentials. The `.env` file is
+ignored by Git. The server reads environment variables; load the file in the
+backend terminal before starting it:
+
+```sh
+cd backend
+set -a
+source .env
+set +a
+go run ./cmd/server
+```
+
+The initial migration runs transactionally and idempotently at startup. An unset
+`DATABASE_URL` exposes status endpoints with live controls disabled; a configured
+but inaccessible database causes startup to fail. There is no runtime replacement
+database. `/healthz` returns 503 when PostgreSQL is unavailable.
+
+Use `localhost` consistently in the browser and OAuth settings so the state
+cookie returns to the same host. Keep one backend instance and one controller
+tab. Reloading a live controller does not reconstruct player movement; stop the
+existing round and start a new approved proposal.
+
+## Real Twitch verification
+
+Follow [the live verification runbook](docs/LIVE-VERIFICATION.md). Register an app
+with the exact callback above, connect your own broadcaster account through the
+dashboard, and send the example from your channel's real chat. The implementation
+requests only `user:read:chat`. OAuth tokens stay in backend memory; restart or
+revocation requires reconnection. The app does not send chat replies.
+
+Twitch's [EventSub WebSocket documentation](https://dev.twitch.tv/docs/eventsub/handling-websocket-events/)
+requires keepalive monitoring and distinguishes server-directed reconnects from
+lost connections. This adapter retains the old socket until the new welcome on
+a directed handoff and re-subscribes after connection loss. The UI explicitly
+shows gaps: Twitch does not replay messages lost while disconnected.
+
+## Checks
+
+```sh
+cd backend
+go test -race ./...
+go vet ./...
+```
+
+```sh
+cd web
+npm test
+npm run build
+```
+
+The PostgreSQL integration test is opt-in; create a separate database named with
+an `_test` suffix and set `TEST_DATABASE_URL` privately before running Go tests.
+It creates and removes a unique schema, never application tables. It is skipped
+when the test database is unavailable; a skip is not integration evidence.
+
+For browser rehearsal checks on a machine allowed to run local servers, keep
+Vite running and install Google Chrome, then run `npm run test:browser` in `web/`.
+Use `CHROME_PATH` for another Chromium executable. The script checks approval,
+movement-triggered reversal, automatic restoration, stop, unsupported proposals,
+source separation, horizontal overflow and captures desktop/mobile images under
+`.local/browser-evidence/`. **This browser script has not run in this sandbox.**
+
+See [architecture](docs/ARCHITECTURE.md), [progress](docs/PROGRESS.md),
+[verification evidence](docs/VERIFICATION.md), and
+[Codex evidence](submission/CODEX-EVIDENCE.md).
+
+## Next gates
+
+Prove the real Twitch → PostgreSQL → approval → game → expiry flow before adding
+AI interpretation, an actual game preview, jump/temporary-platform mechanics or
+an OBS overlay. No provider model, budget or paid API access is assumed. OBS will
+need to consume the controller's active state rather than run another simulation.
+The local score is untrusted and is not suitable for monetary prizes.
+
+Submission target from the brief: November 2, 2026, 21:00 WIB. Submission materials
+and UI are in English. Video, live playtest and competition submission are pending.

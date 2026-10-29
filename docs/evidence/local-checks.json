@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-10-29T12:46:07.674Z",
+  "source": "Actual local commands executed by Codex",
+  "platform": "darwin/arm64",
+  "node": "v24.15.0",
+  "checks": [
+    {
+      "name": "backend-tests",
+      "command": "go test -race -count=1 -json ./...",
+      "status": "passed",
+      "exit_code": 0,
+      "elapsed_ms": 6963,
+      "tests_passed_including_subtests": 28,
+      "skipped_tests": [
+        "ruleshift.live/backend/internal/adapters/postgres/TestPostgreSQLIntegration"
+      ]
+    },
+    {
+      "name": "backend-vet",
+      "command": "go vet ./...",
+      "status": "passed",
+      "exit_code": 0,
+      "elapsed_ms": 1022
+    },
+    {
+      "name": "web-tests",
+      "command": "npm test",
+      "status": "passed",
+      "exit_code": 0,
+      "elapsed_ms": 2368
+    },
+    {
+      "name": "web-build",
+      "command": "npm run build",
+      "status": "passed",
+      "exit_code": 0,
+      "elapsed_ms": 3664
+    }
+  ],
+  "evidence_limits": [
+    "EventSub tests use synthetic protocol fixtures, not Twitch.",
+    "Real PostgreSQL integration is pending unless the opt-in test ran.",
+    "Browser/OBS QA is not included in this command.",
+    "AI interpretation is not implemented."
+  ]
+}

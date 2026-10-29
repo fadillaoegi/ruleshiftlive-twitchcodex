@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "message_id": "synthetic-delivery-01",
+    "message_type": "notification",
+    "subscription_type": "channel.chat.message",
+    "subscription_version": "1"
+  },
+  "payload": {
+    "subscription": { "type": "channel.chat.message", "version": "1", "status": "enabled" },
+    "event": {
+      "broadcaster_user_id": "fixture-broadcaster",
+      "chatter_user_id": "fixture-viewer",
+      "chatter_user_name": "Fixture viewer",
+      "message_id": "synthetic-chat-01",
+      "message": { "text": "!rule Every third coin flips gravity for 4 seconds" }
+    }
+  }
+}
