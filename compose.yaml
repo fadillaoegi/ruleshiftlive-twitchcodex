@@ -1,14 +1,17 @@
 services:
   postgres:
-    image: postgres:17-alpine
+    # Optional fresh-machine setup only. This project uses the user's existing
+    # PostgreSQL 18 container by default; opt in explicitly to create another.
+    profiles: [isolated-dev-db]
+    image: postgres:18-alpine
     environment:
       POSTGRES_DB: ruleshift
       POSTGRES_USER: ruleshift
       POSTGRES_PASSWORD: ${RULESHIFT_DB_PASSWORD:?Set RULESHIFT_DB_PASSWORD in your shell}
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:55432:5432"
     volumes:
-      - ruleshift-postgres:/var/lib/postgresql/data
+      - ruleshift-postgres:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ruleshift -d ruleshift"]
       interval: 3s

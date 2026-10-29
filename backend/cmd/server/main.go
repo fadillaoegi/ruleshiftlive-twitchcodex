@@ -45,6 +45,9 @@ func main() {
 		db, err := postgres.Open(startup, databaseURL)
 		done()
 		if err != nil {
+			if errors.Is(err, postgres.ErrVersion) {
+				log.Fatal(err)
+			}
 			log.Fatal("PostgreSQL connection/migration failed; verify DATABASE_URL locally (details withheld to protect credentials)")
 		}
 		defer db.Pool.Close()

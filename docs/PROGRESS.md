@@ -21,9 +21,11 @@ caches will be used. No paid services or unrelated project credentials are used.
 | Evidence | Status |
 | --- | --- |
 | Real Twitch OAuth and chat | Pending — app credentials and interactive consent |
-| Real PostgreSQL migration/integration | Pending — accessible PostgreSQL instance |
+| Real PostgreSQL 18 migration/integration | Pending — existing Docker instance reported by user; socket access denied |
 | Local rule/game behavior | Passed — 13 engine/contract tests |
+| Frontend transport failure handling | Passed — 6 tests |
 | EventSub protocol fixtures | Passed — synthetic, not live evidence |
+| Backend → actual game engine | Passed — cross-runtime protocol fixture, not live |
 | AI inference | Not implemented; provider access/budget unverified |
 | Browser, OBS and 720p live playtest | Pending — sandbox denies localhost listeners |
 
@@ -53,7 +55,7 @@ approved and affects a playable round, with recorded expiry evidence.
 - Saved reproducible verification and a real Twitch runbook. AI interpretation,
   game preview, temporary platforms and OBS overlay remain after the live gate.
 
-## Actual verification
+## Initial session verification
 
 `scripts/verify.mjs` passed all four commands: Go tests with race detection,
 `go vet`, web tests and production build. Go reported 28 passing tests including
@@ -78,3 +80,46 @@ On a local session that permits loopback listeners and Twitch egress, start
 PostgreSQL and both applications using the README. Supply Twitch app credentials
 privately, connect the broadcaster account, then execute
 `docs/LIVE-VERIFICATION.md`. Complete that real flow before expanding mechanics.
+
+## Continuation — existing PostgreSQL 18 and startup readiness
+
+The user clarified that PostgreSQL 18 already runs in their Docker installation.
+The project now targets that existing instance. No container or volume was
+created, restarted or changed. Docker metadata shows the active `desktop-linux`
+context, but `docker ps` is denied by sandbox socket permissions. TCP connection
+and listener probes on 8080/5174/5432 also return `EPERM`. No backend `.env` exists,
+and no database or Twitch credentials are set in this process.
+
+Completed independent work:
+
+- Added a read-only database inspector and actual-server version check before
+  migrations; both application and opt-in integration test target major 18.
+- Added `scripts/doctor.mjs`, which reports credential presence without values,
+  Docker metadata when permitted, listener availability and Twitch DNS. Actual
+  results are saved in `docs/evidence/environment.json` with unresolved access.
+- Added a single-command local launcher that parses `backend/.env` as data,
+  builds Go, starts Go/Vite and stops its own children on exit. It never manages
+  Docker or passes backend credentials to the frontend process. The configuration
+  guard was exercised; real launch remains blocked/unverified.
+- Documented reuse of the existing PostgreSQL 18 container and dedicated app/test
+  databases in `docs/POSTGRES-18.md`. The optional fresh-machine Compose example
+  now uses 18 with its correct volume layout and an explicit opt-in profile.
+- Added a true cross-runtime fixture test: synthetic EventSub → Go intake →
+  approval → Round JSON → actual TypeScript Engine. Movement collects the third
+  coin at 1,040 ms, causing upward acceleration; gravity returns at the exact
+  four-second effect deadline. Stop and automatic round expiry also pass. This
+  trace is saved as `PROTOCOL_FIXTURE`, never real Twitch/DB evidence.
+- Bounded frontend HTTP waits to five seconds, added readable proxy/network
+  errors and cancellation, removed stale connected wording after backend loss,
+  restored Twitch mode after OAuth return, and initialized successful rounds
+  before optional status refresh so a refresh failure cannot prevent gameplay.
+
+Latest local verification: **29 Go tests including subtests (16 top-level), 19
+web tests, Go vet and production build passed**. Real PostgreSQL 18 integration
+remains skipped. Browser/OBS, real Twitch consent/chat and AI are still pending.
+No AI/temporary-platform/overlay expansion has started before the live gate.
+
+Next external prerequisite: a session permitted to access the existing Docker
+instance and loopback ports, plus private database/Twitch configuration in
+`backend/.env`. Then run `node scripts/doctor.mjs`, `node scripts/verify.mjs` and
+`node scripts/dev.mjs --live`, and execute the live runbook.

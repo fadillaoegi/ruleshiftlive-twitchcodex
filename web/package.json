@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5174 --strictPort",
     "build": "tsc -b && vite build",
-    "test": "node --experimental-strip-types --test src/game/*.test.ts",
+    "test": "node --experimental-strip-types --test src/*.test.ts src/game/*.test.ts",
     "test:browser": "node scripts/browser-check.mjs"
   },
   "dependencies": {

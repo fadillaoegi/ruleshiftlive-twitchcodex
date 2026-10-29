@@ -1,12 +1,15 @@
 import { spawn } from 'node:child_process';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { environment } from './environment.mjs';
 
 const root = new URL('../', import.meta.url);
 const evidence = new URL('docs/evidence/', root);
 const logs = new URL('.local/checks/', root);
 await Promise.all([mkdir(evidence, { recursive: true }), mkdir(logs, { recursive: true })]);
-const env = { ...process.env };
+const env = await environment();
+env.RULESHIFT_VERTICAL_EVIDENCE = fileURLToPath(new URL('vertical-slice.json', evidence));
+await rm(env.RULESHIFT_VERTICAL_EVIDENCE, { force: true });
 if (env.RULESHIFT_OFFLINE === '1') { env.GOPROXY = 'off'; env.GOSUMDB = 'off'; }
 const checks = [
   { name: 'backend-tests', directory: 'backend', program: 'go', args: ['test', '-race', '-count=1', '-json', './...'] },

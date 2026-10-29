@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-29T12:46:07.674Z",
+  "recorded_at": "2026-10-29T13:14:35.469Z",
   "source": "Actual local commands executed by Codex",
   "platform": "darwin/arm64",
   "node": "v24.15.0",
@@ -9,8 +9,8 @@
       "command": "go test -race -count=1 -json ./...",
       "status": "passed",
       "exit_code": 0,
-      "elapsed_ms": 6963,
-      "tests_passed_including_subtests": 28,
+      "elapsed_ms": 5197,
+      "tests_passed_including_subtests": 29,
       "skipped_tests": [
         "ruleshift.live/backend/internal/adapters/postgres/TestPostgreSQLIntegration"
       ]
@@ -20,21 +20,21 @@
       "command": "go vet ./...",
       "status": "passed",
       "exit_code": 0,
-      "elapsed_ms": 1022
+      "elapsed_ms": 558
     },
     {
       "name": "web-tests",
       "command": "npm test",
       "status": "passed",
       "exit_code": 0,
-      "elapsed_ms": 2368
+      "elapsed_ms": 606
     },
     {
       "name": "web-build",
       "command": "npm run build",
       "status": "passed",
       "exit_code": 0,
-      "elapsed_ms": 3664
+      "elapsed_ms": 1186
     }
   ],
   "evidence_limits": [

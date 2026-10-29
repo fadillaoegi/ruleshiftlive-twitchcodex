@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-29T13:04:58.175Z",
+  "source": "Actual read-only preflight commands",
+  "docker": {
+    "status": "permission_denied",
+    "detail": "Could not list containers. No existing container was changed."
+  },
+  "listeners": [
+    {
+      "port": 8080,
+      "status": "blocked",
+      "code": "EPERM"
+    },
+    {
+      "port": 5174,
+      "status": "blocked",
+      "code": "EPERM"
+    }
+  ],
+  "postgres": {
+    "status": "not_configured",
+    "target_major": 18,
+    "detail": "Set DATABASE_URL for the existing PostgreSQL 18 container in backend/.env."
+  },
+  "credentials": {
+    "DATABASE_URL": "missing",
+    "TEST_DATABASE_URL": "missing",
+    "TWITCH_CLIENT_ID": "missing",
+    "TWITCH_CLIENT_SECRET": "missing"
+  },
+  "twitch_dns": "unavailable",
+  "live_twitch": "pending: interactive OAuth and a real channel message must still be verified"
+}

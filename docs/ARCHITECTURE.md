@@ -17,6 +17,10 @@ approval requirements. It imports only the standard library. Application use
 cases depend on Repository and Interpreter interfaces, without SDK dependencies.
 Adapters handle HTTP, the constrained grammar, Twitch and PostgreSQL. `cmd/server`
 is the composition root. `testsupport` is imported only by automated tests.
+The PostgreSQL adapter verifies major version 18 before migration, matching the
+user's existing Docker instance. `cmd/dbcheck` inspects the same server without
+creating schema objects. The local launcher reads backend configuration as data
+and manages only its own Go/Vite processes, leaving Docker under user management.
 
 The local application supports one backend process. A service mutex serializes
 queue admission, cooldown, decisions, starts, stops and telemetry. PostgreSQL

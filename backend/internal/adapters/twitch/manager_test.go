@@ -1,12 +1,15 @@
 package twitch
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -296,6 +299,70 @@ func TestValidationRejectsMissingScopeAndWrongIdentity(t *testing.T) {
 		m.client.http = &http.Client{Transport: roundTripper(func(*http.Request) (*http.Response, error) { return response(200, body), nil })}
 		if _, err := m.client.validate(context.Background(), credentials{AccessToken: "fixture"}); err == nil {
 			t.Fatal("invalid token identity accepted")
+		}
+	}
+}
+
+func TestFixtureChatToActualPhysicsEngine(t *testing.T) {
+	node, err := exec.LookPath("node")
+	if err != nil {
+		t.Skip("cross-runtime fixture requires Node 24+")
+	}
+	m, app, sock, _ := fixtureManager(t)
+	calls := make(chan error, 1)
+	m.sink = func(ctx context.Context, message, viewer, author, text string) (*domain.RuleProposal, error) {
+		p, err := app.Ingest(ctx, message, viewer, author, text)
+		calls <- err
+		return p, err
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	if err = m.Connect(ctx, "fixture-code"); err != nil {
+		t.Fatal(err)
+	}
+	wait(t, func() bool { return m.Status().State == "connected" })
+	sock.send(chatFixture(t))
+	if err = receive(t, calls); err != nil {
+		t.Fatal(err)
+	}
+	state, err := app.State(ctx)
+	if err != nil || len(state.Proposals) != 1 {
+		t.Fatal("fixture proposal missing")
+	}
+	p := state.Proposals[0]
+	if err = app.Decide(ctx, p.ID, "approved"); err != nil {
+		t.Fatal(err)
+	}
+	round, err := app.Start(ctx, p.ID)
+	if err != nil {
+		t.Fatal(err)
+	}
+	packet, err := json.Marshal(map[string]any{"evidence_kind": "PROTOCOL_FIXTURE", "round": round})
+	if err != nil {
+		t.Fatal(err)
+	}
+	script := filepath.Join("..", "..", "..", "..", "web", "scripts", "fixture-physics.mjs")
+	command := exec.CommandContext(ctx, node, "--experimental-strip-types", script)
+	command.Stdin = strings.NewReader(string(packet))
+	output, err := command.CombinedOutput()
+	if err != nil {
+		t.Fatalf("actual engine fixture failed: %v\n%s", err, output)
+	}
+	var result struct {
+		Kind     string `json:"evidence_kind"`
+		Status   string `json:"status"`
+		Upward   bool   `json:"upward_motion"`
+		Restored bool   `json:"exact_expiry_restores_gravity"`
+	}
+	if err = json.Unmarshal(output, &result); err != nil {
+		t.Fatal(err)
+	}
+	if result.Kind != "PROTOCOL_FIXTURE" || result.Status != "passed" || !result.Upward || !result.Restored {
+		t.Fatal("physics fixture did not prove the complete conditional effect")
+	}
+	if path := os.Getenv("RULESHIFT_VERTICAL_EVIDENCE"); path != "" {
+		if err = os.WriteFile(path, append(bytes.TrimSpace(output), '\n'), 0644); err != nil {
+			t.Fatal(err)
 		}
 	}
 }

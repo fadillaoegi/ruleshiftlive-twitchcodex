@@ -27,6 +27,10 @@ func Open(ctx context.Context, url string) (*Repository, error) {
 		pool.Close()
 		return nil, err
 	}
+	if _, err = inspect(ctx, pool); err != nil {
+		pool.Close()
+		return nil, err
+	}
 	r := &Repository{Pool: pool}
 	if err = r.Migrate(ctx); err != nil {
 		pool.Close()

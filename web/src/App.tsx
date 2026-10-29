@@ -5,13 +5,14 @@ import { render } from './game/render.ts';
 import { parseRehearsal, summary } from './game/types.ts';
 import type { Proposal, Round, ServerState } from './game/types.ts';
 import { PixelText } from './PixelText.tsx';
+import { APIError, requestJSON } from './api.ts';
 
 type Mode = 'rehearsal' | 'twitch';
 const EXAMPLE = '!rule Every third coin flips gravity for 4 seconds';
 const EMPTY: GameView = { coins: 0, gravity: 1, effectRemaining: 0, secondsRemaining: 75, status: 'stopped', triggers: 0, nextTrigger: 3 };
 
 export function App() {
-  const [mode, setMode] = useState<Mode>('rehearsal');
+  const [mode, setMode] = useState<Mode>(() => new URLSearchParams(location.search).has('twitch') ? 'twitch' : 'rehearsal');
   const [server, setServer] = useState<ServerState | null>(null);
   const [backendOnline, setBackendOnline] = useState(false);
   const [configured, setConfigured] = useState(false);
@@ -19,7 +20,7 @@ export function App() {
   const [message, setMessage] = useState(EXAMPLE);
   const [view, setView] = useState<GameView>(EMPTY);
   const [event, setEvent] = useState('The next rule is up to chat.');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(() => new URLSearchParams(location.search).get('twitch') === 'denied' ? 'Twitch authorization was declined. You can reconnect when ready.' : '');
   const [busy, setBusy] = useState(false);
   const csrf = useRef('');
   const engine = useRef<Engine | null>(null);
@@ -31,9 +32,7 @@ export function App() {
 
   const refresh = useCallback(async (signal?: AbortSignal) => {
     const sent = Date.now();
-    const response = await fetch('/api/state', { signal });
-    if (!response.ok) throw new Error('Backend unavailable');
-    const state: ServerState = await response.json();
+    const state = await requestJSON<ServerState>('/api/state', { signal });
     clockOffset.current = Date.parse(state.server_time) - (sent + Date.now()) / 2;
     setServer(state); setBackendOnline(true);
     const running = engine.current;
@@ -46,9 +45,8 @@ export function App() {
     async function poll() {
       try {
         if (!csrf.current) {
-          const response = await fetch('/api/bootstrap', { signal: controller.signal });
-          if (!response.ok) throw new Error('Backend unavailable');
-          const data = await response.json(); csrf.current = data.csrf; setConfigured(data.twitch_configured);
+          const data = await requestJSON<{ csrf: string; twitch_configured: boolean }>('/api/bootstrap', { signal: controller.signal });
+          csrf.current = data.csrf; setConfigured(data.twitch_configured);
         }
         await refresh(controller.signal);
       } catch { if (!controller.signal.aborted) setBackendOnline(false); }
@@ -59,10 +57,8 @@ export function App() {
   }, [refresh]);
 
   const mutate = useCallback(async <T,>(path: string, body?: object): Promise<T> => {
-    const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-RuleShift-CSRF': csrf.current }, body: body ? JSON.stringify(body) : undefined });
-    const result = await response.json();
-    if (!response.ok) { if (response.status === 403 || response.status === 401) csrf.current = ''; throw new Error(result.error || 'Request failed.'); }
-    return result as T;
+    try { return await requestJSON<T>(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-RuleShift-CSRF': csrf.current }, body: body ? JSON.stringify(body) : undefined }); }
+    catch (error) { if (error instanceof APIError && (error.status === 403 || error.status === 401)) csrf.current = ''; throw error; }
   }, []);
 
   useEffect(() => {
@@ -146,10 +142,13 @@ export function App() {
       round = { id: crypto.randomUUID(), proposal_id: approved.id, author: approved.author, source: 'rehearsal', rule: approved.rule, status: 'running', started_at: new Date(now).toISOString(), ends_at: new Date(now + 75000).toISOString(), coins: 0, sequence: 0 };
       setLocalProposals(current => current.map(p => p.id === approved.id ? { ...p, status: 'used' } : p));
     } else {
-      round = await mutate<Round>('/api/rounds', { proposal_id: approved.id }); await refresh();
+      round = await mutate<Round>('/api/rounds', { proposal_id: approved.id });
     }
     engine.current = new Engine(round); sequence.current = 0;
     setView(engine.current.view(Date.parse(round.started_at))); canvas.current?.focus();
+    // A lost refresh after a successful Start must not leave a running backend
+    // round without its local simulation. Polling reconciles state separately.
+    if (mode === 'twitch') void refresh().catch(() => setBackendOnline(false));
   }
   async function stop() {
     engine.current?.stop(); // Stop physics immediately, including during an API outage.
@@ -175,7 +174,7 @@ export function App() {
         <div className="mode-picker" aria-label="Message source"><button className={mode === 'rehearsal' ? 'selected' : ''} disabled={!!roundRunning || busy} onClick={() => changeMode('rehearsal')}>◈ Rehearsal</button><button className={mode === 'twitch' ? 'selected' : ''} disabled={!!roundRunning || busy} onClick={() => changeMode('twitch')}>▣ Twitch live</button></div>
       </div>
 
-      <div className={`source-banner ${mode === 'twitch' ? 'twitch-banner' : ''}`}><span className="source-pill">{mode === 'rehearsal' ? 'LOCAL REHEARSAL' : 'TWITCH SOURCE'}</span><span>{mode === 'rehearsal' ? 'Practice the full rule flow in your browser. No Twitch message or AI inference is used.' : `${server?.twitch.detail ?? 'Waiting for backend connection.'} ${!liveReady ? 'PostgreSQL access is required for live controls.' : ''}`}</span></div>
+      <div className={`source-banner ${mode === 'twitch' ? 'twitch-banner' : ''}`}><span className="source-pill">{mode === 'rehearsal' ? 'LOCAL REHEARSAL' : 'TWITCH SOURCE'}</span><span>{mode === 'rehearsal' ? 'Practice the full rule flow in your browser. No Twitch message or AI inference is used.' : `${backendOnline ? server?.twitch.detail ?? 'Waiting for Twitch status.' : 'Backend unavailable. Twitch connection status cannot be verified.'} ${!liveReady ? 'PostgreSQL access is required for live controls.' : ''}`}</span></div>
 
       <div className="studio-grid">
         <section className="arena-panel" aria-label="Game arena">

@@ -23,6 +23,16 @@ implementation session without copying private transcript contents or secrets.
   are saved in `../docs/evidence/local-checks.json`; the PostgreSQL test skipped.
 - Attempted both preview servers and recorded sandbox bind denials. No live
   Twitch, browser, database or OBS evidence is implied by successful local tests.
+- On continuation, incorporated the user's existing PostgreSQL 18 Docker target;
+  added a read-only inspector, pre-migration version check, redacted preflight
+  report, safe `.env` loader and a single-command Go/Vite launcher. Docker access
+  remained denied, and no existing containers/volumes were changed.
+- Added and ran a cross-runtime synthetic chat-to-physics test, preserving a
+  `PROTOCOL_FIXTURE` trace in `../docs/evidence/vertical-slice.json`.
+- Fixed bounded HTTP waits, stale connection messaging, OAuth return mode and
+  the successful-Start/failed-refresh edge case. Latest checks: 29 Go tests
+  including subtests and 19 web tests passed, alongside vet and build. Real
+  PostgreSQL 18, Twitch and browser/OBS verification remain pending.
 
 ## Session identity and reproducibility
 

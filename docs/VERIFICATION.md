@@ -7,16 +7,18 @@ caches were used; neither test suite needs a paid provider.
 
 | Check | Observed result |
 | --- | --- |
-| `go test -race -count=1 -json ./...` | Passed: 15 top-level tests, 28 including subtests |
-| Real PostgreSQL integration | **Skipped**, missing `TEST_DATABASE_URL` |
+| `go test -race -count=1 -json ./...` | Passed: 16 top-level tests, 29 including subtests |
+| Real PostgreSQL 18 integration | **Skipped**, missing `TEST_DATABASE_URL` and Docker access |
 | `go vet ./...` | Passed |
-| `npm test` | Passed: 13 tests |
+| `npm test` | Passed: 19 tests (13 engine/contract, 6 HTTP transport) |
 | `npm run build` | Passed: strict TypeScript check and Vite production bundle |
 | Local HTTP preview | **Blocked**, both listener attempts denied by sandbox |
 | Browser rehearsal script | **Pending**, no permitted preview server |
 | Real Twitch OAuth/chat | **Pending**, credentials/consent and network required |
 | OBS capture / 720p reading | **Pending**, no visual/live verification |
 | AI runtime interpretation | **Not implemented**, limited parser is labeled |
+| Read-only environment preflight | Ran; Docker socket/listeners denied, credentials missing |
+| Launcher syntax/configuration gate | Passed; actual launch remains unverified |
 
 The engine tests prove the condition at coins one/two/three, real upward
 acceleration, movement-based coin collection, platform underside collision,
@@ -24,6 +26,11 @@ exact expiry, overlap refresh, delayed-tab recovery, stop/round cleanup, jump
 behavior, schema validation and coin reachability across all supported
 frequencies. Shared cases keep the rehearsal and Go parser aligned, including
 integer-overflow and unsupported-code requests.
+
+The six transport tests cover mutation headers/payload, session-renewal errors,
+plain-text proxy failures, request timeouts, cancellation and network errors.
+The frontend uses the bounded transport for polling and control commands. A
+successful Start initializes the engine before an optional status refresh.
 
 Backend fixture tests prove admission bounds, persistent-repository contracts,
 concurrent duplicate protection at the use-case boundary, cooldown, single
@@ -38,10 +45,25 @@ old-socket retention during handoff, no duplicate handoff subscription, loss and
 retry status, revocation, reconnect URL validation and invalid-token rejection.
 They do **not** prove Twitch API acceptance or real network delivery.
 
-The opt-in PostgreSQL test creates a unique schema in a dedicated `_test`
+One cross-runtime test carries an accepted synthetic EventSub message through
+Go approval and round creation into the actual TypeScript engine over stdin.
+The [recorded trace](evidence/vertical-slice.json) shows normal gravity at coins
+one/two and reversal at coin three, 1,040 ms into simulated movement. It checks
+actual upward acceleration, expiry at 4,000 ms after triggering, stop cleanup and
+automatic round completion. It is explicitly `PROTOCOL_FIXTURE` evidence with a
+repository double; it proves neither live Twitch nor real PostgreSQL persistence.
+
+The opt-in PostgreSQL test first checks the existing server is major version 18,
+then creates a unique schema in a dedicated `_test`
 database. It checks idempotent migration, unique message constraint, persisted
 cooldown across service instances, approval/round creation, telemetry and stop.
 Those behaviors remain unverified against PostgreSQL until that test runs.
+
+The observed [environment report](evidence/environment.json) contains only
+redacted readiness states and container metadata if accessible. No connection
+URLs or credential values are stored. `node scripts/dev.mjs --live` exited before
+launch with an actionable configuration message because database and Twitch
+credentials were missing. The launcher has not been exercised with live services.
 
 To reproduce the local checks from the project root:
 

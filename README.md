@@ -20,7 +20,7 @@ EventSub fixture tests passed. Browser/OBS verification remains pending.
 ## Implemented scope
 
 - React + TypeScript + Vite + Tailwind CSS, with a Canvas 2D game.
-- Go with inward-pointing Clean Architecture boundaries and PostgreSQL storage.
+- Go with inward-pointing Clean Architecture boundaries and PostgreSQL 18 storage.
 - Twitch authorization-code OAuth, backend-only tokens, validation/refresh and
   EventSub WebSocket chat intake for the signed-in broadcaster's own channel.
 - A bounded proposal queue, message-ID deduplication, viewer cooldown, explicit
@@ -45,37 +45,35 @@ requests remain unexecutable. Chat text is never run as code.
 
 ## Run locally
 
-Requirements: Node 24+, Go 1.26+, and PostgreSQL 17 (or the provided Docker
-Compose service). Run these commands **from `ruleshift-live/`** unless noted.
+Requirements: Node 24+, Go 1.26+, and the user's **existing PostgreSQL 18 Docker
+container**. Run these commands **from `ruleshift-live/`** unless noted.
 The default web URL is `http://localhost:5174`; backend is loopback-only on 8080.
 Port 5173 belongs to another local application and is intentionally avoided.
 
-First terminal, start the web client:
+Install the web dependencies once:
 
 ```sh
 cd web
 npm ci
-npm run dev
+cd ..
 ```
 
-Open **http://localhost:5174**. In Rehearsal, send the example message, approve
+Open **http://localhost:5174** after starting the app below. In Rehearsal, send the example message, approve
 the proposal and start the round. Use A/D or arrow keys to move and Space to
 jump. Click the arena to focus controls. Rehearsal runs in browser memory and
 does not create live records in PostgreSQL; reloading resets it. The app shows
 the backend/database as unavailable until configured.
 
-Second terminal, start PostgreSQL using your existing instance, or:
+Check the existing environment without changing containers or running migrations:
 
 ```sh
-read -rs 'RULESHIFT_DB_PASSWORD?Local PostgreSQL password: '
-export RULESHIFT_DB_PASSWORD
-docker compose up -d postgres
+node scripts/doctor.mjs
 ```
 
-The password prompt above uses zsh, the implementation machine's shell. For a
-different shell, set `RULESHIFT_DB_PASSWORD` privately in your usual way.
-Compose binds the database to loopback and uses a persistent Docker volume.
-Do not run `docker compose down -v` if you want to retain proposals/results.
+Use the host port published by your existing PostgreSQL 18 container. Prepare
+dedicated `ruleshift_live` and `ruleshift_live_test` databases within that server;
+[the PostgreSQL 18 setup guide](docs/POSTGRES-18.md) covers port discovery and
+one-time setup. The launcher does not create, restart or modify Docker services.
 
 Configure the backend privately:
 
@@ -87,7 +85,8 @@ Edit `backend/.env` locally with your database URL and Twitch app credentials.
 Example **configuration shapes**, with placeholders rather than credentials:
 
 ```dotenv
-DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:5432/ruleshift?sslmode=disable'
+DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:HOST_PORT/ruleshift_live?sslmode=disable'
+TEST_DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:HOST_PORT/ruleshift_live_test?sslmode=disable'
 HTTP_ADDR='127.0.0.1:8080'
 WEB_ORIGIN='http://localhost:5174'
 TWITCH_CLIENT_ID='YOUR_APP_CLIENT_ID'
@@ -95,19 +94,21 @@ TWITCH_CLIENT_SECRET='YOUR_APP_CLIENT_SECRET'
 TWITCH_REDIRECT_URI='http://localhost:8080/auth/twitch/callback'
 ```
 
-URL-encode special characters in database credentials. The `.env` file is
-ignored by Git. The server reads environment variables; load the file in the
-backend terminal before starting it:
+Replace `HOST_PORT` with the actual published host port. URL-encode special
+characters in credentials. The `.env` file is ignored by Git. The launcher reads
+it as data, without executing shell commands, then starts Go and Vite together:
 
 ```sh
-cd backend
-set -a
-source .env
-set +a
-go run ./cmd/server
+node scripts/dev.mjs
 ```
 
-The initial migration runs transactionally and idempotently at startup. An unset
+For a live session, `node scripts/dev.mjs --live` requires database and Twitch
+app configuration before launch. Use Ctrl+C to stop both owned child processes.
+Backend credentials are not passed to Vite. OAuth still requires interactive
+consent in the browser.
+
+The server checks the connected major version is 18 before any migration. The
+initial migration runs transactionally and idempotently at startup. An unset
 `DATABASE_URL` exposes status endpoints with live controls disabled; a configured
 but inaccessible database causes startup to fail. There is no runtime replacement
 database. `/healthz` returns 503 when PostgreSQL is unavailable.
@@ -145,7 +146,7 @@ npm test
 npm run build
 ```
 
-The PostgreSQL integration test is opt-in; create a separate database named with
+The PostgreSQL 18 integration test is opt-in; create a separate database named with
 an `_test` suffix and set `TEST_DATABASE_URL` privately before running Go tests.
 It creates and removes a unique schema, never application tables. It is skipped
 when the test database is unavailable; a skip is not integration evidence.
@@ -156,6 +157,11 @@ Use `CHROME_PATH` for another Chromium executable. The script checks approval,
 movement-triggered reversal, automatic restoration, stop, unsupported proposals,
 source separation, horizontal overflow and captures desktop/mobile images under
 `.local/browser-evidence/`. **This browser script has not run in this sandbox.**
+
+`node scripts/verify.mjs` runs all four checks and loads configuration from the
+backend `.env`. It also records a synthetic EventSub → Go approval → actual
+TypeScript engine trace under `docs/evidence/vertical-slice.json`. That trace is
+protocol-fixture evidence, not a real Twitch message or PostgreSQL run.
 
 See [architecture](docs/ARCHITECTURE.md), [progress](docs/PROGRESS.md),
 [verification evidence](docs/VERIFICATION.md), and

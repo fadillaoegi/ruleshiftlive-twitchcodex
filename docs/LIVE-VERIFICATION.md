@@ -6,8 +6,11 @@ Twitch chat. The synthetic fixture under the adapter tests is not a substitute.
 ## Prepare the local machine
 
 Use a session permitted to listen on localhost and reach Twitch. Check ports
-8080, 5174 and 5432. Start accessible PostgreSQL and the backend/web commands in
-the README. Verify `/healthz` reports PostgreSQL, and Signal check shows backend
+8080, 5174 and the published host port of the user's existing PostgreSQL 18
+container. Follow [the PostgreSQL 18 guide](POSTGRES-18.md), set the two database
+URLs in `backend/.env`, and run `node scripts/doctor.mjs`. Start the application
+using `node scripts/dev.mjs --live` once the Twitch configuration below is set.
+Verify `/healthz` reports PostgreSQL, and Signal check shows backend
 reachable and PostgreSQL connected. Run the real opt-in database integration
 test against a separate `_test` database before connecting Twitch.
 

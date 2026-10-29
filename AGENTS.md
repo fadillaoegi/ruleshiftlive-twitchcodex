@@ -5,6 +5,9 @@ Work only in this project. UI, code documentation and submission materials use E
 Stack: React + TypeScript + Vite + Tailwind, Canvas 2D, Go, PostgreSQL.
 Keep Go domain independent of transport, Twitch and persistence. Application ports
 point inward; infrastructure implements them. Do not replace PostgreSQL.
+Use the user's existing PostgreSQL 18 Docker container. Do not start another
+database container, recreate the existing container, change its volume or reset
+its credentials. Application/test databases must be separate from other projects.
 
 First milestone: real Twitch chat → bounded proposal queue → streamer approval →
 every third coin reverses actual gravity for four seconds → automatic expiry.

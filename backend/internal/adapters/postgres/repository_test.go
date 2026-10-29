@@ -31,6 +31,13 @@ func TestPostgreSQLIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer admin.Close()
+	info, err := Inspect(ctx, raw)
+	if err != nil {
+		t.Fatal("PostgreSQL 18 preflight failed (connection details withheld)")
+	}
+	if info.Major != 18 {
+		t.Fatal("integration test must use PostgreSQL 18")
+	}
 	schema := "ruleshift_test_" + application.ID()
 	quoted := pgx.Identifier{schema}.Sanitize()
 	if _, err = admin.Exec(ctx, "CREATE SCHEMA "+quoted); err != nil {
