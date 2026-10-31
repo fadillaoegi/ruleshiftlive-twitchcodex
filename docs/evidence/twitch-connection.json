@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-30T11:15:32.754Z",
+  "evidence_kind": "REAL_TWITCH_CONNECTION",
+  "source": "Actual backend status after user-completed browser OAuth",
+  "server_time": "2026-10-30T11:15:32.72447Z",
+  "database": "connected",
+  "twitch": {
+    "state": "connected",
+    "channel": "fldevboo"
+  },
+  "proposal_count": 0,
+  "round_status": null,
+  "limits": [
+    "Connected status is set only after the EventSub WebSocket welcome and successful subscription response.",
+    "No real chat-to-proposal or gameplay evidence captured in this connection check.",
+    "No credentials, OAuth state, tokens or chat text recorded."
+  ]
+}

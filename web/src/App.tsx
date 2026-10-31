@@ -214,7 +214,7 @@ export function App() {
 
   return <div className="app-shell">
     <header className="topbar">
-      <a className="brand" href="/" aria-label="RuleShift Live home"><span className="brand-mark">↯</span><span>rule<span className="brand-light">shift</span><span className="live-word">LIVE</span></span></a>
+      <a className="brand" href="/" aria-label="RuleShift Live home"><span className="brand-mark" aria-hidden="true"><img src="/favicon.svg" alt="" /></span><span>rule<span className="brand-light">shift</span><span className="live-word">LIVE</span></span></a>
       <div className="top-meta"><span className="mini-dot" /> BUILT WITH CODEX <span className="divider">/</span> TWITCHCON 2026</div>
       <span className="session-tag">STREAMER STUDIO <span>01</span></span>
     </header>

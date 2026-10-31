@@ -10,4 +10,5 @@
 
 Do not expand to AI interpretation or temporary platforms until the first live
 vertical slice is proven. Target submission: November 2, 2026, 21:00 WIB;
-handoff deadline: November 3, 2026, 05:00 WIB.
+official cutoff verified from Devpost on October 30: November 2, 2026,
+14:00 PST, equivalent to November 3, 2026, 05:00 WIB. The earlier target is internal.

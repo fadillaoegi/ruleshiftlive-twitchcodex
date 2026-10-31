@@ -1,7 +1,18 @@
-# Live verification runbook — pending
+# Live verification runbook — core flow captured
 
-The first milestone is not complete until this runbook is executed with real
-Twitch chat. The synthetic fixture under the adapter tests is not a substitute.
+The core first milestone has now been captured with real Twitch chat; see
+[`evidence/twitch-browser-capture.json`](evidence/twitch-browser-capture.json).
+The new round finished with 12 coins and four shifts. Its first third-coin
+effect restored normal gravity after 4,002 ms, and the downloaded controller
+record matches a direct read-only PostgreSQL query. The proposal was approved
+before recording, so the footage does not show that approval click. The 75-second
+round, automatic completion and saved result were captured through actual UI
+input at normal speed. The synthetic fixture is not a substitute for that evidence.
+
+This does not mark every extended check below complete. Live Stop, actual
+failure/retry scenarios, rapid-message cooldown and OBS livestream/720p checks
+remain unverified. Rehearsal Stop and unsupported-rule recordings are separately
+labelled. Use this runbook for those remaining checks or another controlled run.
 
 ## Prepare the local machine
 

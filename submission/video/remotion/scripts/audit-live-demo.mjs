@@ -1,0 +1,45 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
+
+const root=fileURLToPath(new URL('../../../../',import.meta.url));
+const read=async p=>JSON.parse(await readFile(resolve(root,p),'utf8'));
+const capture=await read('submission/video/captures/live-capture.json');
+const record=await read('submission/video/captures/live-round-record.json');
+assert.equal(capture.completed,true);assert.equal(capture.evidence_kind,'REAL_TWITCH_BROWSER_CAPTURE');
+assert.equal(record.evidence_kind,'TWITCH_CONTROLLER_RECORD');assert.equal(record.storage,'postgresql_confirmed');
+assert.equal(capture.round_id,record.round.id);assert.equal(capture.message_id,record.round.message_id);
+assert.equal(record.round.source,'twitch');assert.equal(record.round.result_saved,true);
+assert.equal(record.round.status,'finished');assert.equal(record.events_dropped,0);
+assert.equal(record.round.rule.trigger.every,3);assert.equal(record.round.rule.effect.duration_ms,4000);
+assert.equal(Date.parse(record.round.ends_at)-Date.parse(record.round.started_at),75000);
+const flip=record.controller_events.find(e=>e.kind==='gravity_flip'&&e.coins===3);
+const expiry=record.controller_events.find(e=>e.kind==='effect_expired'&&Date.parse(e.at)>Date.parse(flip?.at));
+assert.ok(flip&&expiry);assert.equal(flip.gravity,-1);assert.equal(expiry.gravity,1);
+assert.equal(Date.parse(flip.effect_ends_at)-Date.parse(flip.at),4000);
+const observed=Date.parse(expiry.at)-Date.parse(flip.at);
+assert.ok(observed>=4000&&observed<4250);
+const flips=record.controller_events.filter(e=>e.kind==='gravity_flip');
+const repeated=flips.find((e,i)=>i>0&&Date.parse(e.at)<Date.parse(flips[i-1].effect_ends_at));
+let repeat=null;
+if(repeated) {
+  const previous=flips[flips.indexOf(repeated)-1];
+  const restored=record.controller_events.find(e=>e.kind==='effect_expired'&&Date.parse(e.at)>Date.parse(repeated.at));
+  assert.ok(restored);assert.equal(repeated.gravity,-1);
+  assert.equal(Date.parse(repeated.effect_ends_at)-Date.parse(repeated.at),4000);
+  assert.ok(Date.parse(restored.at)>=Date.parse(repeated.effect_ends_at));
+  repeat={trigger_coin:repeated.coins,retriggered_at:repeated.at,previous_deadline:previous.effect_ends_at,refreshed_deadline:repeated.effect_ends_at,restored_at:restored.at,observed_duration_from_retrigger_ms:Date.parse(restored.at)-Date.parse(repeated.at)};
+}
+assert.match(record.round.id,/^[a-zA-Z0-9-]+$/);
+const sql=`BEGIN READ ONLY; SELECT row_to_json(r) FROM (SELECT id, proposal_id, message_id, source, status, coins, sequence, result_saved, started_at, ends_at FROM rounds WHERE id='${record.round.id}') r; COMMIT;`;
+const raw=execFileSync('docker',['exec','deliverpay-postgres-1','psql','-X','-q','-A','-t','-U','ruleshift_live','-d','ruleshift_live','-c',sql],{encoding:'utf8'}).trim();
+const database=JSON.parse(raw);
+for(const key of ['id','proposal_id','message_id','source','status','coins','sequence','result_saved'])assert.equal(database[key],record.round[key]);
+const state=await(await fetch('http://localhost:8080/api/state')).json();
+assert.equal(state.database,'connected');assert.equal(state.round.id,record.round.id);
+assert.equal(state.round.result_saved,true);assert.equal(state.round.coins,database.coins);
+const report={recorded_at:new Date().toISOString(),evidence_kind:'REAL_TWITCH_BROWSER_ROUND_WITH_EFFECT_TRACE',source:'Actual UI capture, downloaded controller trace, backend state and a matching direct read-only PostgreSQL query',capture_file:capture.file,round:record.round,postgresql_confirmation:database,first_effect:{trigger_coin:flip.coins,flipped_at:flip.at,expected_expiry_at:flip.effect_ends_at,observed_expiry_at:expiry.at,observed_duration_ms:observed,gravity_during:flip.gravity,gravity_after:expiry.gravity},repeat_trigger:repeat,controller_event_count:record.controller_events.length,events_dropped:record.events_dropped,limits:['Controller event timestamps are client observations; this is not independent physics telemetry.','Score remains controller-reported and untrusted.','Automated keyboard/mouse testing with natural cursor paths; no claim of a human operator or an OBS livestream.']};
+await writeFile(resolve(root,'docs/evidence/twitch-browser-capture.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({round_id:record.round.id,message_id:record.round.message_id,coins:record.round.coins,first_effect_duration_ms:observed,postgresql_confirmation:'matched',status:'passed'}));

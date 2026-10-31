@@ -1,0 +1,44 @@
+{
+  "captured_at": "2026-10-30T13:25:35.901Z",
+  "capture": "Actual Chromium screen video with real DOM input events and decorative cursor",
+  "mode": "rehearsal",
+  "evidence_kind": "LOCAL_REHEARSAL",
+  "file": "rehearsal-raw.webm",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "requested_fps": 60,
+  "automation": "Playwright UI testing with eased cursor movement; no claim of a human operator",
+  "shots": [
+    {
+      "name": "unsupported-rule",
+      "start_seconds": 3.762,
+      "end_seconds": 22.864
+    },
+    {
+      "name": "rehearsal-setup",
+      "start_seconds": 24.855,
+      "end_seconds": 43.665
+    },
+    {
+      "name": "rehearsal-expiry",
+      "start_seconds": 43.665,
+      "end_seconds": 53.85
+    },
+    {
+      "name": "stop-control",
+      "start_seconds": 53.85,
+      "end_seconds": 61.294
+    },
+    {
+      "name": "rehearsal-result",
+      "start_seconds": 61.294,
+      "end_seconds": 64.958
+    }
+  ],
+  "round_id": null,
+  "message_id": null,
+  "script_errors": [],
+  "completed": true
+}

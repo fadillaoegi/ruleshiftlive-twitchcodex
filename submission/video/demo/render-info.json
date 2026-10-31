@@ -1,0 +1,16 @@
+{
+  "rendered_at": "2026-10-30T14:23:43.906Z",
+  "renderer": "Remotion 4.0.539 editorial plates and original 3D graphics; FFmpeg native capture compositing and assembly",
+  "file": "ruleshift-demo.mp4",
+  "review": false,
+  "duration_seconds": 150.5,
+  "frames": 9030,
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "subtitles": false,
+  "embedded_voiceover": false,
+  "voiceover_script": "VOICEOVER-EN.md",
+  "source_manifest": "edit-plan.json",
+  "playback_rate": 1
+}

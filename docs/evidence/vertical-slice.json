@@ -11,7 +11,7 @@
   "evidence_kind": "PROTOCOL_FIXTURE",
   "exact_expiry_restores_gravity": true,
   "final_coins": 3,
-  "recorded_at": "2026-10-29T13:54:19.220Z",
+  "recorded_at": "2026-10-30T13:10:33.227Z",
   "rule": {
     "effect": {
       "duration_ms": 4000,

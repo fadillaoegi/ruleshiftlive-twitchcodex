@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "source": "browser rehearsal; no Twitch or AI inference",
+  "at": "2026-10-30T06:35:29.524Z",
+  "viewport": "1280\u00d7720 and 390\u00d7844",
+  "evidence_kind": "LOCAL_REHEARSAL",
+  "storage": "browser_only",
+  "checks": [
+    "approval and round start",
+    "movement collects third coin and reverses gravity",
+    "automatic gravity restoration",
+    "stop clears effects",
+    "downloaded record retains rehearsal source and expiry events",
+    "unsupported proposal cannot be approved",
+    "Twitch mode hides rehearsal proposals",
+    "no horizontal overflow at desktop/mobile sizes",
+    "no page JavaScript errors"
+  ],
+  "screenshots": [
+    "browser/rehearsal-720p.png",
+    "browser/third-coin-reversal.png",
+    "browser/mobile-390.png"
+  ],
+  "limits": [
+    "No real Twitch OAuth or chat message tested.",
+    "Database integration is separately verified; rehearsal never writes live records.",
+    "Screenshots are full-page captures with 1280x720 and 390x844 viewports; OBS capture and 720p stream readability remain unverified."
+  ]
+}

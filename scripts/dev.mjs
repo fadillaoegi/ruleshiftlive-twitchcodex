@@ -4,15 +4,14 @@ import { spawn } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { environment, root } from './environment.mjs';
+import { configuration } from './configuration.mjs';
 
 const env = await environment();
-const address = env.HTTP_ADDR || '127.0.0.1:8080';
-const origin = env.WEB_ORIGIN || 'http://localhost:5174';
-let backendURL, webURL;
+let config;
 try {
-  backendURL = new URL(`http://${address}`); webURL = new URL(origin);
-  if (!['127.0.0.1', '[::1]'].includes(backendURL.hostname) || backendURL.origin !== `http://${address}` || !['localhost', '127.0.0.1'].includes(webURL.hostname) || webURL.protocol !== 'http:' || webURL.origin !== origin) throw new Error();
-} catch { console.error('Use a loopback HTTP_ADDR and a local WEB_ORIGIN, as shown in backend/.env.example.'); process.exit(1); }
+  config = configuration(env);
+} catch (error) { console.error(error.message); process.exit(1); }
+const { address, origin, backendURL, webURL, redirectURI } = config;
 if (process.argv.includes('--live') && ['DATABASE_URL','TWITCH_CLIENT_ID','TWITCH_CLIENT_SECRET'].some(key => !env[key])) {
   console.error('Live startup requires DATABASE_URL for your existing PostgreSQL 18 container and both Twitch app credentials in backend/.env. Run node scripts/doctor.mjs for status.');
   process.exit(1);
@@ -31,7 +30,7 @@ const frontendEnv = Object.fromEntries(['PATH','HOME','SystemRoot','COMSPEC','TM
 frontendEnv.RULESHIFT_BACKEND_ORIGIN = backendURL.origin;
 frontendEnv.RULESHIFT_WEB_PORT = webURL.port || '80';
 const children = [
-  spawn(binary, [], { cwd: new URL('backend/', root), env: { ...env, HTTP_ADDR: address, WEB_ORIGIN: origin }, stdio: 'inherit' }),
+  spawn(binary, [], { cwd: new URL('backend/', root), env: { ...env, HTTP_ADDR: address, WEB_ORIGIN: origin, TWITCH_REDIRECT_URI: redirectURI }, stdio: 'inherit' }),
   spawn(process.execPath, [fileURLToPath(new URL('web/node_modules/vite/bin/vite.js', root)), '--host', '127.0.0.1', '--port', frontendEnv.RULESHIFT_WEB_PORT, '--strictPort'], { cwd: new URL('web/', root), env: frontendEnv, stdio: 'inherit' }),
 ];
 let stopping = false;

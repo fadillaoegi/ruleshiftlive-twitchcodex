@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-30T12:17:38.495Z",
+  "evidence_kind": "BRAND_ANIMATION_QA",
+  "source": "Actual ffprobe metadata, complete FFmpeg decode, encoded-audio level measurements and extracted final-video frames",
+  "typecheck": "passed",
+  "results": [
+    {
+      "file": "ruleshift-intro.mp4",
+      "status": "passed",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60,
+      "frames": 390,
+      "duration_seconds": 6.5,
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "color_space": "bt709",
+      "audio_codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "audio_peak_dbfs": -2.3,
+      "audio_mean_dbfs": -22.2,
+      "bytes": 6474854,
+      "full_decode": "passed"
+    },
+    {
+      "file": "ruleshift-closing.mp4",
+      "status": "passed",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60,
+      "frames": 330,
+      "duration_seconds": 5.5,
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "color_space": "bt709",
+      "audio_codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "audio_peak_dbfs": -2.2,
+      "audio_mean_dbfs": -20.5,
+      "bytes": 6545655,
+      "full_decode": "passed"
+    }
+  ],
+  "limits": [
+    "Visual QA is separate from media metadata validation.",
+    "These are brand animation clips, not the complete Twitch/Codex submission demo."
+  ],
+  "visual_review": {
+    "status": "inspected",
+    "source": "Frames extracted from final MP4 files",
+    "frames": [
+      "previews/rendered-coin-sequence.png",
+      "previews/rendered-intro.png",
+      "previews/rendered-closing.png"
+    ],
+    "checks": [
+      "3D geometry is visible in the encoded video",
+      "Logo and title remain readable",
+      "Intro has the embossed coin sequence and title reveal",
+      "Closing has the CTA and Codex credit"
+    ]
+  },
+  "combined_preview": {
+    "file": "ruleshift-motion-preview.mp4",
+    "status": "passed",
+    "frames": 720,
+    "fps": 60,
+    "duration_seconds": 12.010667,
+    "full_decode": "passed"
+  }
+}

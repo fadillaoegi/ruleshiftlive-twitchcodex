@@ -1,0 +1,17 @@
+{
+  "source": "Original procedural synthesis; no third-party recordings or music",
+  "intro": {
+    "duration_seconds": 6.5,
+    "sample_rate": 48000,
+    "channels": 2,
+    "peak_dbfs": -2.3,
+    "rms_dbfs": -22.17874469482682
+  },
+  "closing": {
+    "duration_seconds": 5.5,
+    "sample_rate": 48000,
+    "channels": 2,
+    "peak_dbfs": -2.3,
+    "rms_dbfs": -20.466028181935812
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ruleshift-submission-motion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "audio": "node scripts/audio.mjs",
+    "capture:overview": "node scripts/capture-demo.mjs overview",
+    "capture:rehearsal": "node scripts/capture-demo.mjs rehearsal",
+    "capture:live": "node scripts/capture-demo.mjs live",
+    "capture:codex": "node scripts/capture-codex.mjs",
+    "capture:wait": "node scripts/capture-when-ready.mjs",
+    "prepare:demo": "node scripts/prepare-demo.mjs",
+    "render:demo": "node scripts/render-demo.mjs",
+    "verify": "node scripts/verify.mjs",
+    "stills": "node scripts/render.mjs --stills",
+    "render": "node scripts/audio.mjs && node scripts/render.mjs",
+    "verify:demo": "node scripts/verify-demo.mjs",
+    "render:demo:edit": "node scripts/render-demo-edit.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/bundler": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "@remotion/three": "4.0.539",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.539",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "typescript": "7.0.2"
+  }
+}

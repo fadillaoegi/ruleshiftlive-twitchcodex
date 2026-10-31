@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-30T13:51:27.011Z",
+  "evidence_kind": "REVIEW_DEMO_MEDIA_QA",
+  "file": "ruleshift-demo-review.mp4",
+  "duration_seconds": 129.5,
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "frames": 7770,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "sample_rate": 48000,
+  "channels": 2,
+  "audio_peak_dbfs": -2.2,
+  "full_decode": "passed",
+  "subtitles": false,
+  "embedded_voiceover": false,
+  "visual_inspection": {
+    "status": "passed",
+    "scope": "Sampled frames extracted from the final encoded MP4; not a complete real-time human viewing",
+    "frames": [
+      "reversal-detail",
+      "rehearsal-expiry",
+      "rehearsal-stop",
+      "chat-detail",
+      "proposal-detail",
+      "archived-twitch",
+      "codex",
+      "source",
+      "intro-detail",
+      "closing-detail"
+    ]
+  },
+  "limits": [
+    "Fresh continuous Twitch capture is pending; archival images and rehearsal are explicitly labelled.",
+    "Do not treat this review cut as a final rules-compliance certification."
+  ],
+  "bytes": 18506157,
+  "frame_directory": "previews/encoded-review"
+}

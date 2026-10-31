@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-30T11:04:11.133598+00:00",
+  "evidence_kind": "LOCAL_CONFIGURATION_READINESS",
+  "source": "Actual local preflight, launcher and HTTP checks; no real Twitch OAuth or chat",
+  "startup_mode": "--live",
+  "private_configuration": {
+    "mode": "0600",
+    "ignored": true,
+    "twitch_fields": "set"
+  },
+  "postgres": {
+    "status": "connected",
+    "major": 18,
+    "version": "18.4",
+    "health": "ok"
+  },
+  "http": {
+    "health_status": 200,
+    "bootstrap_twitch_configured": true,
+    "oauth_start_status": 303
+  },
+  "twitch": {
+    "state": "disconnected",
+    "provider_credential_validation": "pending_oauth",
+    "real_chat": "not_verified"
+  },
+  "limits": [
+    "No OAuth state, credentials or tokens recorded.",
+    "An OAuth redirect and configured fields do not validate the client secret with Twitch.",
+    "Broadcaster consent, EventSub subscription and real chat-to-game verification remain pending."
+  ]
+}

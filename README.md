@@ -11,11 +11,18 @@ The product hypothesis is that viewers want their creativity to shape moments
 on stream, while streamers need an activity that is easy to explain and control.
 Engagement improvements have not been measured.
 
-This is the first-milestone implementation for Codex × TwitchCon. **Real Twitch
-verification is pending.** No Twitch credentials or accessible PostgreSQL server
-were available in the implementation session; its sandbox also denied localhost
-listeners, Docker socket access and terminal DNS. Unit, in-process HTTP and
-EventSub fixture tests passed. Browser/OBS verification remains pending.
+This is the first-milestone implementation for Codex × TwitchCon. **The core
+real Twitch-to-game flow is verified.** A real chat proposal was approved and
+played through a 75-second round with 12 coins and four gravity shifts. Browser
+footage and its downloaded controller trace show the first third-coin effect
+expiring after 4,002 ms; a direct read-only PostgreSQL query matches the saved
+result. See [the bounded evidence](docs/evidence/twitch-browser-capture.json).
+The proposal was already approved when this recording began; the edit does not
+pretend to show a new approval click. PostgreSQL 18.4 uses the existing Docker
+instance and isolated application/test databases. Real database integration,
+unit, HTTP and synthetic EventSub tests pass. Fixture and rehearsal evidence
+remain separately labelled. OBS livestream, live Stop/failure-retry scenarios
+and competition submission are separate from this verified core loop.
 
 ## Implemented scope
 
@@ -82,10 +89,11 @@ one-time setup. The launcher does not create, restart or modify Docker services.
 Configure the backend privately:
 
 ```sh
-cp backend/.env.example backend/.env
+cp -n backend/.env.example backend/.env
 ```
 
-Edit `backend/.env` locally with your database URL and Twitch app credentials.
+Keep any existing `backend/.env`; the command above does not overwrite it.
+Edit it locally with your database URL and Twitch app credentials.
 Example **configuration shapes**, with placeholders rather than credentials:
 
 ```dotenv
@@ -110,6 +118,14 @@ For a live session, `node scripts/dev.mjs --live` requires database and Twitch
 app configuration before launch. Use Ctrl+C to stop both owned child processes.
 Backend credentials are not passed to Vite. OAuth still requires interactive
 consent in the browser.
+
+The launcher and doctor use the same configuration checks. Doctor probes the
+configured ports rather than always probing 8080/5174; occupied or blocked ports
+fail preflight. The OAuth callback must use the browser hostname in `WEB_ORIGIN`,
+the backend port in `HTTP_ADDR` and `/auth/twitch/callback`. If
+`TWITCH_REDIRECT_URI` is empty, the launcher derives that URL. Register the exact
+URL in Twitch; mixing `localhost` and `127.0.0.1` loses the OAuth state cookie.
+An explicitly mismatched callback fails before either application launches.
 
 The server checks the connected major version is 18 before any migration. The
 initial migration runs transactionally and idempotently at startup. An unset
@@ -173,10 +189,12 @@ Vite running and install Google Chrome, then run `npm run test:browser` in `web/
 Use `CHROME_PATH` for another Chromium executable. The script checks approval,
 movement-triggered reversal, automatic restoration, stop, unsupported proposals,
 source separation, horizontal overflow and captures desktop/mobile images under
-`.local/browser-evidence/`. **This browser script has not run in this sandbox.**
+`.local/browser-evidence/`. **This browser script passed using Chrome with approved local runtime access.**
+See [browser rehearsal evidence](docs/evidence/browser-rehearsal.json).
 It also checks that a downloaded rehearsal record remains labeled browser-only.
 
-`node scripts/verify.mjs` runs all four checks and loads configuration from the
+`node scripts/verify.mjs` runs the four application checks plus startup configuration
+tests and loads configuration from the
 backend `.env`. It also records a synthetic EventSub → Go approval → actual
 TypeScript engine trace under `docs/evidence/vertical-slice.json`. That trace is
 protocol-fixture evidence, not a real Twitch message or PostgreSQL run.
@@ -187,11 +205,19 @@ See [architecture](docs/ARCHITECTURE.md), [progress](docs/PROGRESS.md),
 
 ## Next gates
 
-Prove the real Twitch → PostgreSQL → approval → game → expiry flow before adding
-AI interpretation, an actual game preview, jump/temporary-platform mechanics or
-an OBS overlay. No provider model, budget or paid API access is assumed. OBS will
+The core Twitch → PostgreSQL → approval → game → expiry flow has been captured.
+Finish the demo voice performance/publication and submission materials before
+expanding scope. Any future AI interpretation requires verified provider access
+and budget; no paid API access is assumed. OBS will
 need to consume the controller's active state rather than run another simulation.
 The local score is untrusted and is not suitable for monetary prizes.
 
 Submission target from the brief: November 2, 2026, 21:00 WIB. Submission materials
-and UI are in English. Video, live playtest and competition submission are pending.
+and UI are in English. Real Twitch gameplay has been recorded; the edited demo,
+spoken-narration text and remaining submission status are documented in
+[the video package](submission/video/demo/README.md).
+
+The official cutoff is November 2, 2026 at 14:00 PST, equivalent to November 3
+at 05:00 WIB; the earlier time above is our internal target. See the
+[submission readiness audit](submission/SUBMISSION-READINESS.md) for checked
+sources, remaining materials and verification limits.

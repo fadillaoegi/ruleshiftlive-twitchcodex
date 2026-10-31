@@ -1,0 +1,66 @@
+{
+  "recorded_at": "2026-10-30T14:22:33.041Z",
+  "evidence_kind": "REAL_TWITCH_BROWSER_ROUND_WITH_EFFECT_TRACE",
+  "source": "Actual UI capture, downloaded controller trace, backend state and a matching direct read-only PostgreSQL query",
+  "capture_file": "live-raw.webm",
+  "round": {
+    "id": "56229fde4cf8185ab948448b147755bb",
+    "proposal_id": "93cba8988259cbe19bb2690dfe121870",
+    "message_id": "cacefab2-7bf9-43a6-b33a-c60033401947",
+    "author": "fldevboo",
+    "source": "twitch",
+    "rule": {
+      "version": 1,
+      "trigger": {
+        "kind": "coin_collected",
+        "every": 3
+      },
+      "effect": {
+        "kind": "gravity_flip",
+        "duration_ms": 4000
+      }
+    },
+    "status": "finished",
+    "started_at": "2026-10-30T21:12:04.165998+07:00",
+    "ends_at": "2026-10-30T21:13:19.165998+07:00",
+    "coins": 12,
+    "sequence": 76,
+    "result_saved": true
+  },
+  "postgresql_confirmation": {
+    "id": "56229fde4cf8185ab948448b147755bb",
+    "proposal_id": "93cba8988259cbe19bb2690dfe121870",
+    "message_id": "cacefab2-7bf9-43a6-b33a-c60033401947",
+    "source": "twitch",
+    "status": "finished",
+    "coins": 12,
+    "sequence": 76,
+    "result_saved": true,
+    "started_at": "2026-10-30T14:12:04.165998+00:00",
+    "ends_at": "2026-10-30T14:13:19.165998+00:00"
+  },
+  "first_effect": {
+    "trigger_coin": 3,
+    "flipped_at": "2026-10-30T14:12:10.070Z",
+    "expected_expiry_at": "2026-10-30T14:12:14.070Z",
+    "observed_expiry_at": "2026-10-30T14:12:14.072Z",
+    "observed_duration_ms": 4002,
+    "gravity_during": -1,
+    "gravity_after": 1
+  },
+  "repeat_trigger": {
+    "trigger_coin": 12,
+    "retriggered_at": "2026-10-30T14:12:30.567Z",
+    "previous_deadline": "2026-10-30T14:12:32.217Z",
+    "refreshed_deadline": "2026-10-30T14:12:34.567Z",
+    "restored_at": "2026-10-30T14:12:34.570Z",
+    "observed_duration_from_retrigger_ms": 4003
+  },
+  "controller_event_count": 20,
+  "events_dropped": 0,
+  "limits": [
+    "Controller event timestamps are client observations; this is not independent physics telemetry.",
+    "Score remains controller-reported and untrusted.",
+    "Automated keyboard/mouse testing with natural cursor paths; no claim of a human operator or an OBS livestream."
+  ]
+}

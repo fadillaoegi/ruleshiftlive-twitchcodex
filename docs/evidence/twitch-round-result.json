@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-30T11:27:31.589Z",
+  "evidence_kind": "REAL_TWITCH_ROUND_RESULT",
+  "source": "Actual backend state and matching direct read-only PostgreSQL query after user gameplay",
+  "database": "connected",
+  "round": {
+    "id": "ebc37eec6464a2f97f0a20b6cb6833b3",
+    "proposal_id": "d2241e017ab1149bcd377be6f4727419",
+    "message_id": "5a4b86e3-ca97-4d68-aa6d-bd9efcde1530",
+    "author": "fldevboo",
+    "source": "twitch",
+    "rule": {
+      "version": 1,
+      "trigger": {
+        "kind": "coin_collected",
+        "every": 3
+      },
+      "effect": {
+        "kind": "gravity_flip",
+        "duration_ms": 4000
+      }
+    },
+    "status": "finished",
+    "started_at": "2026-10-30T18:25:09.255166+07:00",
+    "ends_at": "2026-10-30T18:26:24.255166+07:00",
+    "coins": 45,
+    "sequence": 76,
+    "result_saved": true
+  },
+  "postgresql_confirmation": {
+    "round_id": "ebc37eec6464a2f97f0a20b6cb6833b3",
+    "message_id": "5a4b86e3-ca97-4d68-aa6d-bd9efcde1530",
+    "coins": 45,
+    "status": "finished",
+    "result_saved": true,
+    "sequence": 76
+  },
+  "user_screenshot": {
+    "coins": 45,
+    "shifts": 15,
+    "time_remaining_seconds": 0,
+    "gravity": "normal",
+    "user_report": "playable"
+  },
+  "limits": [
+    "Score is controller-reported and untrusted.",
+    "Screenshot shows completed real-source gameplay; it does not establish individual effect duration.",
+    "Downloaded controller event record is needed to inspect reversal and expiry timestamps.",
+    "The Twitch channel was offline during the chat test; no on-stream OBS recording is claimed."
+  ]
+}

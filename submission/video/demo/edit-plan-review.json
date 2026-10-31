@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "prepared_at": "2026-10-30T13:34:56.063Z",
+  "review": true,
+  "ready_for_submission_review": false,
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "duration_in_frames": 7770,
+  "duration_seconds": 129.5,
+  "chapters": [
+    {
+      "name": "intro",
+      "kind": "brand",
+      "file": "demo/intro.mp4",
+      "duration_frames": 390,
+      "start_frame": 0,
+      "title": "",
+      "source": "",
+      "narration": ""
+    },
+    {
+      "name": "overview",
+      "kind": "video",
+      "file": "demo/overview-held.mp4",
+      "duration_frames": 810,
+      "start_frame": 390,
+      "title": "CHAT BECOMES GAMEPLAY",
+      "source": "Product overview",
+      "narration": "On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics."
+    },
+    {
+      "name": "archived-twitch",
+      "kind": "archive",
+      "file": "",
+      "duration_frames": 1140,
+      "start_frame": 1200,
+      "title": "REAL TWITCH TEST · EARLIER CAPTURE",
+      "source": "Earlier user-provided screenshots · not a new live recording",
+      "narration": "In our earlier real Twitch test, this chat message became a pending proposal. After approval, the game was playable and the completed round saved forty-five coins in PostgreSQL. These images document that earlier test."
+    },
+    {
+      "name": "rehearsal-setup",
+      "kind": "video",
+      "file": "demo/rehearsal-setup.mp4",
+      "duration_frames": 840,
+      "start_frame": 2340,
+      "title": "A CLEARLY LABELLED WALKTHROUGH",
+      "source": "Local rehearsal · browser only",
+      "narration": "For this recorded walkthrough, I am using the separate rehearsal mode. It runs the real application and physics engine, while keeping local testing distinct from Twitch and database evidence."
+    },
+    {
+      "name": "rehearsal-expiry",
+      "kind": "video",
+      "file": "demo/rehearsal-expiry.mp4",
+      "duration_frames": 600,
+      "start_frame": 3180,
+      "title": "FOUR SECONDS, THEN NORMAL GRAVITY",
+      "source": "Local rehearsal · normal speed",
+      "narration": "On the third coin, the player rises. The four-second effect expires automatically, and normal gravity returns without another button press."
+    },
+    {
+      "name": "rehearsal-stop",
+      "kind": "video",
+      "file": "demo/stop-control-held.mp4",
+      "duration_frames": 480,
+      "start_frame": 3780,
+      "title": "IMMEDIATE STREAMER CONTROL",
+      "source": "Local rehearsal · browser only",
+      "narration": "The third coin reverses gravity. Stop immediately restores normal gravity and ends the round."
+    },
+    {
+      "name": "rehearsal-result",
+      "kind": "video",
+      "file": "demo/rehearsal-result-held.mp4",
+      "duration_frames": 360,
+      "start_frame": 4260,
+      "title": "SOURCE SEPARATION",
+      "source": "Local rehearsal · browser only",
+      "narration": "The rehearsal result is explicitly browser-only. It never claims live database storage."
+    },
+    {
+      "name": "guardrails",
+      "kind": "video",
+      "file": "demo/unsupported-rule.mp4",
+      "duration_frames": 780,
+      "start_frame": 4620,
+      "title": "ONLY SUPPORTED RULES CAN RUN",
+      "source": "Local rehearsal · browser only",
+      "narration": "Unsupported requests cannot be approved. Chat is never executed as code. Supported proposals pass through a bounded queue, and the streamer keeps control over every activation."
+    },
+    {
+      "name": "codex",
+      "kind": "video",
+      "file": "demo/codex.mp4",
+      "duration_frames": 1320,
+      "start_frame": 5400,
+      "title": "BUILT AND VERIFIED WITH CODEX",
+      "source": "Actual Codex screen recording",
+      "narration": "I used Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior."
+    },
+    {
+      "name": "source",
+      "kind": "source",
+      "file": "",
+      "duration_frames": 720,
+      "start_frame": 6720,
+      "title": "ACTUAL PROJECT SOURCE",
+      "source": "Read-only source and actual check results",
+      "narration": "The implementation keeps domain rules independent from Twitch and storage. RuleShift Live turns audience suggestions into reversible gameplay changes, with streamer approval and an automatic return to normal gravity."
+    },
+    {
+      "name": "closing",
+      "kind": "brand",
+      "file": "demo/closing.mp4",
+      "duration_frames": 330,
+      "start_frame": 7440,
+      "title": "",
+      "source": "",
+      "narration": ""
+    }
+  ],
+  "source_cuts": [
+    {
+      "file": "overview-raw.webm",
+      "shot": "overview",
+      "source_in_seconds": 2.963,
+      "source_out_seconds": 15.109000000000002,
+      "hold_last_frame_seconds": 1.3539999999999992,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "rehearsal-setup",
+      "source_in_seconds": 29.665,
+      "source_out_seconds": 43.665,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "rehearsal-expiry",
+      "source_in_seconds": 43.85,
+      "source_out_seconds": 53.85,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "stop-control",
+      "source_in_seconds": 53.85,
+      "source_out_seconds": 61.294,
+      "hold_last_frame_seconds": 0.5560000000000045,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "rehearsal-result",
+      "source_in_seconds": 61.294,
+      "source_out_seconds": 64.958,
+      "hold_last_frame_seconds": 2.3359999999999985,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "unsupported-rule",
+      "source_in_seconds": 9.864,
+      "source_out_seconds": 22.864,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    }
+  ],
+  "limits": [
+    "Fresh continuous Twitch capture is pending; archival images and rehearsal are explicitly labelled.",
+    "Do not treat this review cut as a final rules-compliance certification."
+  ],
+  "vo_embedded": false,
+  "subtitles": false
+}

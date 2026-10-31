@@ -1,0 +1,55 @@
+{
+  "captured_at": "2026-10-30T14:15:57.854Z",
+  "capture": "Actual Chromium screen video with real DOM input events and decorative cursor",
+  "mode": "live",
+  "evidence_kind": "REAL_TWITCH_BROWSER_CAPTURE",
+  "file": "live-raw.webm",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "requested_fps": 60,
+  "automation": "Playwright UI testing with eased cursor movement; no claim of a human operator",
+  "shots": [
+    {
+      "name": "live-connection",
+      "start_seconds": 4.634,
+      "end_seconds": 14.013
+    },
+    {
+      "name": "real-proposal",
+      "start_seconds": 14.013,
+      "end_seconds": 21.622
+    },
+    {
+      "name": "approval",
+      "start_seconds": 21.622,
+      "end_seconds": 40.623
+    },
+    {
+      "name": "third-coin-and-expiry",
+      "start_seconds": 40.623,
+      "end_seconds": 53.715
+    },
+    {
+      "name": "continued-play",
+      "start_seconds": 53.715,
+      "end_seconds": 67.092
+    },
+    {
+      "name": "automatic-round-end",
+      "start_seconds": 104.823,
+      "end_seconds": 113.268
+    },
+    {
+      "name": "saved-result-and-download",
+      "start_seconds": 113.268,
+      "end_seconds": 122.033
+    }
+  ],
+  "approval_status_at_capture_start": "approved",
+  "round_id": "56229fde4cf8185ab948448b147755bb",
+  "message_id": "cacefab2-7bf9-43a6-b33a-c60033401947",
+  "script_errors": [],
+  "completed": true
+}

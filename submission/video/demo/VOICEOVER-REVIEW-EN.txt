@@ -1,0 +1,17 @@
+On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics.
+
+In our earlier real Twitch test, this chat message became a pending proposal. After approval, the game was playable and the completed round saved forty-five coins in PostgreSQL. These images document that earlier test.
+
+For this recorded walkthrough, I am using the separate rehearsal mode. It runs the real application and physics engine, while keeping local testing distinct from Twitch and database evidence.
+
+On the third coin, the player rises. The four-second effect expires automatically, and normal gravity returns without another button press.
+
+The third coin reverses gravity. Stop immediately restores normal gravity and ends the round.
+
+The rehearsal result is explicitly browser-only. It never claims live database storage.
+
+Unsupported requests cannot be approved. Chat is never executed as code. Supported proposals pass through a bounded queue, and the streamer keeps control over every activation.
+
+I used Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior.
+
+The implementation keeps domain rules independent from Twitch and storage. RuleShift Live turns audience suggestions into reversible gameplay changes, with streamer approval and an automatic return to normal gravity.

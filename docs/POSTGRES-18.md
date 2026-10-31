@@ -15,8 +15,9 @@ docker port YOUR_POSTGRES_CONTAINER 5432/tcp
 
 Replace `YOUR_POSTGRES_CONTAINER` with the actual name. A mapping such as
 `127.0.0.1:5435` means the backend host port is 5435, even though PostgreSQL
-listens on 5432 inside the container. No mapping was observed by Codex: this
-session's Docker socket access was denied.
+listens on 5432 inside the container. The verified RuleShift target is the
+existing `deliverpay-postgres-1` container (`postgres:18-alpine`), published at
+`127.0.0.1:5438`. Its server reports PostgreSQL **18.4**.
 
 Use the existing administrative database user to open `psql` inside that same
 container:
@@ -68,16 +69,30 @@ schema in the `_test` database, then removes that schema. Application startup
 runs the idempotent migration in the application database. No helper starts a
 database container or contacts a paid service.
 
+Doctor checks the actual `HTTP_ADDR` and `WEB_ORIGIN` ports. An occupied port
+fails preflight; confirm which process owns it before changing configuration.
+If you change the backend port or browser hostname, also update the registered
+Twitch callback and any explicit `TWITCH_REDIRECT_URI` to match. The launcher
+rejects mismatches before building or starting the application.
+
 `compose.yaml` is an opt-in template for a fresh machine, under the explicit
 `isolated-dev-db` profile and separate host port 55432. It is not part of this
 existing-container setup. Its volume target follows the PostgreSQL 18 official
 image's `/var/lib/postgresql` layout, documented by the
 [official Docker image](https://hub.docker.com/_/postgres).
 
-## Current verification limit
+## Verified local setup — October 30, 2026
 
-The user reports PostgreSQL 18 already exists in Docker. Codex's read-only
-`docker ps` command was denied by the session sandbox, and localhost network
-access was denied. Its name, port, database role, actual server version and
-integration behavior therefore remain unverified. The observed preflight is
-saved in `docs/evidence/environment.json` without credential values.
+Created a dedicated `ruleshift_live` login role and two databases,
+`ruleshift_live` and `ruleshift_live_test`, inside the existing server. Generated
+a new project password and saved both connection URLs only in the ignored
+`backend/.env` (mode `0600`). Existing roles, credentials, containers and volumes
+were preserved. Do not repeat the creation commands for this configured machine.
+
+With approved access outside the restricted sandbox, preflight connected to the
+application database and the actual PostgreSQL integration test passed without
+skips. The test used a unique schema in `ruleshift_live_test` and removed it
+afterward. The restricted sandbox still denies Docker/network access; its
+failures are distinct from the successful approved checks. The redacted
+preflight is saved in `docs/evidence/environment.json`. Twitch app credentials are now privately configured; real Twitch verification
+still requires interactive OAuth and actual chat delivery.

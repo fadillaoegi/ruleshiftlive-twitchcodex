@@ -2,6 +2,10 @@
 
 Work only in this project. UI, code documentation and submission materials use English.
 
+Repository management belongs to the user. Change files and run checks, but do
+not create commits/branches/tags, stage files, configure remotes, push, rebase,
+reset or otherwise manage Git unless the user explicitly requests that action.
+
 Stack: React + TypeScript + Vite + Tailwind, Canvas 2D, Go, PostgreSQL.
 Keep Go domain independent of transport, Twitch and persistence. Application ports
 point inward; infrastructure implements them. Do not replace PostgreSQL.

@@ -1,0 +1,27 @@
+{
+  "file": "web/src/game/engine.ts",
+  "snippet": "  collect(now: number): boolean {\n    this.deadlines(now);\n    if (this.status !== 'running') return false;\n    this.coins++;\n    this.record('coin_collected', now);\n    if (this.coins % this.round.rule.trigger.every === 0) {\n      // Refresh, never toggle or stack. Expiry always restores +1 gravity.\n      this.triggers++;\n      this.gravityTo(-1);\n      this.effectUntil = Math.min(now + this.round.rule.effect.duration_ms, Date.parse(this.round.ends_at));\n      this.lastEvent = `Coin ${this.coins} → gravity reversed! Rule by ${this.round.author}.`;\n      this.record('gravity_flip', now);\n      return true;\n    }\n    this.lastEvent = `Coin ${this.coins} collected. ${this.round.rule.trigger.every - this.coins % this.round.rule.trigger.every} until gravity flips.`;\n    return false;\n  }\n",
+  "checks": [
+    {
+      "name": "startup-tests",
+      "status": "passed"
+    },
+    {
+      "name": "backend-tests",
+      "status": "passed",
+      "tests": 36
+    },
+    {
+      "name": "backend-vet",
+      "status": "passed"
+    },
+    {
+      "name": "web-tests",
+      "status": "passed"
+    },
+    {
+      "name": "web-build",
+      "status": "passed"
+    }
+  ]
+}

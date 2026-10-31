@@ -1,33 +1,66 @@
 {
-  "recorded_at": "2026-10-29T13:04:58.175Z",
+  "recorded_at": "2026-10-30T11:03:11.975Z",
   "source": "Actual read-only preflight commands",
+  "configuration": {
+    "status": "valid"
+  },
   "docker": {
-    "status": "permission_denied",
-    "detail": "Could not list containers. No existing container was changed."
+    "status": "reachable",
+    "containers": [
+      {
+        "name": "deliverpay-frontend-1",
+        "image": "deliverpay-frontend",
+        "ports": "127.0.0.1:5173->5173/tcp"
+      },
+      {
+        "name": "deliverpay-api-1",
+        "image": "deliverpay-api",
+        "ports": "127.0.0.1:8093->8093/tcp"
+      },
+      {
+        "name": "deliverpay-postgres-1",
+        "image": "postgres:18-alpine",
+        "ports": "127.0.0.1:5438->5432/tcp"
+      },
+      {
+        "name": "deliverpay-tunnel-1",
+        "image": "cloudflare/cloudflared:2026.9.3",
+        "ports": ""
+      },
+      {
+        "name": "deliverpay-webhook-gateway-1",
+        "image": "nginxinc/nginx-unprivileged:stable-alpine",
+        "ports": "127.0.0.1:8097->8080/tcp"
+      }
+    ]
   },
   "listeners": [
     {
+      "host": "127.0.0.1",
       "port": 8080,
-      "status": "blocked",
-      "code": "EPERM"
+      "status": "available"
     },
     {
+      "host": "127.0.0.1",
       "port": 5174,
-      "status": "blocked",
-      "code": "EPERM"
+      "status": "available"
     }
   ],
   "postgres": {
-    "status": "not_configured",
-    "target_major": 18,
-    "detail": "Set DATABASE_URL for the existing PostgreSQL 18 container in backend/.env."
+    "server": {
+      "major": 18,
+      "version": "18.4",
+      "database": "ruleshift_live"
+    },
+    "status": "connected",
+    "target_major": 18
   },
   "credentials": {
-    "DATABASE_URL": "missing",
-    "TEST_DATABASE_URL": "missing",
-    "TWITCH_CLIENT_ID": "missing",
-    "TWITCH_CLIENT_SECRET": "missing"
+    "DATABASE_URL": "set",
+    "TEST_DATABASE_URL": "set",
+    "TWITCH_CLIENT_ID": "set",
+    "TWITCH_CLIENT_SECRET": "set"
   },
-  "twitch_dns": "unavailable",
+  "twitch_dns": "resolved",
   "live_twitch": "pending: interactive OAuth and a real channel message must still be verified"
 }

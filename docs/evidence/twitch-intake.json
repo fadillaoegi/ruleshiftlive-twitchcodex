@@ -1,0 +1,47 @@
+{
+  "recorded_at": "2026-10-30T11:23:47.568Z",
+  "evidence_kind": "REAL_TWITCH_INTAKE",
+  "source": "Actual backend state after the user sent the controlled rule from real Twitch chat",
+  "database": "connected",
+  "twitch": {
+    "state": "connected",
+    "detail": "Receiving live chat from your broadcaster channel.",
+    "channel": "fldevboo",
+    "last_message_at": "2026-10-30T11:23:04.548281Z"
+  },
+  "proposals": [
+    {
+      "id": "d2241e017ab1149bcd377be6f4727419",
+      "message_id": "5a4b86e3-ca97-4d68-aa6d-bd9efcde1530",
+      "author": "fldevboo",
+      "source": "twitch",
+      "status": "pending",
+      "rule": {
+        "version": 1,
+        "trigger": {
+          "kind": "coin_collected",
+          "every": 3
+        },
+        "effect": {
+          "kind": "gravity_flip",
+          "duration_ms": 4000
+        }
+      },
+      "created_at": "2026-10-30T18:23:04.573982+07:00"
+    }
+  ],
+  "round_status": null,
+  "limits": [
+    "Only controlled proposal metadata and parsed rule recorded; no chat transcript or tokens.",
+    "Approval, actual gameplay reversal/expiry and final result storage are separate verification steps.",
+    "The channel was offline in the user screenshot; this is real Twitch chat intake, not an on-stream OBS demonstration."
+  ],
+  "postgresql_confirmation": {
+    "method": "Read-only SQL against ruleshift_live in the existing PostgreSQL 18 container",
+    "proposal_id": "d2241e017ab1149bcd377be6f4727419",
+    "message_id": "5a4b86e3-ca97-4d68-aa6d-bd9efcde1530",
+    "source": "twitch",
+    "status": "pending",
+    "rule_matches_backend_state": true
+  }
+}

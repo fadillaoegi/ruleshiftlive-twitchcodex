@@ -1,0 +1,29 @@
+{
+  "captured_at": "2026-10-30T13:08:38.288Z",
+  "capture": "Actual Chromium screen video with real DOM input events and decorative cursor",
+  "mode": "overview",
+  "evidence_kind": "PRODUCT_OVERVIEW",
+  "file": "overview-raw.webm",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "requested_fps": 60,
+  "automation": "Playwright UI testing with eased cursor movement; no claim of a human operator",
+  "shots": [
+    {
+      "name": "overview",
+      "start_seconds": 2.963,
+      "end_seconds": 15.109
+    },
+    {
+      "name": "source-separation",
+      "start_seconds": 15.109,
+      "end_seconds": 22.791
+    }
+  ],
+  "round_id": null,
+  "message_id": null,
+  "script_errors": [],
+  "completed": true
+}

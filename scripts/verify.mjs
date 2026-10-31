@@ -12,6 +12,7 @@ env.RULESHIFT_VERTICAL_EVIDENCE = fileURLToPath(new URL('vertical-slice.json', e
 await rm(env.RULESHIFT_VERTICAL_EVIDENCE, { force: true });
 if (env.RULESHIFT_OFFLINE === '1') { env.GOPROXY = 'off'; env.GOSUMDB = 'off'; }
 const checks = [
+  { name: 'startup-tests', directory: '.', program: process.execPath, args: ['--test', 'scripts/configuration.test.mjs'] },
   { name: 'backend-tests', directory: 'backend', program: 'go', args: ['test', '-race', '-count=1', '-json', './...'] },
   { name: 'backend-vet', directory: 'backend', program: 'go', args: ['vet', './...'] },
   { name: 'web-tests', directory: 'web', program: 'npm', args: ['test'] },

@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "evidence_kind": "TWITCH_CONTROLLER_RECORD",
+  "live_verification": "pending_manual_review",
+  "exported_at": "2026-10-30T14:13:27.515Z",
+  "interpreter": "constrained_parser",
+  "storage": "postgresql_confirmed",
+  "round": {
+    "id": "56229fde4cf8185ab948448b147755bb",
+    "proposal_id": "93cba8988259cbe19bb2690dfe121870",
+    "message_id": "cacefab2-7bf9-43a6-b33a-c60033401947",
+    "author": "fldevboo",
+    "source": "twitch",
+    "rule": {
+      "version": 1,
+      "trigger": {
+        "kind": "coin_collected",
+        "every": 3
+      },
+      "effect": {
+        "kind": "gravity_flip",
+        "duration_ms": 4000
+      }
+    },
+    "status": "finished",
+    "started_at": "2026-10-30T21:12:04.165998+07:00",
+    "ends_at": "2026-10-30T21:13:19.165998+07:00",
+    "coins": 12,
+    "sequence": 76,
+    "result_saved": true
+  },
+  "observed_game": {
+    "coins": 12,
+    "triggers": 4,
+    "status": "finished",
+    "gravity": 1
+  },
+  "controller_events": [
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:09.292Z",
+      "coins": 1,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:09.670Z",
+      "coins": 2,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:10.070Z",
+      "coins": 3,
+      "gravity": 1
+    },
+    {
+      "kind": "gravity_flip",
+      "at": "2026-10-30T14:12:10.070Z",
+      "coins": 3,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:14.070Z"
+    },
+    {
+      "kind": "effect_expired",
+      "at": "2026-10-30T14:12:14.072Z",
+      "coins": 3,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:22.588Z",
+      "coins": 4,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:23.001Z",
+      "coins": 5,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:23.389Z",
+      "coins": 6,
+      "gravity": 1
+    },
+    {
+      "kind": "gravity_flip",
+      "at": "2026-10-30T14:12:23.389Z",
+      "coins": 6,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:27.389Z"
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:25.435Z",
+      "coins": 7,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:27.389Z"
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:27.038Z",
+      "coins": 8,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:27.389Z"
+    },
+    {
+      "kind": "effect_expired",
+      "at": "2026-10-30T14:12:27.402Z",
+      "coins": 8,
+      "gravity": 1
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:28.217Z",
+      "coins": 9,
+      "gravity": 1
+    },
+    {
+      "kind": "gravity_flip",
+      "at": "2026-10-30T14:12:28.217Z",
+      "coins": 9,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:32.217Z"
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:29.782Z",
+      "coins": 10,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:32.217Z"
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:30.168Z",
+      "coins": 11,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:32.217Z"
+    },
+    {
+      "kind": "coin_collected",
+      "at": "2026-10-30T14:12:30.567Z",
+      "coins": 12,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:32.217Z"
+    },
+    {
+      "kind": "gravity_flip",
+      "at": "2026-10-30T14:12:30.567Z",
+      "coins": 12,
+      "gravity": -1,
+      "effect_ends_at": "2026-10-30T14:12:34.567Z"
+    },
+    {
+      "kind": "effect_expired",
+      "at": "2026-10-30T14:12:34.570Z",
+      "coins": 12,
+      "gravity": 1
+    },
+    {
+      "kind": "round_finished",
+      "at": "2026-10-30T14:13:19.181Z",
+      "coins": 12,
+      "gravity": 1
+    }
+  ],
+  "events_dropped": 0,
+  "note": "Controller capture only. Local scores are untrusted. A real Twitch milestone still requires manual live, database and OBS verification."
+}

@@ -4,8 +4,20 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import net from 'node:net';
 import dns from 'node:dns/promises';
 import { environment, root } from './environment.mjs';
+import { configuration } from './configuration.mjs';
 
 const env = await environment();
+let config;
+try { config = configuration(env); }
+catch (error) {
+  const report = { recorded_at: new Date().toISOString(), source: 'Actual read-only preflight commands', configuration: { status: 'invalid', detail: error.message }, live_twitch: 'pending' };
+  console.log(JSON.stringify(report, null, 2));
+  if (process.argv.includes('--save')) {
+    await mkdir(new URL('docs/evidence/', root), { recursive: true });
+    await writeFile(new URL('docs/evidence/environment.json', root), JSON.stringify(report, null, 2) + '\n');
+  }
+  process.exit(1);
+}
 async function command(program, args, options = {}) {
   return new Promise(resolve => {
     const child = spawn(program, args, { ...options, stdio: ['ignore', 'pipe', 'pipe'], timeout: 20000 });
@@ -16,16 +28,17 @@ async function command(program, args, options = {}) {
     child.on('close', code => resolve({ code, stdout, stderr }));
   });
 }
-function listener(port) {
+function listener(port, host) {
   return new Promise(resolve => {
     const server = net.createServer();
-    server.once('error', error => resolve({ port, status: error.code === 'EADDRINUSE' ? 'occupied' : 'blocked', code: error.code }));
-    server.listen(port, '127.0.0.1', () => server.close(() => resolve({ port, status: 'available' })));
+    server.once('error', error => resolve({ host, port, status: error.code === 'EADDRINUSE' ? 'occupied' : 'blocked', code: error.code }));
+    server.listen(port, host, () => server.close(() => resolve({ host, port, status: 'available' })));
   });
 }
 const [docker, backendPort, webPort, twitchDNS] = await Promise.all([
   command('docker', ['ps', '--format', '{{json .}}']),
-  listener(8080), listener(5174),
+  listener(Number(config.backendURL.port || 80), config.backendURL.hostname.replace(/^\[|\]$/g, '')),
+  listener(Number(config.webURL.port || 80), '127.0.0.1'),
   dns.lookup('id.twitch.tv').then(() => 'resolved', () => 'unavailable'),
 ]);
 let postgres = { status: 'not_configured', target_major: 18, detail: 'Set DATABASE_URL for the existing PostgreSQL 18 container in backend/.env.' };
@@ -36,6 +49,7 @@ if (env.DATABASE_URL) {
 }
 const report = {
   recorded_at: new Date().toISOString(), source: 'Actual read-only preflight commands',
+  configuration: { status: 'valid' },
   docker: docker.code === 0 ? {
     status: 'reachable',
     containers: docker.stdout.trim().split('\n').filter(Boolean).flatMap(line => {
@@ -52,4 +66,4 @@ if (process.argv.includes('--save')) {
   await mkdir(new URL('docs/evidence/', root), { recursive: true });
   await writeFile(new URL('docs/evidence/environment.json', root), JSON.stringify(report, null, 2) + '\n');
 }
-if (postgres.status !== 'connected' || [backendPort, webPort].some(p => p.status === 'blocked') || report.credentials.TWITCH_CLIENT_ID === 'missing' || report.credentials.TWITCH_CLIENT_SECRET === 'missing' || twitchDNS !== 'resolved') process.exitCode = 1;
+if (postgres.status !== 'connected' || [backendPort, webPort].some(p => p.status !== 'available') || report.credentials.TWITCH_CLIENT_ID === 'missing' || report.credentials.TWITCH_CLIENT_SECRET === 'missing' || twitchDNS !== 'resolved') process.exitCode = 1;

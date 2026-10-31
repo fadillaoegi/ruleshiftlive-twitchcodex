@@ -1,0 +1,26 @@
+{
+  "rendered_at": "2026-10-30T12:15:19.966Z",
+  "renderer": "Remotion 4.0.539 + React Three Fiber + Three.js",
+  "evidence_kind": "BRAND_ANIMATION",
+  "source": "Original deterministic procedural 3D scene and synthesized stereo audio; not Twitch gameplay evidence",
+  "renders": [
+    {
+      "file": "ruleshift-intro.mp4",
+      "composition": "RuleShiftIntro",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60,
+      "frames": 390,
+      "duration_seconds": 6.5
+    },
+    {
+      "file": "ruleshift-closing.mp4",
+      "composition": "RuleShiftClosing",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60,
+      "frames": 330,
+      "duration_seconds": 5.5
+    }
+  ]
+}
