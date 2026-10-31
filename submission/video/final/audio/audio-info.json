@@ -1,0 +1,24 @@
+{
+  "source": "User-supplied narration plus original deterministic procedural music and original branding sound",
+  "duration_seconds": 162,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bpm": 96,
+  "voice_files": 11,
+  "music_ducking": "Speech-controlled sidechain, ratio 6:1, attack 12 ms, release 350 ms",
+  "master_target_lufs": -16,
+  "true_peak_target_dbfs": -1.5,
+  "normalization_measurement": {
+    "input_i": "-18.10",
+    "input_tp": "-5.40",
+    "input_lra": "6.40",
+    "input_thresh": "-28.18",
+    "output_i": "-15.54",
+    "output_tp": "-1.50",
+    "output_lra": "5.60",
+    "output_thresh": "-25.62",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.46"
+  },
+  "paid_api_calls": 0
+}

@@ -1,0 +1,430 @@
+{
+  "name": "RuleShift Live — Broadcast Setup",
+  "sources": [
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "RuleShift Frame",
+      "uuid": "179047f9-f5c5-4b60-9d32-380abe0215ff",
+      "id": "image_source",
+      "versioned_id": "image_source",
+      "settings": {
+        "file": "/Users/boo/Github/project/Hacketon/ruleshift-live/submission/video/stream-setup/stream-frame.png",
+        "unload": false
+      },
+      "mixers": 0
+    },
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "RuleShift 3D Opening",
+      "uuid": "63608474-0b92-4d6c-8cb9-f28d2e73383a",
+      "id": "ffmpeg_source",
+      "versioned_id": "ffmpeg_source",
+      "settings": {
+        "is_local_file": true,
+        "local_file": "/Users/boo/Github/project/Hacketon/ruleshift-live/submission/video/ruleshift-intro.mp4",
+        "looping": true,
+        "restart_on_activate": true,
+        "close_when_inactive": false,
+        "clear_on_media_end": false
+      },
+      "mixers": 0
+    },
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "Starting Soon Label",
+      "uuid": "99f803ea-ce67-460f-9578-ba65639340bf",
+      "id": "image_source",
+      "versioned_id": "image_source",
+      "settings": {
+        "file": "/Users/boo/Github/project/Hacketon/ruleshift-live/submission/video/stream-setup/opening-overlay.png",
+        "unload": false
+      },
+      "mixers": 0
+    },
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "RuleShift Actual Controller",
+      "uuid": "0d770d7d-631f-4f29-8596-ae6155989102",
+      "id": "screen_capture",
+      "versioned_id": "screen_capture",
+      "settings": {
+        "type": 1,
+        "window": 36052,
+        "show_cursor": true,
+        "show_hidden_windows": true
+      },
+      "mixers": 0
+    },
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "01 — RuleShift Starting Soon",
+      "uuid": "371471e6-4256-430b-8e3d-79d84dbc1ac3",
+      "id": "scene",
+      "versioned_id": "scene",
+      "settings": {
+        "id_counter": 2,
+        "custom_size": false,
+        "items": [
+          {
+            "name": "RuleShift 3D Opening",
+            "source_uuid": "63608474-0b92-4d6c-8cb9-f28d2e73383a",
+            "visible": true,
+            "locked": true,
+            "rot": 0,
+            "scale_ref": {
+              "x": 1920,
+              "y": 1080
+            },
+            "align": 5,
+            "bounds_type": 2,
+            "bounds_align": 0,
+            "bounds_crop": false,
+            "crop_left": 0,
+            "crop_top": 0,
+            "crop_right": 0,
+            "crop_bottom": 0,
+            "id": 1,
+            "group_item_backup": false,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "pos_rel": {
+              "x": -1.7777777777777777,
+              "y": -1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1
+            },
+            "scale_rel": {
+              "x": 1,
+              "y": 1
+            },
+            "bounds": {
+              "x": 1920,
+              "y": 1080
+            },
+            "bounds_rel": {
+              "x": 3.5555555555555554,
+              "y": 2
+            },
+            "scale_filter": "lanczos",
+            "blend_method": "default",
+            "blend_type": "normal",
+            "show_transition": {
+              "duration": 300
+            },
+            "hide_transition": {
+              "duration": 300
+            },
+            "private_settings": {}
+          },
+          {
+            "name": "Starting Soon Label",
+            "source_uuid": "99f803ea-ce67-460f-9578-ba65639340bf",
+            "visible": true,
+            "locked": true,
+            "rot": 0,
+            "scale_ref": {
+              "x": 1920,
+              "y": 1080
+            },
+            "align": 5,
+            "bounds_type": 2,
+            "bounds_align": 0,
+            "bounds_crop": false,
+            "crop_left": 0,
+            "crop_top": 0,
+            "crop_right": 0,
+            "crop_bottom": 0,
+            "id": 2,
+            "group_item_backup": false,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "pos_rel": {
+              "x": -1.7777777777777777,
+              "y": -1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1
+            },
+            "scale_rel": {
+              "x": 1,
+              "y": 1
+            },
+            "bounds": {
+              "x": 1920,
+              "y": 1080
+            },
+            "bounds_rel": {
+              "x": 3.5555555555555554,
+              "y": 2
+            },
+            "scale_filter": "lanczos",
+            "blend_method": "default",
+            "blend_type": "normal",
+            "show_transition": {
+              "duration": 300
+            },
+            "hide_transition": {
+              "duration": 300
+            },
+            "private_settings": {}
+          }
+        ]
+      },
+      "mixers": 0,
+      "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e"
+    },
+    {
+      "prev_ver": 537001986,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": true,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {},
+      "name": "02 — RuleShift Arena",
+      "uuid": "f75fbe72-1538-4adf-8536-a5ce45d16555",
+      "id": "scene",
+      "versioned_id": "scene",
+      "settings": {
+        "id_counter": 2,
+        "custom_size": false,
+        "items": [
+          {
+            "name": "RuleShift Frame",
+            "source_uuid": "179047f9-f5c5-4b60-9d32-380abe0215ff",
+            "visible": true,
+            "locked": true,
+            "rot": 0,
+            "scale_ref": {
+              "x": 1920,
+              "y": 1080
+            },
+            "align": 5,
+            "bounds_type": 2,
+            "bounds_align": 0,
+            "bounds_crop": false,
+            "crop_left": 0,
+            "crop_top": 0,
+            "crop_right": 0,
+            "crop_bottom": 0,
+            "id": 1,
+            "group_item_backup": false,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "pos_rel": {
+              "x": -1.7777777777777777,
+              "y": -1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1
+            },
+            "scale_rel": {
+              "x": 1,
+              "y": 1
+            },
+            "bounds": {
+              "x": 1920,
+              "y": 1080
+            },
+            "bounds_rel": {
+              "x": 3.5555555555555554,
+              "y": 2
+            },
+            "scale_filter": "lanczos",
+            "blend_method": "default",
+            "blend_type": "normal",
+            "show_transition": {
+              "duration": 300
+            },
+            "hide_transition": {
+              "duration": 300
+            },
+            "private_settings": {}
+          },
+          {
+            "name": "RuleShift Actual Controller",
+            "source_uuid": "0d770d7d-631f-4f29-8596-ae6155989102",
+            "visible": true,
+            "locked": true,
+            "rot": 0,
+            "scale_ref": {
+              "x": 1920,
+              "y": 1080
+            },
+            "align": 5,
+            "bounds_type": 2,
+            "bounds_align": 0,
+            "bounds_crop": false,
+            "crop_left": 0,
+            "crop_top": 28,
+            "crop_right": 0,
+            "crop_bottom": 0,
+            "id": 2,
+            "group_item_backup": false,
+            "pos": {
+              "x": 40,
+              "y": 126
+            },
+            "pos_rel": {
+              "x": -1.7037037037037037,
+              "y": -0.7666666666666667
+            },
+            "scale": {
+              "x": 1,
+              "y": 1
+            },
+            "scale_rel": {
+              "x": 1,
+              "y": 1
+            },
+            "bounds": {
+              "x": 1840,
+              "y": 894
+            },
+            "bounds_rel": {
+              "x": 3.4074074074074074,
+              "y": 1.6555555555555554
+            },
+            "scale_filter": "lanczos",
+            "blend_method": "default",
+            "blend_type": "normal",
+            "show_transition": {
+              "duration": 300
+            },
+            "hide_transition": {
+              "duration": 300
+            },
+            "private_settings": {}
+          }
+        ]
+      },
+      "mixers": 0,
+      "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e"
+    }
+  ],
+  "groups": [],
+  "scene_order": [
+    {
+      "name": "01 — RuleShift Starting Soon"
+    },
+    {
+      "name": "02 — RuleShift Arena"
+    }
+  ],
+  "current_scene": "02 — RuleShift Arena",
+  "current_program_scene": "02 — RuleShift Arena",
+  "canvases": [],
+  "current_transition": "Fade",
+  "transition_duration": 300,
+  "transitions": [],
+  "quick_transitions": [],
+  "saved_projectors": [],
+  "preview_locked": true,
+  "scaling_enabled": false,
+  "scaling_level": 0,
+  "scaling_off_x": 0,
+  "scaling_off_y": 0,
+  "virtual-camera": {
+    "type": 2
+  },
+  "modules": {},
+  "resolution": {
+    "x": 1920,
+    "y": 1080
+  },
+  "version": 2
+}

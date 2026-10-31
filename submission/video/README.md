@@ -1,8 +1,11 @@
-# RuleShift Live — Remotion opening and closing
+# RuleShift Live — submission video and Remotion sources
+
+**Latest complete video:** [`final/ruleshift-demo-final.mp4`](final/ruleshift-demo-final.mp4), **02:42**, with the supplied voice-over, original backsound, English subtitles and an informative 3D rule diagram. See [`final/README.md`](final/README.md) for sources, timing and verification. The older `demo/` edit below remains a separate narration-free version.
 
 The primary application demonstration is under [`demo/`](demo/README.md):
-`ruleshift-demo.mp4`, a 150.5-second actual-Twitch/Codex edit with separately
-timed English voice-over text. Its new real-source round includes observed
+`ruleshift-demo.mp4`, a 158.5-second actual-Twitch/Codex edit with separately
+timed English voice-over text and eight seconds of actual public Twitch broadcast.
+Its separate verified real-source round includes observed
 expiry and a matching PostgreSQL result. The earlier 129.5-second archival
 review remains separate. See the demo README for provenance and QA.
 

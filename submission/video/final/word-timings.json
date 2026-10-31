@@ -1,0 +1,2111 @@
+{
+  "1": {
+    "transcription": [
+      {
+        "text": " This",
+        "offsets": {
+          "from": 70,
+          "to": 280
+        }
+      },
+      {
+        "text": " is",
+        "offsets": {
+          "from": 280,
+          "to": 360
+        }
+      },
+      {
+        "text": " RuleShift",
+        "offsets": {
+          "from": 360,
+          "to": 930
+        }
+      },
+      {
+        "text": " Live",
+        "offsets": {
+          "from": 930,
+          "to": 1150
+        }
+      },
+      {
+        "text": " on",
+        "offsets": {
+          "from": 1150,
+          "to": 1270
+        }
+      },
+      {
+        "text": " my",
+        "offsets": {
+          "from": 1270,
+          "to": 1390
+        }
+      },
+      {
+        "text": " Twitch",
+        "offsets": {
+          "from": 1390,
+          "to": 1760
+        }
+      },
+      {
+        "text": " channel,",
+        "offsets": {
+          "from": 1760,
+          "to": 2330
+        }
+      },
+      {
+        "text": " streamed",
+        "offsets": {
+          "from": 2330,
+          "to": 2800
+        }
+      },
+      {
+        "text": " from",
+        "offsets": {
+          "from": 2800,
+          "to": 3040
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 3040,
+          "to": 3090
+        }
+      },
+      {
+        "text": " browser.",
+        "offsets": {
+          "from": 3090,
+          "to": 3800
+        }
+      },
+      {
+        "text": " Now,",
+        "offsets": {
+          "from": 3800,
+          "to": 4030
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 4030,
+          "to": 4170
+        }
+      },
+      {
+        "text": " connected",
+        "offsets": {
+          "from": 4170,
+          "to": 4600
+        }
+      },
+      {
+        "text": " game",
+        "offsets": {
+          "from": 4600,
+          "to": 4790
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 4790,
+          "to": 4930
+        }
+      },
+      {
+        "text": " close",
+        "offsets": {
+          "from": 4930,
+          "to": 5170
+        }
+      },
+      {
+        "text": " up.",
+        "offsets": {
+          "from": 5170,
+          "to": 5440
+        }
+      }
+    ]
+  },
+  "2": {
+    "transcription": [
+      {
+        "text": " On",
+        "offsets": {
+          "from": 60,
+          "to": 140
+        }
+      },
+      {
+        "text": " Twitch,",
+        "offsets": {
+          "from": 140,
+          "to": 890
+        }
+      },
+      {
+        "text": " chat",
+        "offsets": {
+          "from": 890,
+          "to": 1060
+        }
+      },
+      {
+        "text": " usually",
+        "offsets": {
+          "from": 1060,
+          "to": 1590
+        }
+      },
+      {
+        "text": " reacts",
+        "offsets": {
+          "from": 1590,
+          "to": 2060
+        }
+      },
+      {
+        "text": " to",
+        "offsets": {
+          "from": 2060,
+          "to": 2200
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 2200,
+          "to": 2430
+        }
+      },
+      {
+        "text": " game.",
+        "offsets": {
+          "from": 2430,
+          "to": 3000
+        }
+      },
+      {
+        "text": " RuleShift",
+        "offsets": {
+          "from": 3000,
+          "to": 3630
+        }
+      },
+      {
+        "text": " Live",
+        "offsets": {
+          "from": 3630,
+          "to": 3910
+        }
+      },
+      {
+        "text": " lets",
+        "offsets": {
+          "from": 3910,
+          "to": 4190
+        }
+      },
+      {
+        "text": " chat",
+        "offsets": {
+          "from": 4190,
+          "to": 4470
+        }
+      },
+      {
+        "text": " change",
+        "offsets": {
+          "from": 4470,
+          "to": 5040
+        }
+      },
+      {
+        "text": " it.",
+        "offsets": {
+          "from": 5040,
+          "to": 5420
+        }
+      },
+      {
+        "text": " Viewers",
+        "offsets": {
+          "from": 5420,
+          "to": 5680
+        }
+      },
+      {
+        "text": " propose",
+        "offsets": {
+          "from": 5680,
+          "to": 6000
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 6000,
+          "to": 6100
+        }
+      },
+      {
+        "text": " rule,",
+        "offsets": {
+          "from": 6100,
+          "to": 6850
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 6850,
+          "to": 6960
+        }
+      },
+      {
+        "text": " streamer",
+        "offsets": {
+          "from": 6960,
+          "to": 7520
+        }
+      },
+      {
+        "text": " approves",
+        "offsets": {
+          "from": 7520,
+          "to": 8220
+        }
+      },
+      {
+        "text": " it,",
+        "offsets": {
+          "from": 8220,
+          "to": 8360
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 8360,
+          "to": 8570
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 8570,
+          "to": 8780
+        }
+      },
+      {
+        "text": " rule",
+        "offsets": {
+          "from": 8780,
+          "to": 9060
+        }
+      },
+      {
+        "text": " changes",
+        "offsets": {
+          "from": 9060,
+          "to": 9550
+        }
+      },
+      {
+        "text": " actual",
+        "offsets": {
+          "from": 9550,
+          "to": 9970
+        }
+      },
+      {
+        "text": " game",
+        "offsets": {
+          "from": 9970,
+          "to": 10250
+        }
+      },
+      {
+        "text": " physics.",
+        "offsets": {
+          "from": 10250,
+          "to": 10980
+        }
+      }
+    ]
+  },
+  "3": {
+    "transcription": [
+      {
+        "text": " This",
+        "offsets": {
+          "from": 70,
+          "to": 280
+        }
+      },
+      {
+        "text": " real",
+        "offsets": {
+          "from": 280,
+          "to": 560
+        }
+      },
+      {
+        "text": " Twitch",
+        "offsets": {
+          "from": 560,
+          "to": 1000
+        }
+      },
+      {
+        "text": " message",
+        "offsets": {
+          "from": 1000,
+          "to": 1490
+        }
+      },
+      {
+        "text": " became",
+        "offsets": {
+          "from": 1490,
+          "to": 1920
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 1920,
+          "to": 2010
+        }
+      },
+      {
+        "text": " proposal.",
+        "offsets": {
+          "from": 2010,
+          "to": 2940
+        }
+      },
+      {
+        "text": " Every",
+        "offsets": {
+          "from": 2940,
+          "to": 3130
+        }
+      },
+      {
+        "text": " third",
+        "offsets": {
+          "from": 3130,
+          "to": 3460
+        }
+      },
+      {
+        "text": " coin",
+        "offsets": {
+          "from": 3460,
+          "to": 3720
+        }
+      },
+      {
+        "text": " reverses",
+        "offsets": {
+          "from": 3720,
+          "to": 4240
+        }
+      },
+      {
+        "text": " gravity",
+        "offsets": {
+          "from": 4240,
+          "to": 4700
+        }
+      },
+      {
+        "text": " for",
+        "offsets": {
+          "from": 4700,
+          "to": 4970
+        }
+      },
+      {
+        "text": " four",
+        "offsets": {
+          "from": 4970,
+          "to": 5140
+        }
+      },
+      {
+        "text": " seconds.",
+        "offsets": {
+          "from": 5140,
+          "to": 5840
+        }
+      },
+      {
+        "text": " The",
+        "offsets": {
+          "from": 5840,
+          "to": 6010
+        }
+      },
+      {
+        "text": " streamer",
+        "offsets": {
+          "from": 6010,
+          "to": 6470
+        }
+      },
+      {
+        "text": " has",
+        "offsets": {
+          "from": 6470,
+          "to": 6640
+        }
+      },
+      {
+        "text": " already",
+        "offsets": {
+          "from": 6640,
+          "to": 7050
+        }
+      },
+      {
+        "text": " approved",
+        "offsets": {
+          "from": 7050,
+          "to": 7520
+        }
+      },
+      {
+        "text": " it,",
+        "offsets": {
+          "from": 7520,
+          "to": 7750
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 7750,
+          "to": 7910
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 7910,
+          "to": 8070
+        }
+      },
+      {
+        "text": " viewer",
+        "offsets": {
+          "from": 8070,
+          "to": 8720
+        }
+      },
+      {
+        "text": " keeps",
+        "offsets": {
+          "from": 8720,
+          "to": 8780
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 8780,
+          "to": 8890
+        }
+      },
+      {
+        "text": " credit.",
+        "offsets": {
+          "from": 8890,
+          "to": 9520
+        }
+      }
+    ]
+  },
+  "4": {
+    "transcription": [
+      {
+        "text": " Chat",
+        "offsets": {
+          "from": 90,
+          "to": 370
+        }
+      },
+      {
+        "text": " cannot",
+        "offsets": {
+          "from": 370,
+          "to": 770
+        }
+      },
+      {
+        "text": " activate",
+        "offsets": {
+          "from": 770,
+          "to": 1390
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 1390,
+          "to": 1480
+        }
+      },
+      {
+        "text": " rule",
+        "offsets": {
+          "from": 1480,
+          "to": 1770
+        }
+      },
+      {
+        "text": " by",
+        "offsets": {
+          "from": 1770,
+          "to": 1920
+        }
+      },
+      {
+        "text": " itself.",
+        "offsets": {
+          "from": 1920,
+          "to": 2660
+        }
+      },
+      {
+        "text": " This",
+        "offsets": {
+          "from": 2660,
+          "to": 2910
+        }
+      },
+      {
+        "text": " proposal",
+        "offsets": {
+          "from": 2910,
+          "to": 3420
+        }
+      },
+      {
+        "text": " was",
+        "offsets": {
+          "from": 3420,
+          "to": 3610
+        }
+      },
+      {
+        "text": " approved",
+        "offsets": {
+          "from": 3610,
+          "to": 4140
+        }
+      },
+      {
+        "text": " before",
+        "offsets": {
+          "from": 4140,
+          "to": 4380
+        }
+      },
+      {
+        "text": " recording.",
+        "offsets": {
+          "from": 4380,
+          "to": 5280
+        }
+      },
+      {
+        "text": " I",
+        "offsets": {
+          "from": 5280,
+          "to": 5380
+        }
+      },
+      {
+        "text": " review",
+        "offsets": {
+          "from": 5380,
+          "to": 5690
+        }
+      },
+      {
+        "text": " its",
+        "offsets": {
+          "from": 5690,
+          "to": 5870
+        }
+      },
+      {
+        "text": " exact",
+        "offsets": {
+          "from": 5870,
+          "to": 6160
+        }
+      },
+      {
+        "text": " trigger",
+        "offsets": {
+          "from": 6160,
+          "to": 6570
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 6570,
+          "to": 6760
+        }
+      },
+      {
+        "text": " effect,",
+        "offsets": {
+          "from": 6760,
+          "to": 7260
+        }
+      },
+      {
+        "text": " then",
+        "offsets": {
+          "from": 7260,
+          "to": 7990
+        }
+      },
+      {
+        "text": " start",
+        "offsets": {
+          "from": 7990,
+          "to": 8090
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 8090,
+          "to": 8260
+        }
+      },
+      {
+        "text": " round.",
+        "offsets": {
+          "from": 8260,
+          "to": 8900
+        }
+      },
+      {
+        "text": " One",
+        "offsets": {
+          "from": 8900,
+          "to": 9120
+        }
+      },
+      {
+        "text": " approved",
+        "offsets": {
+          "from": 9120,
+          "to": 9780
+        }
+      },
+      {
+        "text": " rule",
+        "offsets": {
+          "from": 9780,
+          "to": 10020
+        }
+      },
+      {
+        "text": " controls",
+        "offsets": {
+          "from": 10020,
+          "to": 10630
+        }
+      },
+      {
+        "text": " this",
+        "offsets": {
+          "from": 10630,
+          "to": 10910
+        }
+      },
+      {
+        "text": " arena.",
+        "offsets": {
+          "from": 10910,
+          "to": 11540
+        }
+      }
+    ]
+  },
+  "5": {
+    "transcription": [
+      {
+        "text": " On",
+        "offsets": {
+          "from": 80,
+          "to": 140
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 140,
+          "to": 340
+        }
+      },
+      {
+        "text": " third",
+        "offsets": {
+          "from": 340,
+          "to": 700
+        }
+      },
+      {
+        "text": " coin,",
+        "offsets": {
+          "from": 700,
+          "to": 1200
+        }
+      },
+      {
+        "text": " acceleration",
+        "offsets": {
+          "from": 1200,
+          "to": 1960
+        }
+      },
+      {
+        "text": " reverses",
+        "offsets": {
+          "from": 1960,
+          "to": 2660
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 2660,
+          "to": 2730
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 2730,
+          "to": 3040
+        }
+      },
+      {
+        "text": " player",
+        "offsets": {
+          "from": 3040,
+          "to": 3360
+        }
+      },
+      {
+        "text": " rises",
+        "offsets": {
+          "from": 3360,
+          "to": 3710
+        }
+      },
+      {
+        "text": " toward",
+        "offsets": {
+          "from": 3710,
+          "to": 4130
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 4130,
+          "to": 4340
+        }
+      },
+      {
+        "text": " ceiling.",
+        "offsets": {
+          "from": 4340,
+          "to": 5060
+        }
+      },
+      {
+        "text": " Four",
+        "offsets": {
+          "from": 5060,
+          "to": 5310
+        }
+      },
+      {
+        "text": " seconds",
+        "offsets": {
+          "from": 5310,
+          "to": 5740
+        }
+      },
+      {
+        "text": " later,",
+        "offsets": {
+          "from": 5740,
+          "to": 6260
+        }
+      },
+      {
+        "text": " gravity",
+        "offsets": {
+          "from": 6260,
+          "to": 6620
+        }
+      },
+      {
+        "text": " returns",
+        "offsets": {
+          "from": 6620,
+          "to": 7060
+        }
+      },
+      {
+        "text": " automatically.",
+        "offsets": {
+          "from": 7060,
+          "to": 8120
+        }
+      },
+      {
+        "text": " Movement",
+        "offsets": {
+          "from": 8120,
+          "to": 8620
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 8620,
+          "to": 8810
+        }
+      },
+      {
+        "text": " collisions",
+        "offsets": {
+          "from": 8810,
+          "to": 9490
+        }
+      },
+      {
+        "text": " follow",
+        "offsets": {
+          "from": 9490,
+          "to": 9810
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 9810,
+          "to": 10000
+        }
+      },
+      {
+        "text": " rule.",
+        "offsets": {
+          "from": 10000,
+          "to": 10460
+        }
+      }
+    ]
+  },
+  "6": {
+    "transcription": [
+      {
+        "text": " I",
+        "offsets": {
+          "from": 60,
+          "to": 70
+        }
+      },
+      {
+        "text": " keep",
+        "offsets": {
+          "from": 70,
+          "to": 380
+        }
+      },
+      {
+        "text": " playing",
+        "offsets": {
+          "from": 380,
+          "to": 850
+        }
+      },
+      {
+        "text": " with",
+        "offsets": {
+          "from": 850,
+          "to": 1070
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 1070,
+          "to": 1270
+        }
+      },
+      {
+        "text": " same",
+        "offsets": {
+          "from": 1270,
+          "to": 1540
+        }
+      },
+      {
+        "text": " keyboard",
+        "offsets": {
+          "from": 1540,
+          "to": 2080
+        }
+      },
+      {
+        "text": " controls.",
+        "offsets": {
+          "from": 2080,
+          "to": 2880
+        }
+      },
+      {
+        "text": " Another",
+        "offsets": {
+          "from": 2880,
+          "to": 3340
+        }
+      },
+      {
+        "text": " third",
+        "offsets": {
+          "from": 3340,
+          "to": 3730
+        }
+      },
+      {
+        "text": " coin",
+        "offsets": {
+          "from": 3730,
+          "to": 3930
+        }
+      },
+      {
+        "text": " trigger",
+        "offsets": {
+          "from": 3930,
+          "to": 4390
+        }
+      },
+      {
+        "text": " refreshes",
+        "offsets": {
+          "from": 4390,
+          "to": 4970
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 4970,
+          "to": 5160
+        }
+      },
+      {
+        "text": " effect,",
+        "offsets": {
+          "from": 5160,
+          "to": 5810
+        }
+      },
+      {
+        "text": " while",
+        "offsets": {
+          "from": 5810,
+          "to": 6000
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 6000,
+          "to": 6210
+        }
+      },
+      {
+        "text": " arena",
+        "offsets": {
+          "from": 6210,
+          "to": 6480
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 6480,
+          "to": 6600
+        }
+      },
+      {
+        "text": " its",
+        "offsets": {
+          "from": 6600,
+          "to": 6780
+        }
+      },
+      {
+        "text": " solid",
+        "offsets": {
+          "from": 6780,
+          "to": 7090
+        }
+      },
+      {
+        "text": " platforms",
+        "offsets": {
+          "from": 7090,
+          "to": 7650
+        }
+      },
+      {
+        "text": " stay",
+        "offsets": {
+          "from": 7650,
+          "to": 7910
+        }
+      },
+      {
+        "text": " playable.",
+        "offsets": {
+          "from": 7910,
+          "to": 8480
+        }
+      }
+    ]
+  },
+  "7": {
+    "transcription": [
+      {
+        "text": " At",
+        "offsets": {
+          "from": 100,
+          "to": 120
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 120,
+          "to": 300
+        }
+      },
+      {
+        "text": " end",
+        "offsets": {
+          "from": 300,
+          "to": 540
+        }
+      },
+      {
+        "text": " of",
+        "offsets": {
+          "from": 540,
+          "to": 600
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 600,
+          "to": 780
+        }
+      },
+      {
+        "text": " 75-second",
+        "offsets": {
+          "from": 780,
+          "to": 1580
+        }
+      },
+      {
+        "text": " round,",
+        "offsets": {
+          "from": 1580,
+          "to": 2020
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 2020,
+          "to": 2210
+        }
+      },
+      {
+        "text": " server",
+        "offsets": {
+          "from": 2210,
+          "to": 2560
+        }
+      },
+      {
+        "text": " closes",
+        "offsets": {
+          "from": 2560,
+          "to": 2930
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 2930,
+          "to": 3110
+        }
+      },
+      {
+        "text": " result.",
+        "offsets": {
+          "from": 3110,
+          "to": 3720
+        }
+      },
+      {
+        "text": " Effects",
+        "offsets": {
+          "from": 3720,
+          "to": 4260
+        }
+      },
+      {
+        "text": " clear,",
+        "offsets": {
+          "from": 4260,
+          "to": 4720
+        }
+      },
+      {
+        "text": " movement",
+        "offsets": {
+          "from": 4720,
+          "to": 5250
+        }
+      },
+      {
+        "text": " stops,",
+        "offsets": {
+          "from": 5250,
+          "to": 5740
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 5740,
+          "to": 5930
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 5930,
+          "to": 6120
+        }
+      },
+      {
+        "text": " final",
+        "offsets": {
+          "from": 6120,
+          "to": 6490
+        }
+      },
+      {
+        "text": " score",
+        "offsets": {
+          "from": 6490,
+          "to": 6800
+        }
+      },
+      {
+        "text": " is",
+        "offsets": {
+          "from": 6800,
+          "to": 6960
+        }
+      },
+      {
+        "text": " delivered.",
+        "offsets": {
+          "from": 6960,
+          "to": 7800
+        }
+      }
+    ]
+  },
+  "8": {
+    "transcription": [
+      {
+        "text": " The",
+        "offsets": {
+          "from": 100,
+          "to": 240
+        }
+      },
+      {
+        "text": " result",
+        "offsets": {
+          "from": 240,
+          "to": 730
+        }
+      },
+      {
+        "text": " is",
+        "offsets": {
+          "from": 730,
+          "to": 890
+        }
+      },
+      {
+        "text": " confirmed",
+        "offsets": {
+          "from": 890,
+          "to": 1620
+        }
+      },
+      {
+        "text": " in",
+        "offsets": {
+          "from": 1620,
+          "to": 1790
+        }
+      },
+      {
+        "text": " PostgreSQL.",
+        "offsets": {
+          "from": 1790,
+          "to": 2860
+        }
+      },
+      {
+        "text": " I",
+        "offsets": {
+          "from": 2860,
+          "to": 2960
+        }
+      },
+      {
+        "text": " can",
+        "offsets": {
+          "from": 2960,
+          "to": 3080
+        }
+      },
+      {
+        "text": " download",
+        "offsets": {
+          "from": 3080,
+          "to": 3550
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 3550,
+          "to": 3600
+        }
+      },
+      {
+        "text": " round",
+        "offsets": {
+          "from": 3600,
+          "to": 3940
+        }
+      },
+      {
+        "text": " record",
+        "offsets": {
+          "from": 3940,
+          "to": 4240
+        }
+      },
+      {
+        "text": " with",
+        "offsets": {
+          "from": 4240,
+          "to": 4460
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 4460,
+          "to": 4650
+        }
+      },
+      {
+        "text": " rule,",
+        "offsets": {
+          "from": 4650,
+          "to": 5040
+        }
+      },
+      {
+        "text": " its",
+        "offsets": {
+          "from": 5040,
+          "to": 5280
+        }
+      },
+      {
+        "text": " author,",
+        "offsets": {
+          "from": 5280,
+          "to": 5920
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 5920,
+          "to": 6140
+        }
+      },
+      {
+        "text": " originating",
+        "offsets": {
+          "from": 6140,
+          "to": 6980
+        }
+      },
+      {
+        "text": " message,",
+        "offsets": {
+          "from": 6980,
+          "to": 7540
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 7540,
+          "to": 7710
+        }
+      },
+      {
+        "text": " observed",
+        "offsets": {
+          "from": 7710,
+          "to": 8160
+        }
+      },
+      {
+        "text": " gameplay",
+        "offsets": {
+          "from": 8160,
+          "to": 8870
+        }
+      },
+      {
+        "text": " events.",
+        "offsets": {
+          "from": 8870,
+          "to": 9280
+        }
+      }
+    ]
+  },
+  "9": {
+    "transcription": [
+      {
+        "text": " Unsupported",
+        "offsets": {
+          "from": 60,
+          "to": 820
+        }
+      },
+      {
+        "text": " requests",
+        "offsets": {
+          "from": 820,
+          "to": 1420
+        }
+      },
+      {
+        "text": " cannot",
+        "offsets": {
+          "from": 1420,
+          "to": 1890
+        }
+      },
+      {
+        "text": " be",
+        "offsets": {
+          "from": 1890,
+          "to": 2020
+        }
+      },
+      {
+        "text": " approved.",
+        "offsets": {
+          "from": 2020,
+          "to": 2860
+        }
+      },
+      {
+        "text": " Chat",
+        "offsets": {
+          "from": 2860,
+          "to": 3140
+        }
+      },
+      {
+        "text": " is",
+        "offsets": {
+          "from": 3140,
+          "to": 3280
+        }
+      },
+      {
+        "text": " never",
+        "offsets": {
+          "from": 3280,
+          "to": 3640
+        }
+      },
+      {
+        "text": " executed",
+        "offsets": {
+          "from": 3640,
+          "to": 4200
+        }
+      },
+      {
+        "text": " as",
+        "offsets": {
+          "from": 4200,
+          "to": 4340
+        }
+      },
+      {
+        "text": " code.",
+        "offsets": {
+          "from": 4340,
+          "to": 4860
+        }
+      },
+      {
+        "text": " Supported",
+        "offsets": {
+          "from": 4860,
+          "to": 5410
+        }
+      },
+      {
+        "text": " proposals",
+        "offsets": {
+          "from": 5410,
+          "to": 5930
+        }
+      },
+      {
+        "text": " pass",
+        "offsets": {
+          "from": 5930,
+          "to": 6220
+        }
+      },
+      {
+        "text": " through",
+        "offsets": {
+          "from": 6220,
+          "to": 6630
+        }
+      },
+      {
+        "text": " a",
+        "offsets": {
+          "from": 6630,
+          "to": 6690
+        }
+      },
+      {
+        "text": " bounded",
+        "offsets": {
+          "from": 6690,
+          "to": 7110
+        }
+      },
+      {
+        "text": " queue,",
+        "offsets": {
+          "from": 7110,
+          "to": 7680
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 7680,
+          "to": 7700
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 7700,
+          "to": 7810
+        }
+      },
+      {
+        "text": " streamer",
+        "offsets": {
+          "from": 7810,
+          "to": 8150
+        }
+      },
+      {
+        "text": " keeps",
+        "offsets": {
+          "from": 8150,
+          "to": 8400
+        }
+      },
+      {
+        "text": " control",
+        "offsets": {
+          "from": 8400,
+          "to": 8870
+        }
+      },
+      {
+        "text": " over",
+        "offsets": {
+          "from": 8870,
+          "to": 9120
+        }
+      },
+      {
+        "text": " every",
+        "offsets": {
+          "from": 9120,
+          "to": 9770
+        }
+      },
+      {
+        "text": " activation.",
+        "offsets": {
+          "from": 9770,
+          "to": 10740
+        }
+      }
+    ]
+  },
+  "10": {
+    "transcription": [
+      {
+        "text": " I",
+        "offsets": {
+          "from": 60,
+          "to": 60
+        }
+      },
+      {
+        "text": " use",
+        "offsets": {
+          "from": 60,
+          "to": 240
+        }
+      },
+      {
+        "text": " Codex",
+        "offsets": {
+          "from": 240,
+          "to": 550
+        }
+      },
+      {
+        "text": " to",
+        "offsets": {
+          "from": 550,
+          "to": 670
+        }
+      },
+      {
+        "text": " build",
+        "offsets": {
+          "from": 670,
+          "to": 1010
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 1010,
+          "to": 1180
+        }
+      },
+      {
+        "text": " Go",
+        "offsets": {
+          "from": 1180,
+          "to": 1300
+        }
+      },
+      {
+        "text": " application",
+        "offsets": {
+          "from": 1300,
+          "to": 1960
+        }
+      },
+      {
+        "text": " boundaries,",
+        "offsets": {
+          "from": 1960,
+          "to": 2840
+        }
+      },
+      {
+        "text": " Twitch",
+        "offsets": {
+          "from": 2840,
+          "to": 3130
+        }
+      },
+      {
+        "text": " integration,",
+        "offsets": {
+          "from": 3130,
+          "to": 3930
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 3930,
+          "to": 4110
+        }
+      },
+      {
+        "text": " TypeScript",
+        "offsets": {
+          "from": 4110,
+          "to": 4720
+        }
+      },
+      {
+        "text": " game",
+        "offsets": {
+          "from": 4720,
+          "to": 4960
+        }
+      },
+      {
+        "text": " engine.",
+        "offsets": {
+          "from": 4960,
+          "to": 5560
+        }
+      },
+      {
+        "text": " Here,",
+        "offsets": {
+          "from": 5560,
+          "to": 6010
+        }
+      },
+      {
+        "text": " Codex",
+        "offsets": {
+          "from": 6010,
+          "to": 6450
+        }
+      },
+      {
+        "text": " reviews",
+        "offsets": {
+          "from": 6450,
+          "to": 6930
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 6930,
+          "to": 7160
+        }
+      },
+      {
+        "text": " real",
+        "offsets": {
+          "from": 7160,
+          "to": 7460
+        }
+      },
+      {
+        "text": " rule",
+        "offsets": {
+          "from": 7460,
+          "to": 7760
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 7760,
+          "to": 7990
+        }
+      },
+      {
+        "text": " expiry",
+        "offsets": {
+          "from": 7990,
+          "to": 8460
+        }
+      },
+      {
+        "text": " logic",
+        "offsets": {
+          "from": 8460,
+          "to": 8830
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 8830,
+          "to": 9060
+        }
+      },
+      {
+        "text": " runs",
+        "offsets": {
+          "from": 9060,
+          "to": 9400
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 9400,
+          "to": 9590
+        }
+      },
+      {
+        "text": " checks.",
+        "offsets": {
+          "from": 9590,
+          "to": 10360
+        }
+      },
+      {
+        "text": " Tests",
+        "offsets": {
+          "from": 10360,
+          "to": 10750
+        }
+      },
+      {
+        "text": " cover",
+        "offsets": {
+          "from": 10750,
+          "to": 11140
+        }
+      },
+      {
+        "text": " race",
+        "offsets": {
+          "from": 11140,
+          "to": 11420
+        }
+      },
+      {
+        "text": " safety,",
+        "offsets": {
+          "from": 11420,
+          "to": 12040
+        }
+      },
+      {
+        "text": " PostgreSQL",
+        "offsets": {
+          "from": 12040,
+          "to": 12770
+        }
+      },
+      {
+        "text": " persistence,",
+        "offsets": {
+          "from": 12770,
+          "to": 13790
+        }
+      },
+      {
+        "text": " transport",
+        "offsets": {
+          "from": 13790,
+          "to": 14440
+        }
+      },
+      {
+        "text": " failures,",
+        "offsets": {
+          "from": 14440,
+          "to": 15160
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 15160,
+          "to": 15370
+        }
+      },
+      {
+        "text": " the",
+        "offsets": {
+          "from": 15370,
+          "to": 15900
+        }
+      },
+      {
+        "text": " game",
+        "offsets": {
+          "from": 15900,
+          "to": 16100
+        }
+      },
+      {
+        "text": " behavior.",
+        "offsets": {
+          "from": 16100,
+          "to": 16740
+        }
+      }
+    ]
+  },
+  "11": {
+    "transcription": [
+      {
+        "text": " The",
+        "offsets": {
+          "from": 110,
+          "to": 190
+        }
+      },
+      {
+        "text": " implementation",
+        "offsets": {
+          "from": 190,
+          "to": 1100
+        }
+      },
+      {
+        "text": " keeps",
+        "offsets": {
+          "from": 1100,
+          "to": 1400
+        }
+      },
+      {
+        "text": " domain",
+        "offsets": {
+          "from": 1400,
+          "to": 1760
+        }
+      },
+      {
+        "text": " rules",
+        "offsets": {
+          "from": 1760,
+          "to": 2060
+        }
+      },
+      {
+        "text": " independent",
+        "offsets": {
+          "from": 2060,
+          "to": 2760
+        }
+      },
+      {
+        "text": " from",
+        "offsets": {
+          "from": 2760,
+          "to": 3010
+        }
+      },
+      {
+        "text": " Twitch",
+        "offsets": {
+          "from": 3010,
+          "to": 3410
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 3410,
+          "to": 3580
+        }
+      },
+      {
+        "text": " storage.",
+        "offsets": {
+          "from": 3580,
+          "to": 4260
+        }
+      },
+      {
+        "text": " RuleShift",
+        "offsets": {
+          "from": 4260,
+          "to": 4840
+        }
+      },
+      {
+        "text": " Live",
+        "offsets": {
+          "from": 4840,
+          "to": 5110
+        }
+      },
+      {
+        "text": " turns",
+        "offsets": {
+          "from": 5110,
+          "to": 5440
+        }
+      },
+      {
+        "text": " audience",
+        "offsets": {
+          "from": 5440,
+          "to": 5970
+        }
+      },
+      {
+        "text": " suggestions",
+        "offsets": {
+          "from": 5970,
+          "to": 6700
+        }
+      },
+      {
+        "text": " into",
+        "offsets": {
+          "from": 6700,
+          "to": 6960
+        }
+      },
+      {
+        "text": " reversible",
+        "offsets": {
+          "from": 6960,
+          "to": 7630
+        }
+      },
+      {
+        "text": " gameplay",
+        "offsets": {
+          "from": 7630,
+          "to": 8160
+        }
+      },
+      {
+        "text": " changes,",
+        "offsets": {
+          "from": 8160,
+          "to": 8820
+        }
+      },
+      {
+        "text": " with",
+        "offsets": {
+          "from": 8820,
+          "to": 9090
+        }
+      },
+      {
+        "text": " streamer",
+        "offsets": {
+          "from": 9090,
+          "to": 9620
+        }
+      },
+      {
+        "text": " approval",
+        "offsets": {
+          "from": 9620,
+          "to": 10170
+        }
+      },
+      {
+        "text": " and",
+        "offsets": {
+          "from": 10170,
+          "to": 10360
+        }
+      },
+      {
+        "text": " an",
+        "offsets": {
+          "from": 10360,
+          "to": 10490
+        }
+      },
+      {
+        "text": " automatic",
+        "offsets": {
+          "from": 10490,
+          "to": 11150
+        }
+      },
+      {
+        "text": " return",
+        "offsets": {
+          "from": 11150,
+          "to": 11520
+        }
+      },
+      {
+        "text": " to",
+        "offsets": {
+          "from": 11520,
+          "to": 11630
+        }
+      },
+      {
+        "text": " normal",
+        "offsets": {
+          "from": 11630,
+          "to": 12030
+        }
+      },
+      {
+        "text": " gravity.",
+        "offsets": {
+          "from": 12030,
+          "to": 12780
+        }
+      }
+    ]
+  }
+}

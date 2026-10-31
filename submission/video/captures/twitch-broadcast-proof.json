@@ -1,0 +1,21 @@
+{
+  "evidence_kind": "ACTUAL_PUBLIC_TWITCH_BROADCAST_CAPTURE",
+  "file": "twitch-broadcast-proof.mp4",
+  "channel": "fldevboo",
+  "broadcast_id": "316248581225",
+  "broadcast_started_at": "2026-10-31T08:32:38Z",
+  "recording_started_at": "2026-10-31T09:44:35.192Z",
+  "source_file": ".local/live-broadcast/broadcast-page-2026-10-31T09-44-35-192Z.mp4",
+  "source_in_seconds": 30,
+  "duration_seconds": 8,
+  "playback_rate": 1,
+  "visually_reviewed": true,
+  "capture": "Actual native Twitch viewer frames; wall-clock encoded",
+  "privacy_crop": "Removed unrelated recommendations and sign-up footer; no replacement Twitch UI or status badges.",
+  "limits": [
+    "Shows the actual app broadcast in its idle state, with real broadcaster camera and Restream layout.",
+    "The gameplay close-ups are a separate verified Twitch-source round, not a claim that its physics were observed in this broadcast.",
+    "Native LIVE status was visually inspected separately and corroborated by Helix; the captured viewport does not include that badge.",
+    "No chat message, approval, viewer count or stream UI was fabricated."
+  ]
+}

@@ -1,0 +1,418 @@
+[
+  {
+    "start": 7.183333333333334,
+    "end": 9.433333333333334,
+    "text": "This is RuleShift Live on my Twitch channel,",
+    "lines": [
+      "This is RuleShift Live on my Twitch channel,"
+    ],
+    "chapter": "broadcast",
+    "voice_file": "../voiceover/ruleshiftlive-vo-1.mp3"
+  },
+  {
+    "start": 9.433333333333334,
+    "end": 10.9,
+    "text": "streamed from a browser.",
+    "lines": [
+      "streamed from a browser."
+    ],
+    "chapter": "broadcast",
+    "voice_file": "../voiceover/ruleshiftlive-vo-1.mp3"
+  },
+  {
+    "start": 10.916666666666666,
+    "end": 12.683333333333334,
+    "text": "Now, the connected game in close-up.",
+    "lines": [
+      "Now, the connected game in close-up."
+    ],
+    "chapter": "broadcast",
+    "voice_file": "../voiceover/ruleshiftlive-vo-1.mp3"
+  },
+  {
+    "start": 15.166666666666666,
+    "end": 18.1,
+    "text": "On Twitch, chat usually reacts to the game.",
+    "lines": [
+      "On Twitch, chat usually reacts to the game."
+    ],
+    "chapter": "overview",
+    "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3"
+  },
+  {
+    "start": 18.116666666666667,
+    "end": 20.516666666666666,
+    "text": "RuleShift Live lets chat change it.",
+    "lines": [
+      "RuleShift Live lets chat change it."
+    ],
+    "chapter": "overview",
+    "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3"
+  },
+  {
+    "start": 20.533333333333335,
+    "end": 23.466666666666665,
+    "text": "Viewers propose a rule, the streamer approves it,",
+    "lines": [
+      "Viewers propose a rule, the streamer approves it,"
+    ],
+    "chapter": "overview",
+    "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3"
+  },
+  {
+    "start": 23.466666666666665,
+    "end": 26.05,
+    "text": "and the rule changes actual game physics.",
+    "lines": [
+      "and the rule changes actual game physics."
+    ],
+    "chapter": "overview",
+    "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3"
+  },
+  {
+    "start": 35.18333333333333,
+    "end": 38.03333333333333,
+    "text": "This real Twitch message became a proposal:",
+    "lines": [
+      "This real Twitch message became a proposal:"
+    ],
+    "chapter": "twitch",
+    "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3"
+  },
+  {
+    "start": 38.05,
+    "end": 40.93333333333333,
+    "text": "every third coin reverses gravity for four seconds.",
+    "lines": [
+      "every third coin reverses gravity for four seconds."
+    ],
+    "chapter": "twitch",
+    "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3"
+  },
+  {
+    "start": 40.95,
+    "end": 42.85,
+    "text": "The streamer has already approved it,",
+    "lines": [
+      "The streamer has already approved it,"
+    ],
+    "chapter": "twitch",
+    "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3"
+  },
+  {
+    "start": 42.86666666666667,
+    "end": 44.766666666666666,
+    "text": "and the viewer keeps the credit.",
+    "lines": [
+      "and the viewer keeps the credit."
+    ],
+    "chapter": "twitch",
+    "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3"
+  },
+  {
+    "start": 47.2,
+    "end": 49.766666666666666,
+    "text": "Chat cannot activate a rule by itself.",
+    "lines": [
+      "Chat cannot activate a rule by itself."
+    ],
+    "chapter": "approval",
+    "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3"
+  },
+  {
+    "start": 49.766666666666666,
+    "end": 52.38333333333333,
+    "text": "This proposal was approved before recording.",
+    "lines": [
+      "This proposal was approved before recording."
+    ],
+    "chapter": "approval",
+    "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3"
+  },
+  {
+    "start": 52.38333333333333,
+    "end": 54.36666666666667,
+    "text": "I review its exact trigger and effect,",
+    "lines": [
+      "I review its exact trigger and effect,"
+    ],
+    "chapter": "approval",
+    "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3"
+  },
+  {
+    "start": 54.36666666666667,
+    "end": 56.0,
+    "text": "then start the round.",
+    "lines": [
+      "then start the round."
+    ],
+    "chapter": "approval",
+    "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3"
+  },
+  {
+    "start": 56.016666666666666,
+    "end": 58.38333333333333,
+    "text": "One approved rule controls this arena.",
+    "lines": [
+      "One approved rule controls this arena."
+    ],
+    "chapter": "approval",
+    "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3"
+  },
+  {
+    "start": 62.18333333333333,
+    "end": 67.16666666666667,
+    "text": "On the third coin, acceleration reverses and the player rises toward the ceiling.",
+    "lines": [
+      "On the third coin, acceleration reverses",
+      "and the player rises toward the ceiling."
+    ],
+    "chapter": "gravity",
+    "voice_file": "../voiceover/ruleshiftlive-vo-5.mp3"
+  },
+  {
+    "start": 67.16666666666667,
+    "end": 70.21666666666667,
+    "text": "Four seconds later, gravity returns automatically.",
+    "lines": [
+      "Four seconds later, gravity returns automatically."
+    ],
+    "chapter": "gravity",
+    "voice_file": "../voiceover/ruleshiftlive-vo-5.mp3"
+  },
+  {
+    "start": 70.23333333333333,
+    "end": 72.71666666666667,
+    "text": "Movement and collisions follow the rule.",
+    "lines": [
+      "Movement and collisions follow the rule."
+    ],
+    "chapter": "gravity",
+    "voice_file": "../voiceover/ruleshiftlive-vo-5.mp3"
+  },
+  {
+    "start": 76.16666666666667,
+    "end": 78.98333333333333,
+    "text": "I keep playing with the same keyboard controls.",
+    "lines": [
+      "I keep playing with the same keyboard controls."
+    ],
+    "chapter": "play",
+    "voice_file": "../voiceover/ruleshiftlive-vo-6.mp3"
+  },
+  {
+    "start": 78.98333333333333,
+    "end": 81.91666666666667,
+    "text": "Another third-coin trigger refreshes the effect,",
+    "lines": [
+      "Another third-coin trigger refreshes the effect,"
+    ],
+    "chapter": "play",
+    "voice_file": "../voiceover/ruleshiftlive-vo-6.mp3"
+  },
+  {
+    "start": 81.91666666666667,
+    "end": 84.73333333333333,
+    "text": "while the arena and its solid platforms stay playable.",
+    "lines": [
+      "while the arena and its solid platforms stay playable."
+    ],
+    "chapter": "play",
+    "voice_file": "../voiceover/ruleshiftlive-vo-6.mp3"
+  },
+  {
+    "start": 87.21666666666667,
+    "end": 89.11666666666666,
+    "text": "At the end of the seventy-five-second round,",
+    "lines": [
+      "At the end of the seventy-five-second round,"
+    ],
+    "chapter": "deadline",
+    "voice_file": "../voiceover/ruleshiftlive-vo-7.mp3"
+  },
+  {
+    "start": 89.13333333333334,
+    "end": 90.81666666666666,
+    "text": "the server closes the result.",
+    "lines": [
+      "the server closes the result."
+    ],
+    "chapter": "deadline",
+    "voice_file": "../voiceover/ruleshiftlive-vo-7.mp3"
+  },
+  {
+    "start": 90.83333333333333,
+    "end": 94.9,
+    "text": "Effects clear, movement stops, and the final score is delivered.",
+    "lines": [
+      "Effects clear, movement stops,",
+      "and the final score is delivered."
+    ],
+    "chapter": "deadline",
+    "voice_file": "../voiceover/ruleshiftlive-vo-7.mp3"
+  },
+  {
+    "start": 97.21666666666667,
+    "end": 99.96666666666667,
+    "text": "The result is confirmed in PostgreSQL.",
+    "lines": [
+      "The result is confirmed in PostgreSQL."
+    ],
+    "chapter": "result",
+    "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3"
+  },
+  {
+    "start": 99.96666666666667,
+    "end": 102.13333333333334,
+    "text": "I can download a round record with the rule,",
+    "lines": [
+      "I can download a round record with the rule,"
+    ],
+    "chapter": "result",
+    "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3"
+  },
+  {
+    "start": 102.15,
+    "end": 104.63333333333334,
+    "text": "its author, the originating message,",
+    "lines": [
+      "its author, the originating message,"
+    ],
+    "chapter": "result",
+    "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3"
+  },
+  {
+    "start": 104.65,
+    "end": 106.53333333333333,
+    "text": "and observed gameplay events.",
+    "lines": [
+      "and observed gameplay events."
+    ],
+    "chapter": "result",
+    "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3"
+  },
+  {
+    "start": 109.16666666666667,
+    "end": 111.96666666666667,
+    "text": "Unsupported requests cannot be approved.",
+    "lines": [
+      "Unsupported requests cannot be approved."
+    ],
+    "chapter": "guardrails",
+    "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3"
+  },
+  {
+    "start": 111.96666666666667,
+    "end": 113.96666666666667,
+    "text": "Chat is never executed as code.",
+    "lines": [
+      "Chat is never executed as code."
+    ],
+    "chapter": "guardrails",
+    "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3"
+  },
+  {
+    "start": 113.96666666666667,
+    "end": 116.78333333333333,
+    "text": "Supported proposals pass through a bounded queue,",
+    "lines": [
+      "Supported proposals pass through a bounded queue,"
+    ],
+    "chapter": "guardrails",
+    "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3"
+  },
+  {
+    "start": 116.78333333333333,
+    "end": 119.73333333333333,
+    "text": "and the streamer keeps control over every activation.",
+    "lines": [
+      "and the streamer keeps control over every activation."
+    ],
+    "chapter": "guardrails",
+    "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3"
+  },
+  {
+    "start": 122.16666666666667,
+    "end": 124.93333333333334,
+    "text": "I used Codex to build the Go application boundaries,",
+    "lines": [
+      "I used Codex to build the Go application boundaries,"
+    ],
+    "chapter": "codex",
+    "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3"
+  },
+  {
+    "start": 124.95,
+    "end": 127.66666666666667,
+    "text": "Twitch integration, and TypeScript game engine.",
+    "lines": [
+      "Twitch integration, and TypeScript game engine."
+    ],
+    "chapter": "codex",
+    "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3"
+  },
+  {
+    "start": 127.66666666666667,
+    "end": 132.46666666666667,
+    "text": "Here, Codex reviews the real rule and expiry logic and runs the checks.",
+    "lines": [
+      "Here, Codex reviews the real rule",
+      "and expiry logic and runs the checks."
+    ],
+    "chapter": "codex",
+    "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3"
+  },
+  {
+    "start": 132.46666666666667,
+    "end": 135.88333333333333,
+    "text": "Tests cover race safety, PostgreSQL persistence,",
+    "lines": [
+      "Tests cover race safety, PostgreSQL persistence,"
+    ],
+    "chapter": "codex",
+    "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3"
+  },
+  {
+    "start": 135.9,
+    "end": 138.81666666666666,
+    "text": "transport failures, and the game behavior.",
+    "lines": [
+      "transport failures, and the game behavior."
+    ],
+    "chapter": "codex",
+    "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3"
+  },
+  {
+    "start": 142.21666666666667,
+    "end": 146.36666666666667,
+    "text": "The implementation keeps domain rules independent from Twitch and storage.",
+    "lines": [
+      "The implementation keeps domain rules",
+      "independent from Twitch and storage."
+    ],
+    "chapter": "source",
+    "voice_file": "../voiceover/ruleshiftlive-vo-11.mp3"
+  },
+  {
+    "start": 146.36666666666667,
+    "end": 150.91666666666666,
+    "text": "RuleShift Live turns audience suggestions into reversible gameplay changes,",
+    "lines": [
+      "RuleShift Live turns audience suggestions",
+      "into reversible gameplay changes,"
+    ],
+    "chapter": "source",
+    "voice_file": "../voiceover/ruleshiftlive-vo-11.mp3"
+  },
+  {
+    "start": 150.93333333333334,
+    "end": 155.0,
+    "text": "with streamer approval and an automatic return to normal gravity.",
+    "lines": [
+      "with streamer approval and an",
+      "automatic return to normal gravity."
+    ],
+    "chapter": "source",
+    "voice_file": "../voiceover/ruleshiftlive-vo-11.mp3"
+  }
+]

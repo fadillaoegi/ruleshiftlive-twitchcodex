@@ -1,0 +1,22 @@
+{
+  "rendered_at": "2026-10-31T16:49:48.095Z",
+  "renderer": "Remotion 4.0.539: original 3D explanation, editorial graphics and subtitle cards; FFmpeg normal-speed source compositing",
+  "file": "ruleshift-demo-final.mp4",
+  "duration_seconds": 162,
+  "frames": 9720,
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "embedded_voiceover": true,
+  "burned_in_subtitles": true,
+  "subtitle_language": "en",
+  "original_music": true,
+  "source_plan": "edit-plan.json",
+  "limits": [
+    "Public Twitch excerpt shows the app idle; gameplay is a separate verified real Twitch-source round.",
+    "The approved proposal was approved before filming; no approval click is invented.",
+    "The 3D explanation is an illustration, not additional gameplay evidence.",
+    "Unsupported-input footage is explicitly labelled local rehearsal.",
+    "Mouse and keyboard inputs were automated, without game-clock acceleration."
+  ]
+}

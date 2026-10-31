@@ -1,0 +1,41 @@
+import {bundle} from '@remotion/bundler';
+import {getCompositions,renderStill} from '@remotion/renderer';
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {randomUUID} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
+
+const root=fileURLToPath(new URL('../../../../',import.meta.url));
+const project=resolve(root,'submission/video/remotion');
+const out=resolve(root,'submission/video/stream-setup');
+await mkdir(out,{recursive:true});
+const browserExecutable='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const serveUrl=await bundle({entryPoint:resolve(project,'src/stream-index.tsx'),publicDir:resolve(project,'public')});
+const chromiumOptions={gl:'angle'};
+const compositions=await getCompositions(serveUrl,{browserExecutable,chromiumOptions,logLevel:'error'});
+for(const [id,name] of [['RuleShiftStreamFrame','stream-frame.png'],['RuleShiftOpeningOverlay','opening-overlay.png'],['RuleShiftArenaPreview','scene-preview.png'],['RuleShiftPreviewWatermark','preview-watermark.png'],['RuleShiftViewerBeforePreview','viewer-before-preview.png']]) {
+  const composition=compositions.find(c=>c.id===id);
+  await renderStill({serveUrl,browserExecutable,chromiumOptions,composition,frame:0,imageFormat:'png',output:resolve(out,name),overwrite:true,logLevel:'error'});
+  console.log(`Remotion frame: ${name}`);
+}
+await copyFile(resolve(project,'public/stream/controller.png'),resolve(out,'actual-controller.png'));
+const base=JSON.parse(await readFile('/Users/boo/Library/Application Support/obs-studio/basic/scenes/Untitled.json','utf8'));
+const sourceDefaults={prev_ver:base.sources.find(s=>s.id==='scene').prev_ver,sync:0,flags:0,volume:1,balance:.5,enabled:true,muted:true,'push-to-mute':false,'push-to-mute-delay':0,'push-to-talk':false,'push-to-talk-delay':0,hotkeys:{},deinterlace_mode:0,deinterlace_field_order:0,monitoring_type:0,private_settings:{}};
+const source=(name,id,settings)=>({...sourceDefaults,name,uuid:randomUUID(),id,versioned_id:id,settings,mixers:0});
+const background=source('RuleShift Frame','image_source',{file:resolve(out,'stream-frame.png'),unload:false});
+const opening=source('RuleShift 3D Opening','ffmpeg_source',{is_local_file:true,local_file:resolve(root,'submission/video/ruleshift-intro.mp4'),looping:true,restart_on_activate:true,close_when_inactive:false,clear_on_media_end:false});
+const overlay=source('Starting Soon Label','image_source',{file:resolve(out,'opening-overlay.png'),unload:false});
+const native=JSON.parse(await readFile(resolve(root,'.local/stream-controller/window.json'),'utf8'));
+const capture=source('RuleShift Actual Controller','screen_capture',{type:1,window:native.id,show_cursor:true,show_hidden_windows:true});
+const item=(s,id,x=0,y=0,w=1920,h=1080,cropTop=0)=>({name:s.name,source_uuid:s.uuid,visible:true,locked:true,rot:0,scale_ref:{x:1920,y:1080},align:5,bounds_type:2,bounds_align:0,bounds_crop:false,crop_left:0,crop_top:cropTop,crop_right:0,crop_bottom:0,id,group_item_backup:false,pos:{x,y},pos_rel:{x:(x-960)/540,y:(y-540)/540},scale:{x:1,y:1},scale_rel:{x:1,y:1},bounds:{x:w,y:h},bounds_rel:{x:w/540,y:h/540},scale_filter:'lanczos',blend_method:'default',blend_type:'normal',show_transition:{duration:300},hide_transition:{duration:300},private_settings:{}});
+const scene=(name,items)=>({...sourceDefaults,name,uuid:randomUUID(),id:'scene',versioned_id:'scene',settings:{id_counter:items.length,custom_size:false,items},mixers:0,canvas_uuid:'6c69626f-6273-4c00-9d88-c5136d61696e'});
+const soon=scene('01 — RuleShift Starting Soon',[item(opening,1),item(overlay,2)]);
+const arena=scene('02 — RuleShift Arena',[item(background,1),item(capture,2,40,126,1840,894,28)]);
+const collection={name:'RuleShift Live — Broadcast Setup',sources:[background,opening,overlay,capture,soon,arena],groups:[],scene_order:[{name:soon.name},{name:arena.name}],current_scene:arena.name,current_program_scene:arena.name,canvases:[],current_transition:'Fade',transition_duration:300,transitions:[],quick_transitions:[],saved_projectors:[],preview_locked:true,scaling_enabled:false,scaling_level:0,scaling_off_x:0,scaling_off_y:0,'virtual-camera':{type:2},modules:{},resolution:{x:1920,y:1080},version:2};
+await writeFile(resolve(out,'RuleShift-Live-OBS.json'),JSON.stringify(collection,null,2)+'\n');
+const run=args=>execFileSync('ffmpeg',['-y','-v','error',...args],{stdio:'pipe'});
+run(['-i',resolve(root,'submission/video/ruleshift-intro.mp4'),'-loop','1','-i',resolve(out,'opening-overlay.png'),'-filter_complex','[0:v][1:v]overlay=0:0[v]','-map','[v]','-an','-t','6.5','-c:v','libx264','-preset','fast','-crf','18','-threads','4','-pix_fmt','yuv420p','-r','60',resolve(out,'opening-preview.mp4')]);
+run(['-i',resolve(out,'opening-preview.mp4'),'-loop','1','-framerate','60','-i',resolve(out,'scene-preview.png'),'-loop','1','-framerate','60','-i',resolve(out,'preview-watermark.png'),'-loop','1','-framerate','60','-i',resolve(out,'viewer-before-preview.png'),'-filter_complex','[0:v][2:v]overlay=0:0:shortest=1[v0];[1:v]trim=duration=6.5,setpts=PTS-STARTPTS[v1];[3:v]trim=duration=5,setpts=PTS-STARTPTS[v2];[v0][v1][v2]concat=n=3:v=1:a=0[v]','-map','[v]','-an','-t','18','-c:v','libx264','-preset','fast','-crf','18','-threads','4','-pix_fmt','yuv420p','-r','60','-movflags','+faststart',resolve(out,'stream-layout-preview.mp4')]);
+await writeFile(resolve(out,'setup-info.json'),JSON.stringify({prepared_at:new Date().toISOString(),evidence_kind:'OBS_LAYOUT_PREVIEW_NOT_BROADCAST',scene_collection:'RuleShift-Live-OBS.json',window_owner:native.owner,window_id:native.id,width:1920,height:1080,preview:'stream-layout-preview.mp4',preview_seconds:18,started_broadcast:false,microphone_included:false,stream_credentials_included:false,limits:['Import must be checked in actual OBS; this export alone does not establish working capture or streaming.','No live badge, viewer count or Twitch player was fabricated.','The viewer-page portion is a cropped user-provided offline screenshot, explicitly labelled as before broadcast.','A genuine broadcast and new controlled round are needed before replacing the live-demo video.']},null,2)+'\n');
+console.log('Prepared OBS scene collection and explicitly labelled local preview.');

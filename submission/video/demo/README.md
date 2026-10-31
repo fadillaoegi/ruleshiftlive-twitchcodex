@@ -1,49 +1,57 @@
 # RuleShift Live — submission video
 
-## Primary delivery — actual Twitch demo
+**A newer narrated/subtitled 02:42 edit is in [`../final/`](../final/README.md).** This folder retains the earlier clean edit and its separate narration text.
 
-Use **`ruleshift-demo.mp4`**, a **150.5-second (02:30.5), 1920×1080/60 fps**
-edit with actual Twitch-source gameplay and genuine Codex footage. It replaces
-the earlier review's archival gameplay section. Remotion authors the 3D graphics
-and editorial layouts; FFmpeg composites the original captures at normal speed.
+## Primary delivery — actual Twitch broadcast and application demo
 
-Read **`VOICEOVER-EN.md`** for the matching timed English narration, or
-`VOICEOVER-EN.txt` for a clean reading copy. The requested voice-over is supplied
-as **text**, not subtitles or a synthesized voice performance. The MP4 retains
-original intro/closing sound; its screen clips contain no microphone recording.
+Use **`ruleshift-demo.mp4`**, a **158.5-second (02:38.5), 1920×1080/60 fps**
+Remotion edit. It includes **eight seconds of the actual Twitch broadcast**, the
+verified real Twitch-source application demo, genuine Codex development footage,
+and original 3D opening/closing with original sound.
 
-| Timeline | Material | Evidence |
-| --- | --- | --- |
-| 00:00–00:06.5 | 3D opening | Original Remotion animation and synthesized sound |
-| 00:06.5–00:20 | Product overview | Actual running application |
-| 00:20–00:32 | Real Twitch proposal | Actual message attribution and approved proposal |
-| 00:32–00:51 | Review rule and start | Actual UI; proposal was approved before recording |
-| 00:51–01:05 | First third-coin reversal and expiry | Actual real-source gameplay, normal speed |
-| 01:05–01:16 | Continued play and retrigger | Same real round, normal speed |
-| 01:16–01:26 | Automatic round end | Later in the same 75-second round, normal speed |
-| 01:26–01:38 | Saved result and record download | Actual PostgreSQL confirmation and UI download |
-| 01:38–01:51 | Unsupported rule | Separate, explicitly labelled local rehearsal |
-| 01:51–02:13 | Codex development/checks | Actual cropped Codex window recording |
-| 02:13–02:25 | Source and check results | Actual engine excerpt and verification results |
-| 02:25–02:30.5 | 3D closing | Original Remotion animation and sound |
+Read **`VOICEOVER-EN.md`** for timed spoken narration, or **`VOICEOVER-EN.txt`**
+for a clean reading copy. These are voice-over text, not subtitles. No spoken
+voice performance is embedded. Editorial headings identify chapters and evidence.
 
-The real round finished with **12 coins and four shifts**. Its first effect
-restored normal gravity after **4,002 ms**. A retrigger on coin 12 refreshed the
-coin-nine effect; gravity restored 4,003 ms after that retrigger. Backend state,
-the downloaded controller trace and a direct read-only query on the existing
-PostgreSQL 18 database agree on message/round IDs, score and saved completion.
-See `../../../docs/evidence/twitch-browser-capture.json`,
-`../captures/live-capture.json` and `../captures/live-round-record.json`.
+| Timeline | Material |
+| --- | --- |
+| 00:00–00:06.5 | Original Remotion 3D opening |
+| 00:06.5–00:14.5 | Actual Twitch viewer recording of the app broadcast |
+| 00:14.5–00:28 | Actual product overview |
+| 00:28–00:40 | Real Twitch message attribution and approved proposal |
+| 00:40–00:59 | Review rule and start; proposal approved before filming |
+| 00:59–01:13 | Third coin reverses actual gravity; automatic expiry |
+| 01:13–01:24 | Continued play and retrigger in the same round |
+| 01:24–01:34 | Automatic 75-second round end; editorial cut skips waiting |
+| 01:34–01:46 | PostgreSQL confirmation and round record download |
+| 01:46–01:59 | Unsupported rule in explicitly labelled local rehearsal |
+| 01:59–02:21 | Actual Codex development/check recording |
+| 02:21–02:33 | Actual engine source and recorded checks |
+| 02:33–02:38.5 | Original Remotion 3D closing |
 
-This is automated UI testing with eased cursor paths and real keyboard input,
-not a claim of a human operator. The proposal had already been approved when
-filming began; the footage and narration do not invent an approval click or
-claim to show the original chat-send action. No simulated Twitch response,
-game-clock acceleration or direct engine-state injection was used. Editorial
-cuts skip waiting and can hold the last captured frame; the entire initial
-trigger/expiry shot is retained. Exact cuts and holds are in `edit-plan.json`.
+The eight-second Twitch segment is an actual recording from broadcast
+`316248581225` on October 31. It shows the app in its idle state, its broadcaster
+camera and actual Restream layout. Public streaming was separately confirmed by
+Helix and visual inspection. The original capture viewport did not include the
+native LIVE badge; none was inserted. Unrelated recommendations and the signup
+footer were cropped out. The broadcast is labelled earlier in this session.
 
-Rebuild the full edit from the recorded sources:
+**The gameplay close-ups are a separate verified real Twitch-source round.**
+They do not claim that those physics events were observed in this broadcast.
+That recorded round finished with 12 coins and four shifts; its first effect
+expired after 4,002 ms. Backend state, downloaded controller events and a direct
+read-only query on the existing PostgreSQL 18 database match. The proposal was
+already approved before filming; narration states that explicitly. No chat-send
+or approval click is invented. Mouse/keyboard testing is automated with eased
+cursor paths and normal game time, without direct engine-state injection.
+
+See `../captures/twitch-broadcast-proof.json`,
+`../../../docs/evidence/twitch-browser-capture.json` and
+`RULES-VIDEO-COVERAGE.md` for provenance and video-requirement mapping. The
+remaining unsupported-input segment is labelled local rehearsal. The original
+129.5-second archival review remains separate below.
+
+Rebuild from the captured sources:
 
 ```sh
 cd submission/video/remotion
@@ -53,23 +61,16 @@ npm run render:demo:edit
 npm run verify:demo
 ```
 
-Run `node scripts/audit-live-demo.mjs` there to repeat the controller/backend/
-read-only PostgreSQL evidence match. It uses only the dedicated project database
-in the existing container. Full-video media QA is `verification.json`; final
-encoded inspection frames are under `previews/encoded/`. The original review
-and its QA remain separate below.
+`node scripts/render-demo-edit.mjs --reuse-verified-parts` can reuse unchanged
+chapter encodes only when their layout fields and verified capture round match
+the preserved previous edit. New broadcast footage is rendered with Remotion's
+editorial plate; assembly verifies chapter frame counts. Final media QA and
+encoded inspection frames are `verification.json` and `previews/encoded/`.
 
-The English edit is under three minutes and includes working Twitch behavior
-and real Codex development/checks. It does not certify all entry requirements.
-Voice recording/mixing, YouTube publication, repository/judge access, entrant
-eligibility, the principal Codex session ID, final description and Devpost
-Submitted status remain separate tasks. Nothing was uploaded by this work.
-
-Final media QA passed: exactly 9,030 frames/150.5 seconds, H.264 1080p/60 fps,
-48 kHz stereo AAC, -2.3 dBFS peak, no subtitle stream and complete error-free
-decode. Encoded-frame samples were inspected for proposal attribution,
-reversed/restored gravity, automatic end, stored result, labelled rehearsal,
-Codex and source. See `verification.json`.
+This video does not certify entrant eligibility or the whole Devpost entry.
+YouTube publication, repository/judge access, final description, principal Codex
+session and Devpost Submitted status remain separate tasks. No upload, paid AI
+call, Git operation or new application/database setup was performed.
 
 ## Earlier review cut — retained separately
 

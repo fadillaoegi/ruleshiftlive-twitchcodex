@@ -1,4 +1,6 @@
-# Submission readiness — October 30, 2026
+# Submission readiness — updated October 31, 2026
+
+**Latest video update — November 1:** [`video/final/ruleshift-demo-final.mp4`](video/final/ruleshift-demo-final.mp4) is the complete **02:42** Remotion film with eleven supplied voice clips, 41 English subtitle cues, original backsound and an informative 3D rule diagram. Final decode, timing, audio and encoded visual checks passed. Earlier `video/demo/` versions remain separate. Entry publication and non-video requirements below are still separate.
 
 Verdict: the core application is ready to demonstrate. The final entry is not
 yet verified as ready to submit. This is a source-backed readiness assessment;
@@ -21,7 +23,7 @@ entrant eligibility and acceptance remain subject to the organizer's rules.
 | Repository access for judges | Unverified | No submission repository URL or judge-access confirmation was found in project materials. Supply complete source/assets/setup instructions and keep access free during judging. Repository publication/settings belong to the user. |
 | Project description | Pending | README and development evidence exist, but no final Devpost description was found. Explain the experience and how Codex contributed; match actual behavior. |
 | Codex session identifier | Needs selection check | codex-session.json records the initial implementation thread. The current continuation thread differs. Confirm the recorded identifier corresponds to the thread containing most of the build before entering it. |
-| YouTube demonstration | Actual Twitch capture and final edit prepared; publication pending | `video/demo/` contains the 150.5-second Remotion demo plan and timed English voice-over text. The new real-source round has matching video/controller/PostgreSQL evidence; approval occurred before filming and is described accurately. The earlier 129.5-second archival review remains separate. No YouTube URL is verified. The FAQ permits public or unlisted viewing; private video is unsuitable. |
+| YouTube demonstration | Actual Twitch capture and final edit prepared; publication pending | `video/demo/` contains the updated 158.5-second Remotion edit and timed English voice-over text, including eight seconds of actual public Twitch broadcast. The new real-source round has matching video/controller/PostgreSQL evidence; approval occurred before filming and is described accurately. The earlier 129.5-second archival review remains separate. No YouTube URL is verified. The FAQ permits public or unlisted viewing; private video is unsuitable. |
 | English submission materials | Partially ready | UI/docs and the timed spoken-narration script are English. No subtitles were requested or embedded. Final description and judge instructions remain to be completed. |
 | Participant eligibility | Unverified | Confirm age, legal residence, individual/team entry, conflicts and any team representative. No identity documents were requested or inspected. |
 | Ownership and third-party permissions | Partially assessed | Visual asset provenance is documented. Verify dependency terms, all submitted material permissions and ownership. Avoid unrelated streamer footage/music in the demo. No particular open-source license is mandated by this audit. |
@@ -99,3 +101,35 @@ Final demo media QA passed: 150.5 seconds, exactly 9,030 frames, H.264
 and a full decode. Encoded-frame samples were inspected. See
 `video/demo/verification.json`. The matching English voice-over remains a
 separate spoken-narration script; the MP4 has not been uploaded to YouTube.
+
+## October 31 — additional on-stream capture preparation
+
+`video/stream-setup/` contains an 18-second labelled layout preview and OBS
+scene import, with an actual controller and the supplied Twitch viewer reference
+cropped for privacy. OFFLINE status is preserved and a real Helix status check
+also found the channel offline. Actual OBS import/account setup is unverified;
+no public broadcast was started. Native Twitch player/chat footage and a new
+on-camera approval remain planned after the entrant chooses to broadcast.
+The existing 150.5-second demo is unchanged. This preview is not additional
+live-use evidence or submission approval.
+
+## October 31 — broadcast excerpt added to the demo
+
+The user requested a short proof of public broadcasting rather than another
+interactive setup sequence. Eight seconds of actual October 31 Twitch viewer
+recording are included at 00:06.5–00:14.5, with the source labelled earlier in
+this session. The clip shows the idle app in a real Restream broadcast; Helix
+and separate visual inspection confirmed public streaming. No LIVE badge,
+player or chat arrival was generated. Unrelated recommendations were cropped.
+
+The subsequent close-ups retain the verified real-source round with 12 coins,
+four shifts and matching controller/PostgreSQL evidence. They are separate from
+the public broadcast recording. A new October 31 capture attempt did not reach
+a round because its browser locator timed out; it remains private and is not
+substituted for completed evidence. The previous verified capture was restored.
+
+The updated target is 158.5 seconds (under three minutes), with matching English
+spoken-narration text, original Remotion branding and genuine Codex footage.
+See `video/demo/RULES-VIDEO-COVERAGE.md` and the final `verification.json`.
+YouTube publication and other entry requirements above are still separate;
+this edit is not a full compliance or eligibility certification.

@@ -1,0 +1,8 @@
+{
+  "method": "Local ASR spot-check of mixed narration and music, Codex segment, 16.67 seconds",
+  "reference_match_ratio": 0.9977,
+  "expected": "I used Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior.",
+  "recognized": "I use Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior.",
+  "source": "Mixed WAV before AAC encoding",
+  "paid_api_calls": 0
+}

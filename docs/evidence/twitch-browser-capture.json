@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-30T14:22:33.041Z",
+  "recorded_at": "2026-10-31T11:14:02.191Z",
   "evidence_kind": "REAL_TWITCH_BROWSER_ROUND_WITH_EFFECT_TRACE",
   "source": "Actual UI capture, downloaded controller trace, backend state and a matching direct read-only PostgreSQL query",
   "capture_file": "live-raw.webm",

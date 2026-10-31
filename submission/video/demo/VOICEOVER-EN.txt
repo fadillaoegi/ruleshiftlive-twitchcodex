@@ -1,3 +1,5 @@
+This is RuleShift Live on my Twitch channel, streamed from a browser. Now, the connected game in close-up.
+
 On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics.
 
 This real Twitch message became a proposal: every third coin reverses gravity for four seconds. The streamer has already approved it, and the viewer keeps the credit.

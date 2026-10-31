@@ -1,0 +1,169 @@
+1
+00:00:07,183 --> 00:00:09,433
+This is RuleShift Live on my Twitch channel,
+
+2
+00:00:09,433 --> 00:00:10,900
+streamed from a browser.
+
+3
+00:00:10,917 --> 00:00:12,683
+Now, the connected game in close-up.
+
+4
+00:00:15,167 --> 00:00:18,100
+On Twitch, chat usually reacts to the game.
+
+5
+00:00:18,117 --> 00:00:20,517
+RuleShift Live lets chat change it.
+
+6
+00:00:20,533 --> 00:00:23,467
+Viewers propose a rule, the streamer approves it,
+
+7
+00:00:23,467 --> 00:00:26,050
+and the rule changes actual game physics.
+
+8
+00:00:35,183 --> 00:00:38,033
+This real Twitch message became a proposal:
+
+9
+00:00:38,050 --> 00:00:40,933
+every third coin reverses gravity for four seconds.
+
+10
+00:00:40,950 --> 00:00:42,850
+The streamer has already approved it,
+
+11
+00:00:42,867 --> 00:00:44,767
+and the viewer keeps the credit.
+
+12
+00:00:47,200 --> 00:00:49,767
+Chat cannot activate a rule by itself.
+
+13
+00:00:49,767 --> 00:00:52,383
+This proposal was approved before recording.
+
+14
+00:00:52,383 --> 00:00:54,367
+I review its exact trigger and effect,
+
+15
+00:00:54,367 --> 00:00:56,000
+then start the round.
+
+16
+00:00:56,017 --> 00:00:58,383
+One approved rule controls this arena.
+
+17
+00:01:02,183 --> 00:01:07,167
+On the third coin, acceleration reverses
+and the player rises toward the ceiling.
+
+18
+00:01:07,167 --> 00:01:10,217
+Four seconds later, gravity returns automatically.
+
+19
+00:01:10,233 --> 00:01:12,717
+Movement and collisions follow the rule.
+
+20
+00:01:16,167 --> 00:01:18,983
+I keep playing with the same keyboard controls.
+
+21
+00:01:18,983 --> 00:01:21,917
+Another third-coin trigger refreshes the effect,
+
+22
+00:01:21,917 --> 00:01:24,733
+while the arena and its solid platforms stay playable.
+
+23
+00:01:27,217 --> 00:01:29,117
+At the end of the seventy-five-second round,
+
+24
+00:01:29,133 --> 00:01:30,817
+the server closes the result.
+
+25
+00:01:30,833 --> 00:01:34,900
+Effects clear, movement stops,
+and the final score is delivered.
+
+26
+00:01:37,217 --> 00:01:39,967
+The result is confirmed in PostgreSQL.
+
+27
+00:01:39,967 --> 00:01:42,133
+I can download a round record with the rule,
+
+28
+00:01:42,150 --> 00:01:44,633
+its author, the originating message,
+
+29
+00:01:44,650 --> 00:01:46,533
+and observed gameplay events.
+
+30
+00:01:49,167 --> 00:01:51,967
+Unsupported requests cannot be approved.
+
+31
+00:01:51,967 --> 00:01:53,967
+Chat is never executed as code.
+
+32
+00:01:53,967 --> 00:01:56,783
+Supported proposals pass through a bounded queue,
+
+33
+00:01:56,783 --> 00:01:59,733
+and the streamer keeps control over every activation.
+
+34
+00:02:02,167 --> 00:02:04,933
+I used Codex to build the Go application boundaries,
+
+35
+00:02:04,950 --> 00:02:07,667
+Twitch integration, and TypeScript game engine.
+
+36
+00:02:07,667 --> 00:02:12,467
+Here, Codex reviews the real rule
+and expiry logic and runs the checks.
+
+37
+00:02:12,467 --> 00:02:15,883
+Tests cover race safety, PostgreSQL persistence,
+
+38
+00:02:15,900 --> 00:02:18,817
+transport failures, and the game behavior.
+
+39
+00:02:22,217 --> 00:02:26,367
+The implementation keeps domain rules
+independent from Twitch and storage.
+
+40
+00:02:26,367 --> 00:02:30,917
+RuleShift Live turns audience suggestions
+into reversible gameplay changes,
+
+41
+00:02:30,933 --> 00:02:35,000
+with streamer approval and an
+automatic return to normal gravity.

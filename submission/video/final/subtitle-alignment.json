@@ -1,0 +1,108 @@
+{
+  "method": "Local whisper.cpp 1.8.3 base.en word timings aligned to the user-provided narration script. Reference spelling and punctuation are retained.",
+  "language": "en",
+  "cue_count": 41,
+  "voices": [
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-1.mp3",
+      "chapter": "broadcast",
+      "sha256": "f5db7073772a6793d39448ed65a4de0ad397a89e55875234f4e0178fde6cd1dc",
+      "duration_seconds": 5.746938,
+      "timeline_start": 7.15,
+      "asr_reference_match_ratio": 0.9822,
+      "recognized_text": "This is RuleShift Live on my Twitch channel, streamed from a browser. Now, the connected game and close up."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3",
+      "chapter": "overview",
+      "sha256": "e2a8f479574aa74262a1fd207f1806e3073bd32414ecadd06f52a832984db4bf",
+      "duration_seconds": 10.893063,
+      "timeline_start": 15.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3",
+      "chapter": "twitch",
+      "sha256": "ec4a4c1a6e5b2c19e64b58ab7672d79412a27eac5b6353823258fda2eb76d548",
+      "duration_seconds": 9.691375,
+      "timeline_start": 35.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "This real Twitch message became a proposal. Every third coin reverses gravity for four seconds. The streamer has already approved it, and the viewer keeps the credit."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3",
+      "chapter": "approval",
+      "sha256": "279efbcf41b7e9f0ef11799523030fd3a9b3851d4bd49644a10561db5dacafe9",
+      "duration_seconds": 11.232625,
+      "timeline_start": 47.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "Chat cannot activate a rule by itself. This proposal was approved before recording. I review its exact trigger and effect, then start the round. One approved rule controls this arena."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-5.mp3",
+      "chapter": "gravity",
+      "sha256": "b568400ba5de6637db1dc947fbf80aff28d9be97dba840ba9cc279cac8d64450",
+      "duration_seconds": 10.631813,
+      "timeline_start": 62.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "On the third coin, acceleration reverses and the player rises toward the ceiling. Four seconds later, gravity returns automatically. Movement and collisions follow the rule."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-6.mp3",
+      "chapter": "play",
+      "sha256": "23a20e23d8e101d93e22d13b512c68cff9828596d1f910087fa94b5abd2fbf00",
+      "duration_seconds": 8.724875,
+      "timeline_start": 76.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "I keep playing with the same keyboard controls. Another third coin trigger refreshes the effect, while the arena and its solid platforms stay playable."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-7.mp3",
+      "chapter": "deadline",
+      "sha256": "9940a6edd8bdf5c778183333b3a58c7d3f7580c774f6e34ff438275593deac7c",
+      "duration_seconds": 7.758313,
+      "timeline_start": 87.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "At the end of the 75-second round, the server closes the result. Effects clear, movement stops, and the final score is delivered."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3",
+      "chapter": "result",
+      "sha256": "ca41a2e949dc3c70581f4a5743efd768d8d229adf873db3a37230b08f71d0baf",
+      "duration_seconds": 9.508563,
+      "timeline_start": 97.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "The result is confirmed in PostgreSQL. I can download a round record with the rule, its author, the originating message, and observed gameplay events."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3",
+      "chapter": "guardrails",
+      "sha256": "559c0bd6073652980aedc7007a3e55e7a30c97cf1cade6bfd8d54e0eeddd5eac",
+      "duration_seconds": 10.579563,
+      "timeline_start": 109.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "Unsupported requests cannot be approved. Chat is never executed as code. Supported proposals pass through a bounded queue, and the streamer keeps control over every activation."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3",
+      "chapter": "codex",
+      "sha256": "ec6dd9ed6b8971dc620f18790c628b39a7f11a802a32474cf92c149889e0a27c",
+      "duration_seconds": 16.666063,
+      "timeline_start": 122.15,
+      "asr_reference_match_ratio": 0.9977,
+      "recognized_text": "I use Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior."
+    },
+    {
+      "voice_file": "../voiceover/ruleshiftlive-vo-11.mp3",
+      "chapter": "source",
+      "sha256": "e9858538e94f329def615df442ea390c0810603cf54a2421b1e0502597f9832f",
+      "duration_seconds": 12.852188,
+      "timeline_start": 142.15,
+      "asr_reference_match_ratio": 1.0,
+      "recognized_text": "The implementation keeps domain rules independent from Twitch and storage. RuleShift Live turns audience suggestions into reversible gameplay changes, with streamer approval and an automatic return to normal gravity."
+    }
+  ],
+  "paid_api_calls": 0,
+  "uploaded_audio": false
+}

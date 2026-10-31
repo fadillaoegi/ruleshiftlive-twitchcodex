@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-31T17:00:48.680Z",
+  "file": "ruleshift-demo-final.mp4",
+  "duration_seconds": 162,
+  "frames": 9720,
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "sample_rate": 48000,
+  "channels": 2,
+  "integrated_lufs": -16.01,
+  "true_peak_dbfs": -3.3,
+  "full_decode": "passed",
+  "original_voice_files": 11,
+  "voice_hashes": "matched",
+  "subtitle_cues": 41,
+  "burned_in_subtitles": true,
+  "subtitle_sidecars": [
+    "subtitles-en.srt",
+    "subtitles-en.vtt"
+  ],
+  "subtitle_complete_script": "passed",
+  "subtitle_timing_and_layout_bounds": "passed",
+  "visual_inspection": "Passed: final encoded Twitch excerpt, coin collection/automatic return diagram, attributed proposal, reversed gravity, saved result, unsupported input, Codex, source, closing, caption layout and caption-free gaps were reviewed.",
+  "sha256": "791afa3c7bab38e73d741f597297d33443f27632cc0c5d114aa760821305c164",
+  "bytes": 24380216,
+  "limits": [
+    "Public Twitch excerpt shows the app idle; gameplay is a separate verified real Twitch-source round.",
+    "The approved proposal was approved before filming; no approval click is invented.",
+    "The 3D explanation is an illustration, not additional gameplay evidence.",
+    "Unsupported-input footage is explicitly labelled local rehearsal.",
+    "Mouse and keyboard inputs were automated, without game-clock acceleration."
+  ],
+  "chapter_timeline": "Passed: all chapter frame counts and normalized MP4 timebases; assembled picture 162 seconds, 9720 frames, constant 60 fps",
+  "mixed_speech_spot_check": "Passed: local transcription of 16.67 seconds of the mixed soundtrack matches narration at 99.77 percent"
+}

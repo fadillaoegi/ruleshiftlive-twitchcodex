@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-10-31T09:40:37.730Z",
+  "evidence_kind": "ACTUAL_CONTROLLER_PREVIEW_NOT_BROADCAST",
+  "url": "http://localhost:5174",
+  "twitch_state": "connected",
+  "database": "connected",
+  "round_status": "finished",
+  "started_broadcast": false,
+  "started_round": false,
+  "screenshot": "../remotion/public/stream/controller.png"
+}

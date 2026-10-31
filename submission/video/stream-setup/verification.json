@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-31T05:55:39.142Z",
+  "evidence_kind": "OBS_LAYOUT_PREVIEW_QA_NOT_BROADCAST",
+  "file": "stream-layout-preview.mp4",
+  "seconds": 18,
+  "frames": 1080,
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "audio": false,
+  "full_decode": "passed",
+  "scene_references": "all existing",
+  "scene_count": 2,
+  "stream_credentials_included": false,
+  "previous_actual_twitch_demo": "unchanged; SHA256 matched",
+  "actual_obs_import": "not yet verified",
+  "broadcast_started": false,
+  "visual_inspection": {
+    "status": "passed",
+    "scope": "Sampled encoded opening, actual-controller preview and original OFFLINE viewer reference; no actual OBS import or livestream verification",
+    "frames": [
+      "encoded-opening.png",
+      "encoded-arena.png",
+      "encoded-viewer.png"
+    ]
+  },
+  "overlay_alpha_range": [
+    0,
+    255
+  ]
+}

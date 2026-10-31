@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-31T10:27:52.145Z",
+  "source": "Actual read-only Twitch Helix Get Streams response",
+  "channel": "fldevboo",
+  "is_live": false,
+  "broadcast_id": null,
+  "started_at": null,
+  "evidence_kind": "ACTUAL_CHANNEL_OFFLINE",
+  "limits": [
+    "Public metadata status does not by itself prove the game is visible in the player.",
+    "No broadcast is started or stopped by this check."
+  ]
+}

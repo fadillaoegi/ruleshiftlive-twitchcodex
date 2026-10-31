@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-10-30T14:24:38.818Z",
+  "checked_at": "2026-10-31T11:16:42.403Z",
   "evidence_kind": "REAL_TWITCH_DEMO_MEDIA_QA",
   "file": "ruleshift-demo.mp4",
-  "duration_seconds": 150.5,
+  "duration_seconds": 158.5,
   "width": 1920,
   "height": 1080,
   "fps": 60,
-  "frames": 9030,
+  "frames": 9510,
   "video_codec": "h264",
   "audio_codec": "aac",
   "sample_rate": 48000,
@@ -16,25 +16,12 @@
   "subtitles": false,
   "embedded_voiceover": false,
   "frame_directory": "previews/encoded",
-  "visual_inspection": {
-    "status": "passed",
-    "scope": "Sampled frames extracted from the final encoded MP4; not a complete real-time human viewing",
-    "frames": [
-      "twitch",
-      "gravity-onset-detail",
-      "gravity-reversed-detail",
-      "gravity-restored-detail",
-      "deadline",
-      "saved-result-detail",
-      "guardrails",
-      "codex",
-      "source"
-    ]
-  },
+  "visual_inspection": "Passed: encoded broadcast, gravity restoration, saved result, Codex, closing, and reversal detail reviewed",
   "limits": [
     "Footage is automated browser testing with natural cursor paths, not a claim of a human operator.",
-    "Narration script is separate; no voice performance is synthesized or embedded."
+    "Narration script is separate; no voice performance is synthesized or embedded.",
+    "The 8-second actual public Twitch broadcast shows the app idle; the gameplay close-ups are a separate verified Twitch-source round, not claimed to have been observed in that broadcast."
   ],
-  "bytes": 19424735,
-  "sha256": "bb61260a9fdc3ee40e54df6596171e3892de146727ae8e2e38c05914997b43cd"
+  "sha256": "e7a668b83f556dfcb569b1c4c7b0d79d63304d9588eb288a654a9e23a2e69afd",
+  "bytes": 19691464
 }

@@ -11,7 +11,10 @@ input at normal speed. The synthetic fixture is not a substitute for that eviden
 
 This does not mark every extended check below complete. Live Stop, actual
 failure/retry scenarios, rapid-message cooldown and OBS livestream/720p checks
-remain unverified. Rehearsal Stop and unsupported-rule recordings are separately
+remain unverified. An actual October 31 Restream broadcast was verified and
+eight seconds of the public viewer recording are in the final demo. That clip
+shows the app idle; the gameplay close-ups remain a separate verified round.
+Rehearsal Stop and unsupported-rule recordings are separately
 labelled. Use this runbook for those remaining checks or another controlled run.
 
 ## Prepare the local machine

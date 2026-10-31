@@ -46,6 +46,14 @@ function shot(record,name,duration,out=name) {
 }
 for(const name of ['intro','closing'])await copyFile(resolve(output,`ruleshift-${name}.mp4`),resolve(assets,`${name}.mp4`));
 add('intro','brand','demo/intro.mp4',6.5,'','','');
+if(!review) {
+  const broadcast=await read(resolve(capture,'twitch-broadcast-proof.json'));
+  if(broadcast.evidence_kind!=='ACTUAL_PUBLIC_TWITCH_BROADCAST_CAPTURE'||!broadcast.visually_reviewed)throw new Error('Reviewed actual broadcast footage is required.');
+  await copyFile(resolve(capture,broadcast.file),resolve(assets,'twitch-broadcast-proof.mp4'));
+  cuts.push({file:broadcast.file,shot:'actual-public-broadcast',source_in_seconds:0,source_out_seconds:8,hold_last_frame_seconds:0,playback_rate:1});
+  add('broadcast','video','demo/twitch-broadcast-proof.mp4',8,'STREAMED ON TWITCH','Actual broadcast · earlier in this session',
+    'This is RuleShift Live on my Twitch channel, streamed from a browser. Now, the connected game in close-up.');
+}
 add('overview','video',shot(overview,'overview',13.5),13.5,'CHAT BECOMES GAMEPLAY','Product overview',
   'On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics.');
 
@@ -103,6 +111,7 @@ add('closing','brand','demo/closing.mp4',5.5,'','','');
 if(cursor>=180*60)throw new Error('The edit must stay below three minutes; shorten editorial segments without accelerating gameplay.');
 
 const plan={version:1,prepared_at:new Date().toISOString(),review,ready_for_submission_review:!review,fps:60,width:1920,height:1080,duration_in_frames:cursor,duration_seconds:cursor/60,chapters,source_cuts:cuts,limits:review?['Fresh continuous Twitch capture is pending; archival images and rehearsal are explicitly labelled.','Do not treat this review cut as a final rules-compliance certification.']:['Footage is automated browser testing with natural cursor paths, not a claim of a human operator.','Narration script is separate; no voice performance is synthesized or embedded.'],vo_embedded:false,subtitles:false};
+if(!review)plan.limits.push('The 8-second actual public Twitch broadcast shows the app idle; the gameplay close-ups are a separate verified Twitch-source round, not claimed to have been observed in that broadcast.');
 await writeFile(resolve(assets,'edit-plan.json'),JSON.stringify(plan,null,2)+'\n');
 await writeFile(resolve(output,`demo/edit-plan${review?'-review':''}.json`),JSON.stringify(plan,null,2)+'\n');
 const time=n=>`${String(Math.floor(n/60)).padStart(2,'0')}:${(n%60).toFixed(1).padStart(4,'0')}`;

@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "prepared_at": "2026-10-30T14:18:26.759Z",
+  "prepared_at": "2026-10-31T11:02:18.194Z",
   "review": false,
   "ready_for_submission_review": true,
   "fps": 60,
   "width": 1920,
   "height": 1080,
-  "duration_in_frames": 9030,
-  "duration_seconds": 150.5,
+  "duration_in_frames": 9510,
+  "duration_seconds": 158.5,
   "chapters": [
     {
       "name": "intro",
@@ -20,11 +20,21 @@
       "narration": ""
     },
     {
+      "name": "broadcast",
+      "kind": "video",
+      "file": "demo/twitch-broadcast-proof.mp4",
+      "duration_frames": 480,
+      "start_frame": 390,
+      "title": "STREAMED ON TWITCH",
+      "source": "Actual broadcast · earlier in this session",
+      "narration": "This is RuleShift Live on my Twitch channel, streamed from a browser. Now, the connected game in close-up."
+    },
+    {
       "name": "overview",
       "kind": "video",
       "file": "demo/overview-held.mp4",
       "duration_frames": 810,
-      "start_frame": 390,
+      "start_frame": 870,
       "title": "CHAT BECOMES GAMEPLAY",
       "source": "Product overview",
       "narration": "On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics."
@@ -34,7 +44,7 @@
       "kind": "video",
       "file": "demo/real-proposal-held.mp4",
       "duration_frames": 720,
-      "start_frame": 1200,
+      "start_frame": 1680,
       "title": "A REAL TWITCH PROPOSAL",
       "source": "Real Twitch capture",
       "narration": "This real Twitch message became a proposal: every third coin reverses gravity for four seconds. The streamer has already approved it, and the viewer keeps the credit."
@@ -44,7 +54,7 @@
       "kind": "video",
       "file": "demo/approval.mp4",
       "duration_frames": 1140,
-      "start_frame": 1920,
+      "start_frame": 2400,
       "title": "THE STREAMER DECIDES",
       "source": "Real Twitch capture",
       "narration": "Chat cannot activate a rule by itself. This proposal was approved before recording. I review its exact trigger and effect, then start the round. One approved rule controls this arena."
@@ -54,7 +64,7 @@
       "kind": "video",
       "file": "demo/third-coin-and-expiry-held.mp4",
       "duration_frames": 840,
-      "start_frame": 3060,
+      "start_frame": 3540,
       "title": "THIRD COIN. REAL GRAVITY.",
       "source": "Real Twitch capture · normal speed",
       "narration": "On the third coin, acceleration reverses and the player rises toward the ceiling. Four seconds later, gravity returns automatically. Movement and collisions follow the rule."
@@ -64,7 +74,7 @@
       "kind": "video",
       "file": "demo/continued-play.mp4",
       "duration_frames": 660,
-      "start_frame": 3900,
+      "start_frame": 4380,
       "title": "SURVIVE THE SHIFT",
       "source": "Real Twitch capture · normal speed",
       "narration": "I keep playing with the same keyboard controls. Another third-coin trigger refreshes the effect, while the arena and its solid platforms stay playable."
@@ -74,7 +84,7 @@
       "kind": "video",
       "file": "demo/automatic-round-end-held.mp4",
       "duration_frames": 600,
-      "start_frame": 4560,
+      "start_frame": 5040,
       "title": "THE ROUND ENDS AUTOMATICALLY",
       "source": "Later in the same real round · normal speed",
       "narration": "At the end of the seventy-five-second round, the server closes the result. Effects clear, movement stops, and the final score is delivered."
@@ -84,7 +94,7 @@
       "kind": "video",
       "file": "demo/saved-result-and-download-held.mp4",
       "duration_frames": 720,
-      "start_frame": 5160,
+      "start_frame": 5640,
       "title": "SAVED AND TRACEABLE",
       "source": "Real Twitch capture",
       "narration": "The result is confirmed in PostgreSQL. I can download a round record with the rule, its author, the originating message, and observed gameplay events."
@@ -94,7 +104,7 @@
       "kind": "video",
       "file": "demo/unsupported-rule.mp4",
       "duration_frames": 780,
-      "start_frame": 5880,
+      "start_frame": 6360,
       "title": "ONLY SUPPORTED RULES CAN RUN",
       "source": "Local rehearsal · browser only",
       "narration": "Unsupported requests cannot be approved. Chat is never executed as code. Supported proposals pass through a bounded queue, and the streamer keeps control over every activation."
@@ -104,7 +114,7 @@
       "kind": "video",
       "file": "demo/codex.mp4",
       "duration_frames": 1320,
-      "start_frame": 6660,
+      "start_frame": 7140,
       "title": "BUILT AND VERIFIED WITH CODEX",
       "source": "Actual Codex screen recording",
       "narration": "I used Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior."
@@ -114,7 +124,7 @@
       "kind": "source",
       "file": "",
       "duration_frames": 720,
-      "start_frame": 7980,
+      "start_frame": 8460,
       "title": "ACTUAL PROJECT SOURCE",
       "source": "Read-only source and actual check results",
       "narration": "The implementation keeps domain rules independent from Twitch and storage. RuleShift Live turns audience suggestions into reversible gameplay changes, with streamer approval and an automatic return to normal gravity."
@@ -124,13 +134,21 @@
       "kind": "brand",
       "file": "demo/closing.mp4",
       "duration_frames": 330,
-      "start_frame": 8700,
+      "start_frame": 9180,
       "title": "",
       "source": "",
       "narration": ""
     }
   ],
   "source_cuts": [
+    {
+      "file": "twitch-broadcast-proof.mp4",
+      "shot": "actual-public-broadcast",
+      "source_in_seconds": 0,
+      "source_out_seconds": 8,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
     {
       "file": "overview-raw.webm",
       "shot": "overview",
@@ -198,7 +216,8 @@
   ],
   "limits": [
     "Footage is automated browser testing with natural cursor paths, not a claim of a human operator.",
-    "Narration script is separate; no voice performance is synthesized or embedded."
+    "Narration script is separate; no voice performance is synthesized or embedded.",
+    "The 8-second actual public Twitch broadcast shows the app idle; the gameplay close-ups are a separate verified Twitch-source round, not claimed to have been observed in that broadcast."
   ],
   "vo_embedded": false,
   "subtitles": false

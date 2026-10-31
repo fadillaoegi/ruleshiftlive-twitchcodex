@@ -18,7 +18,17 @@
     "stills": "node scripts/render.mjs --stills",
     "render": "node scripts/audio.mjs && node scripts/render.mjs",
     "verify:demo": "node scripts/verify-demo.mjs",
-    "render:demo:edit": "node scripts/render-demo-edit.mjs"
+    "render:demo:edit": "node scripts/render-demo-edit.mjs",
+    "prepare:stream-controller": "node scripts/prepare-stream-controller.mjs",
+    "render:stream-setup": "node scripts/render-stream-setup.mjs",
+    "check:broadcast": "node scripts/check-twitch-broadcast.mjs",
+    "studio:final": "remotion studio src/final-index.tsx",
+    "prepare:final": "node scripts/prepare-final.mjs",
+    "audio:final": "node scripts/final-audio.mjs",
+    "subtitles:final": "python3 scripts/align-final-subtitles.py",
+    "render:final:graphics": "node scripts/render-final.mjs --graphics",
+    "render:final": "node scripts/render-final.mjs --assemble",
+    "verify:final": "node scripts/verify-final.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "9.8.2",

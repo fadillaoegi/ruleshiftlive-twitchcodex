@@ -514,3 +514,156 @@ submission readiness to reflect the new evidence. No application code changes,
 new paid calls, Git operations or external publication were performed. YouTube,
 entry metadata/eligibility, principal Codex session and final Devpost submission
 are still separate requirements.
+
+## 2026-10-31 — on-stream recording preparation
+
+Prepared `submission/video/stream-setup/` for the user's requested Twitch
+viewer-page/stream-start segment. Their screenshot shows OFFLINE; a real
+read-only Helix Get Streams check at 05:44:35.842 UTC also found `fldevboo`
+offline. Credentials/app token stayed in memory. No broadcast, chat message,
+approval or round was started by tools.
+
+Opened OBS 32.2.2 and a dedicated actual Chrome controller window with a
+project-private profile and loopback-only debugging. Its snapshot truthfully
+reports reauthorization needed. Exported two OBS scenes, Starting Soon and
+Arena, targeting that actual controller through macOS Screen Capture. No
+microphone or stream credentials are included. The window ID is session-specific.
+Existing OBS scenes/profile were not overwritten. Accessibility access was not
+granted and OBS WebSocket control was disabled; import/account connection and
+actual OBS capture still require user action and verification.
+
+Delivered an editable Remotion 18-second layout preview with original 3D
+branding, the actual idle controller screenshot and a privacy-cropped offline
+Twitch reference. It is explicitly labelled not broadcast. No LIVE badge, player,
+viewer count, chat arrival or approval was fabricated. The previous verified
+150.5-second actual-Twitch-chat demo remains intact; its SHA256 still matches.
+
+TypeScript and preview QA passed: 1,080 frames/18 seconds, H.264 1920×1080/60 fps,
+no audio/microphone track, complete decode, existing scene asset references and
+transparent overlay. Sampled encoded frames were inspected. Import instructions,
+status/QA metadata and a proposed replacement edit with conditional English
+narration are included. Genuine native Twitch player/chat footage and a new
+on-camera approval depend on OBS setup and the user's decision to start a public
+stream. No application/database changes, paid AI calls, Git operations or public
+publication occurred; application tests were not repeated for media-only work.
+
+The online-stream follow-up preflight at 06:19:40.977 UTC still found the
+channel offline. OBS has only the original Untitled collection and no configured
+stream service; the RuleShift scene has not been imported. Opened OBS and
+revealed the prepared scene file for the user's direct account connection/import.
+No broadcast was started or password/stream key requested in chat. Account
+connection and a verified OBS preview remain necessary before streaming.
+
+## 2026-10-31 — actual browser-based Twitch broadcast
+
+The user started Restream Studio sharing their actual RuleShift Chrome tab.
+Read-only Helix verification at 08:38:27.944 UTC confirmed active broadcast
+`316248581225`, started at 08:32:38 UTC. An independent public Twitch viewer
+visually showed the real controller, Restream layout and native LIVE badge.
+Earlier offline checks remain historical; OBS was not used for this broadcast.
+
+Prepared read-only public-viewer recording helpers with wall-clock encoding and
+bounded backend observations. Raw footage stays private in
+`.local/live-broadcast/` until cropped, reviewed and verified. Helpers never send
+chat, approve rules or operate the user's shared game. Syntax checks passed.
+
+At 09:04:42 UTC, Twitch and PostgreSQL were connected but no fresh controlled
+proposal or new round had arrived during capture. The user received the manual
+approval/play/download steps. A new on-stream gameplay sequence and replacement
+Remotion edit remain pending; the existing verified 150.5-second demo is intact.
+No Git, database setup, paid API or external video publication changes occurred.
+
+Shared-tab automation preflight: regular Chrome rejects JavaScript from Apple
+Events, so it cannot currently be driven directly. Prepared and visually checked
+the isolated headful window titled `RuleShift Live — Demo controller`, with the
+whole arena visible and actual Twitch/PostgreSQL connection restored. The user
+was asked to switch Restream's shared source to that window and send the fresh
+rule from their logged-in Twitch account. Approval and gameplay remain pending
+until that source switch is confirmed; a separate unshared game is not evidence
+of broadcast gameplay. No system automation preference was changed.
+
+The user's new real Twitch proposal `2cd91137920ab45497dfaa1c3a285cc7`
+arrived at 09:36:49 UTC and remains pending. The isolated capture browser had
+closed, so it was reopened. A read-only scroll probe showed the proposal queue
+in the controllable window while the independent broadcast still showed the
+initial header/arena view. Asked the user to reselect the reopened controller
+under Window in Restream; no duplicate message is required. Both actual viewer
+and controller capture helpers are armed. Prepared the existing-headful UI
+driver separately from the previous headless capture; it requires confirmed
+sharing and never closes the user's browser. No approval or new round has been
+performed pending source matching.
+
+## 2026-10-31 — final short broadcast excerpt and voice-over edit
+
+Delivered the user's requested short live-streaming proof inside the Remotion
+demo: eight seconds of actual public Twitch viewer recording from broadcast
+`316248581225`, followed by the prior verified real Twitch-source gameplay and
+actual Codex footage. The broadcast clip is labelled earlier in this session
+and shows the idle app. No corresponding gameplay-on-broadcast claim is made.
+The latest Helix check at 10:27:52 UTC found the channel offline; the edit uses
+the previously recorded active broadcast, without generating a LIVE badge.
+
+A fresh close-up capture attempt stopped at the approved-proposal browser
+locator and never started a round. It is retained privately as incomplete. The
+previous verified capture, trace and edit were preserved, and the completed
+source capture was restored. No failed attempt is presented as completed live
+evidence. The new October 31 proposal remains distinct from the recorded round.
+
+Final movie: `submission/video/demo/ruleshift-demo.mp4`, 158.5 seconds,
+9,510 frames, H.264 1920×1080/60 fps, AAC stereo 48 kHz, peak -2.3 dBFS,
+no subtitle stream and complete error-free decode. Remotion renders the new
+editorial plate; unchanged verified chapter encodes are reused after capture
+identity/layout checks. Original 3D opening, closing and original synth sound
+remain. Timed `VOICEOVER-EN.md` and clean `VOICEOVER-EN.txt` match the edit;
+no voice performance is embedded. Encoded broadcast, gameplay, result, Codex
+and closing frames were visually inspected.
+
+Remotion TypeScript, script syntax, final media QA and a repeat read-only
+PostgreSQL/controller audit passed (same round: 12 coins, four shifts, first
+expiry 4,002 ms). Updated source/provenance and official-video-requirement
+mapping. Official rules and overview were rechecked. YouTube publication,
+repository/judge access, final entry fields and eligibility are not completed
+by making this video. No application code, paid API, database setup or Git
+operation was performed.
+
+## 2026-11-01 — narrated, subtitled Remotion final demo
+
+Completed `submission/video/final/ruleshift-demo-final.mp4`: 162 seconds
+(02:42), 9,720 frames, H.264 1920×1080/60 fps with AAC stereo 48 kHz.
+The user's eleven supplied MP3 voice recordings are now embedded. Original
+96 BPM neon/sci-fi music includes pads, arpeggios, bass, restrained percussion
+and synchronized diagram accents; a speech-controlled sidechain lowers the
+backsound during narration. The final encoded mix measures -16.01 LUFS and
+-3.3 dBFS true peak. No paid music, TTS or transcription API was used.
+
+Remotion adds a seven-second informative 3D diagram: three coin triggers,
+a four-second reversal countdown, and automatic restoration. New editorial
+side panels explain chat → review → play → save. Actual Twitch broadcast,
+verified Twitch-source controller footage, local rehearsal and the illustrated
+diagram stay distinctly labelled. The public excerpt shows the idle app; it
+is not claimed to show the separate recorded gameplay round.
+
+Local whisper.cpp word timings were aligned to the supplied script, with
+98.22–100 percent reference alignment. The 41 English subtitle cues are
+burned into a dedicated lower area and also supplied as SRT/VTT. Audio
+originals and hashes were preserved. Public word timings allow regeneration
+without a model download. A 16.67-second mixed-speech transcription spot-check
+matched the expected narration at 99.77 percent.
+
+Visual QA found a mixed-timebase concatenation issue before delivery. Every
+chapter is now remuxed to the same MP4 timebase and its duration/frame count
+checked before assembly. The resulting complete picture and encoded movie
+are both exactly 162 seconds at 60 fps. Full decode, Remotion typecheck,
+script syntax, narration-file hashes, complete subtitle script, cue bounds
+and final loudness checks passed. Final encoded frames were inspected for
+all major evidence types, diagrams, caption readability and chapter order.
+`verification.json` records the output hash and measurements.
+
+The package includes the final MP4, original music and narration/mix WAV
+stems, subtitle sidecars, timed narration, edit plan, source/QA metadata and
+editable Remotion compositions/scripts. Earlier clean/review videos remain
+separate. Official video rules were rechecked; this movie is under the
+three-minute limit and includes Twitch and genuine Codex footage. YouTube
+publication, judge repository access and final entry/eligibility details
+remain separate. No Git operations, application code or database changes
+were made; application tests were not repeated for this media-only change.

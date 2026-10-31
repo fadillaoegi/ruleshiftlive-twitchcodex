@@ -1,0 +1,20 @@
+{
+  "prepared_at": "2026-10-31T05:51:39.127Z",
+  "evidence_kind": "OBS_LAYOUT_PREVIEW_NOT_BROADCAST",
+  "scene_collection": "RuleShift-Live-OBS.json",
+  "window_owner": "Google Chrome",
+  "window_id": 36052,
+  "width": 1920,
+  "height": 1080,
+  "preview": "stream-layout-preview.mp4",
+  "preview_seconds": 18,
+  "started_broadcast": false,
+  "microphone_included": false,
+  "stream_credentials_included": false,
+  "limits": [
+    "Import must be checked in actual OBS; this export alone does not establish working capture or streaming.",
+    "No live badge, viewer count or Twitch player was fabricated.",
+    "The viewer-page portion is a cropped user-provided offline screenshot, explicitly labelled as before broadcast.",
+    "A genuine broadcast and new controlled round are needed before replacing the live-demo video."
+  ]
+}

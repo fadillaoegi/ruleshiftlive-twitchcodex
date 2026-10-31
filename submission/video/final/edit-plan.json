@@ -1,0 +1,375 @@
+{
+  "version": 2,
+  "prepared_at": "2026-10-31T13:55:43.608Z",
+  "review": false,
+  "ready_for_submission_review": true,
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "duration_in_frames": 9720,
+  "duration_seconds": 162,
+  "chapters": [
+    {
+      "name": "intro",
+      "kind": "brand",
+      "file": "demo/intro.mp4",
+      "duration_frames": 390,
+      "start_frame": 0,
+      "title": "",
+      "source": "",
+      "narration": "",
+      "trim_in_seconds": 0,
+      "info": [],
+      "voice_file": null,
+      "voice_duration": 0,
+      "voice_offset": 0
+    },
+    {
+      "name": "broadcast",
+      "kind": "video",
+      "file": "demo/twitch-broadcast-proof.mp4",
+      "duration_frames": 480,
+      "start_frame": 390,
+      "title": "STREAMED ON TWITCH",
+      "source": "Actual public Twitch broadcast · earlier capture",
+      "narration": "This is RuleShift Live on my Twitch channel, streamed from a browser. Now, the connected game in close-up.",
+      "trim_in_seconds": 0,
+      "info": [
+        "BROADCAST READY",
+        "A real Twitch viewer",
+        "Actual public broadcast",
+        "Browser-based streaming",
+        "Gameplay close-ups follow"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-1.mp3",
+      "voice_duration": 5.746938,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "overview",
+      "kind": "video",
+      "file": "demo/overview-held.mp4",
+      "duration_frames": 780,
+      "start_frame": 870,
+      "title": "CHAT BECOMES GAMEPLAY",
+      "source": "Product overview · local rehearsal",
+      "narration": "On Twitch, chat usually reacts to the game. RuleShift Live lets chat change it. Viewers propose a rule, the streamer approves it, and the rule changes actual game physics.",
+      "trim_in_seconds": 0,
+      "info": [
+        "THE IDEA",
+        "Chat becomes a game mechanic",
+        "1. Viewers suggest a rule",
+        "2. The streamer reviews it",
+        "3. The game applies it"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-2.mp3",
+      "voice_duration": 10.893063,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "explainer",
+      "kind": "diagram",
+      "file": "",
+      "duration_frames": 420,
+      "title": "HOW ONE RULE CHANGES THE GAME",
+      "source": "3D explanation · illustrated, not gameplay footage",
+      "narration": "",
+      "voice_file": null,
+      "voice_duration": 0,
+      "voice_offset": 0,
+      "info": [],
+      "trim_in_seconds": 0,
+      "start_frame": 1650
+    },
+    {
+      "name": "twitch",
+      "kind": "video",
+      "file": "demo/real-proposal-held.mp4",
+      "duration_frames": 720,
+      "start_frame": 2070,
+      "title": "A REAL TWITCH PROPOSAL",
+      "source": "Actual Twitch-source controller recording",
+      "narration": "This real Twitch message became a proposal: every third coin reverses gravity for four seconds. The streamer has already approved it, and the viewer keeps the credit.",
+      "trim_in_seconds": 0,
+      "info": [
+        "THE PROPOSAL",
+        "Every third coin → reverse gravity",
+        "From real Twitch chat",
+        "Author credit is preserved",
+        "Approved before filming"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-3.mp3",
+      "voice_duration": 9.691375,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "approval",
+      "kind": "video",
+      "file": "demo/approval.mp4",
+      "duration_frames": 900,
+      "start_frame": 2790,
+      "title": "THE STREAMER DECIDES",
+      "source": "Actual Twitch-source controller recording",
+      "narration": "Chat cannot activate a rule by itself. This proposal was approved before recording. I review its exact trigger and effect, then start the round. One approved rule controls this arena.",
+      "trim_in_seconds": 4,
+      "info": [
+        "STREAMER CONTROL",
+        "Chat proposes. You decide.",
+        "Review trigger + effect",
+        "Start one approved round",
+        "No automatic activation"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-4.mp3",
+      "voice_duration": 11.232625,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "gravity",
+      "kind": "video",
+      "file": "demo/third-coin-and-expiry-held.mp4",
+      "duration_frames": 840,
+      "start_frame": 3690,
+      "title": "THIRD COIN. REAL GRAVITY.",
+      "source": "Actual Twitch-source gameplay · normal speed",
+      "narration": "On the third coin, acceleration reverses and the player rises toward the ceiling. Four seconds later, gravity returns automatically. Movement and collisions follow the rule.",
+      "trim_in_seconds": 0,
+      "info": [
+        "THE EFFECT",
+        "3 coins. 4 seconds.",
+        "The third coin is the trigger",
+        "Gravity really reverses",
+        "Normal gravity returns"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-5.mp3",
+      "voice_duration": 10.631813,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "play",
+      "kind": "video",
+      "file": "demo/continued-play.mp4",
+      "duration_frames": 660,
+      "start_frame": 4530,
+      "title": "SURVIVE THE SHIFT",
+      "source": "Actual Twitch-source gameplay · normal speed",
+      "narration": "I keep playing with the same keyboard controls. Another third-coin trigger refreshes the effect, while the arena and its solid platforms stay playable.",
+      "trim_in_seconds": 0,
+      "info": [
+        "KEEP PLAYING",
+        "Same controls. New physics.",
+        "A / D to move · Space to jump",
+        "Platforms stay solid",
+        "A repeat trigger refreshes time"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-6.mp3",
+      "voice_duration": 8.724875,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "deadline",
+      "kind": "video",
+      "file": "demo/automatic-round-end-held.mp4",
+      "duration_frames": 600,
+      "start_frame": 5190,
+      "title": "THE ROUND ENDS AUTOMATICALLY",
+      "source": "Later in the same real round · normal speed",
+      "narration": "At the end of the seventy-five-second round, the server closes the result. Effects clear, movement stops, and the final score is delivered.",
+      "trim_in_seconds": 0,
+      "info": [
+        "AUTOMATIC CLEANUP",
+        "A 75-second round",
+        "The real deadline is enforced",
+        "Effects clear when it ends",
+        "The final score is delivered"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-7.mp3",
+      "voice_duration": 7.758313,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "result",
+      "kind": "video",
+      "file": "demo/saved-result-and-download-held.mp4",
+      "duration_frames": 720,
+      "start_frame": 5790,
+      "title": "SAVED AND TRACEABLE",
+      "source": "Actual Twitch-source controller recording",
+      "narration": "The result is confirmed in PostgreSQL. I can download a round record with the rule, its author, the originating message, and observed gameplay events.",
+      "trim_in_seconds": 0,
+      "info": [
+        "TRACEABLE RESULT",
+        "Saved to PostgreSQL",
+        "12 coins · 4 gravity shifts",
+        "Rule + author + message ID",
+        "Download the round record"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-8.mp3",
+      "voice_duration": 9.508563,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "guardrails",
+      "kind": "video",
+      "file": "demo/unsupported-rule.mp4",
+      "duration_frames": 780,
+      "start_frame": 6510,
+      "title": "ONLY SUPPORTED RULES CAN RUN",
+      "source": "Local rehearsal · browser only",
+      "narration": "Unsupported requests cannot be approved. Chat is never executed as code. Supported proposals pass through a bounded queue, and the streamer keeps control over every activation.",
+      "trim_in_seconds": 0,
+      "info": [
+        "BOUNDED INPUT",
+        "Unsupported rules stay blocked",
+        "A constrained rule parser",
+        "Chat never runs as code",
+        "Separate local rehearsal"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-9.mp3",
+      "voice_duration": 10.579563,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "codex",
+      "kind": "video",
+      "file": "demo/codex.mp4",
+      "duration_frames": 1200,
+      "start_frame": 7290,
+      "title": "BUILT AND VERIFIED WITH CODEX",
+      "source": "Actual Codex screen recording",
+      "narration": "I used Codex to build the Go application boundaries, Twitch integration, and TypeScript game engine. Here, Codex reviews the real rule and expiry logic and runs the checks. Tests cover race safety, PostgreSQL persistence, transport failures, and the game behavior.",
+      "trim_in_seconds": 2,
+      "info": [
+        "BUILT WITH CODEX",
+        "From implementation to checks",
+        "Go application boundaries",
+        "Twitch integration + game engine",
+        "Real source inspection + tests"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-10.mp3",
+      "voice_duration": 16.666063,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "source",
+      "kind": "source",
+      "file": "",
+      "duration_frames": 900,
+      "start_frame": 8490,
+      "title": "ACTUAL PROJECT SOURCE",
+      "source": "Read-only source and actual check results",
+      "narration": "The implementation keeps domain rules independent from Twitch and storage. RuleShift Live turns audience suggestions into reversible gameplay changes, with streamer approval and an automatic return to normal gravity.",
+      "trim_in_seconds": 0,
+      "info": [
+        "DESIGNED TO BE CHECKED",
+        "Rules stay independent",
+        "Domain → application ports",
+        "Twitch + PostgreSQL adapters",
+        "Race, storage and UI checks"
+      ],
+      "voice_file": "../voiceover/ruleshiftlive-vo-11.mp3",
+      "voice_duration": 12.852188,
+      "voice_offset": 0.65
+    },
+    {
+      "name": "closing",
+      "kind": "brand",
+      "file": "demo/closing.mp4",
+      "duration_frames": 330,
+      "start_frame": 9390,
+      "title": "",
+      "source": "",
+      "narration": "",
+      "trim_in_seconds": 0,
+      "info": [],
+      "voice_file": null,
+      "voice_duration": 0,
+      "voice_offset": 0
+    }
+  ],
+  "source_cuts": [
+    {
+      "file": "twitch-broadcast-proof.mp4",
+      "shot": "actual-public-broadcast",
+      "source_in_seconds": 0,
+      "source_out_seconds": 8,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
+    {
+      "file": "overview-raw.webm",
+      "shot": "overview",
+      "source_in_seconds": 2.963,
+      "source_out_seconds": 15.109000000000002,
+      "hold_last_frame_seconds": 1.3539999999999992,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "real-proposal",
+      "source_in_seconds": 14.013,
+      "source_out_seconds": 21.622,
+      "hold_last_frame_seconds": 4.391,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "approval",
+      "source_in_seconds": 21.622,
+      "source_out_seconds": 40.623,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "third-coin-and-expiry",
+      "source_in_seconds": 40.623,
+      "source_out_seconds": 53.715,
+      "hold_last_frame_seconds": 0.9079999999999941,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "continued-play",
+      "source_in_seconds": 56.092,
+      "source_out_seconds": 67.092,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "automatic-round-end",
+      "source_in_seconds": 104.823,
+      "source_out_seconds": 113.268,
+      "hold_last_frame_seconds": 1.5549999999999926,
+      "playback_rate": 1
+    },
+    {
+      "file": "live-raw.webm",
+      "shot": "saved-result-and-download",
+      "source_in_seconds": 113.268,
+      "source_out_seconds": 122.033,
+      "hold_last_frame_seconds": 3.2349999999999994,
+      "playback_rate": 1
+    },
+    {
+      "file": "rehearsal-raw.webm",
+      "shot": "unsupported-rule",
+      "source_in_seconds": 9.864,
+      "source_out_seconds": 22.864,
+      "hold_last_frame_seconds": 0,
+      "playback_rate": 1
+    }
+  ],
+  "limits": [
+    "Public Twitch excerpt shows the app idle; gameplay is a separate verified real Twitch-source round.",
+    "The approved proposal was approved before filming; no approval click is invented.",
+    "The 3D explanation is an illustration, not additional gameplay evidence.",
+    "Unsupported-input footage is explicitly labelled local rehearsal.",
+    "Mouse and keyboard inputs were automated, without game-clock acceleration."
+  ],
+  "vo_embedded": true,
+  "subtitles": true,
+  "narration_source": "Eleven audio recordings supplied by the user under submission/video/voiceover",
+  "subtitles_language": "en",
+  "music_source": "Original procedural neon/sci-fi composition, with narration ducking"
+}

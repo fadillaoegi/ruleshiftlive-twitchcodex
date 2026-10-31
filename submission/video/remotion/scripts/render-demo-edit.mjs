@@ -1,6 +1,6 @@
 import {bundle} from '@remotion/bundler';
 import {getCompositions,renderStill} from '@remotion/renderer';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,access} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
@@ -14,6 +14,14 @@ const assets=resolve(project,'public');
 const work=resolve(project,'../../../.local/video-demo-edit');
 await mkdir(work,{recursive:true});await mkdir(resolve(out,'previews'),{recursive:true});
 const plan=JSON.parse(await readFile(resolve(assets,'demo/edit-plan.json'),'utf8'));
+let previous=null;
+if(process.argv.includes('--reuse-verified-parts')) {
+  const root=resolve(project,'../../../');
+  const currentCapture=JSON.parse(await readFile(resolve(root,'submission/video/captures/live-capture.json'),'utf8'));
+  const previousCapture=JSON.parse(await readFile(resolve(root,'.local/video-before-refresh/captures/live-capture.json'),'utf8'));
+  if(!currentCapture.completed||currentCapture.round_id!==previousCapture.round_id)throw new Error('Part reuse requires the same verified gameplay capture.');
+  previous=JSON.parse(await readFile(resolve(root,'.local/video-before-refresh/demo/edit-plan.json'),'utf8'));
+}
 if(plan.duration_seconds>=180)throw new Error('Demo must remain below three minutes');
 const browserExecutable=process.env.CHROME_PATH??'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const chromiumOptions={gl:'angle'};
@@ -29,6 +37,12 @@ for(const c of plan.chapters) {
   const duration=c.duration_frames/60;
   const target=resolve(work,`${c.name}.mp4`);
   const frame=c.start_frame+Math.round(c.duration_frames*.58);
+  const prior=previous?.chapters.find(p=>p.name===c.name);
+  const same=prior&&['kind','file','duration_frames','title','source'].every(key=>prior[key]===c[key]);
+  if(same) {
+    await access(target);
+    parts.push(target);console.log(`Reused verified unchanged edit part: ${c.name}`);continue;
+  }
   if(c.kind==='brand') {
     run(['-i',resolve(assets,c.file),'-t',String(duration),...encode,target]);
   } else if(c.kind==='video') {
