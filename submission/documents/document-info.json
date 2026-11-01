@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-10-31T20:53:21.702416+00:00",
+  "brief": "ruleshift-live-project-brief.pdf",
+  "brief_pages": 4,
+  "poster": "ruleshift-live-poster-a3.pdf",
+  "poster_pages": 1,
+  "language": "en",
+  "demo_video": "https://youtu.be/AvWHm6U2jUs",
+  "repository_provided": true,
+  "recorded_codex_session": "01a18796-7169-7d23-a967-e2dd8079a7fb",
+  "pdf_text_checks": "passed",
+  "visual_review": "Passed: all four A4 pages and the A3 page rendered through PDFKit and visually inspected; no clipping or overlaps.",
+  "limits": [
+    "Supplementary project brief; not a full Devpost eligibility/submission certification.",
+    "YouTube oEmbed metadata is reachable, but complete unauthenticated playback has not been verified."
+  ]
+}

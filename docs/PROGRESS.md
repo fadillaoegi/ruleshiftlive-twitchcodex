@@ -667,3 +667,47 @@ three-minute limit and includes Twitch and genuine Codex footage. YouTube
 publication, judge repository access and final entry/eligibility details
 remain separate. No Git operations, application code or database changes
 were made; application tests were not repeated for this media-only change.
+
+## 2026-11-01 — submission artwork and supporting PDFs
+
+The entrant subsequently supplied
+`https://github.com/fadillaoegi/ruleshiftlive-twitchcodex`. Unauthenticated GitHub
+REST calls confirm public visibility and accessible README content. Updated
+the submission copy, readiness record, link data and brief's source link.
+Remote source/asset completeness and independent installation remain unverified;
+no clone, Git management, publication or submission was performed.
+
+Subsequently prepared `submission/DEVPOST-FORM.md`: English copy for the
+project name, tagline, story, Codex contribution, tags, video and asset fields.
+Checked official submission requirements and the public submission-management
+link. Repository URL and principal-session confirmation remain entrant actions;
+no authenticated fields were filled and no submission was sent. This is a
+documentation-only change; application checks were not repeated.
+
+Created original English promotional artwork with Remotion using the existing
+lightning logo, original pixel sprite, navy grid and cyan/pink app palette.
+Exports include a 3840 x 2160 YouTube thumbnail (plus 1280 x 720 alternative),
+an 1800 x 1200 Devpost cover, and a 3508 x 4961 A3 poster. Perspective frames
+contain actual verified gravity-reversal footage; decorative coins/sprites
+are illustrations. Platform dimensions and JPEG byte limits were checked
+against official YouTube and Devpost guidance.
+
+Created a four-page A4 project brief and one-page A3 poster PDF in
+`submission/documents/`. The brief covers interaction, constrained parsing,
+actual physics, streamer control, implementation/Codex contribution, recorded
+session, setup and bounded evidence. Every page was rendered with native
+PDFKit and visually inspected. Embedded font subsets, page counts, text and
+clickable demo/rules links passed inspection. A Devpost headline/frame
+overlap was corrected before final export. Remotion typecheck passed.
+
+Recorded the user-supplied https://youtu.be/AvWHm6U2jUs. Official unauthenticated
+YouTube oEmbed returns the expected title and FLdev channel; full playback and
+identity with the local final MP4 are not verified. The PDF explicitly records
+that repository access still needs a URL and that the recorded implementation
+session needs confirmation as the principal thread. Supporting PDFs do not
+certify the complete entry or participant eligibility. No Git, application,
+database or paid API changes were performed.
+
+Native Vision decoded the QR in the final poster JPEG, rendered A3 PDF and
+brief page one to the exact supplied YouTube URL. Sandbox image-processing
+restrictions required approved local verification outside the sandbox.

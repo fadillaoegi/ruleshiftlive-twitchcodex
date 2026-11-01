@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-10-31T20:31:13.710Z",
+  "renderer": "Remotion code-native artwork; real RuleShift logo, original pixel sprite and actual gameplay capture",
+  "masters": [
+    {
+      "file": "masters/logo.png",
+      "width": 160,
+      "height": 160
+    },
+    {
+      "file": "masters/youtube-thumbnail.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "file": "masters/devpost-cover.png",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "file": "masters/poster-a3.png",
+      "width": 3508,
+      "height": 4961
+    }
+  ],
+  "youtube_ratio": "16:9",
+  "devpost_ratio": "3:2",
+  "poster_format": "A3 portrait at approximately 300 dpi",
+  "reference_video": "https://youtu.be/AvWHm6U2jUs",
+  "generated_gameplay": false,
+  "paid_generation_calls": 0
+}

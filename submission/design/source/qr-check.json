@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "decoder": "macOS Vision VNDetectBarcodesRequest, CPU mode",
+  "expected_url": "https://youtu.be/AvWHm6U2jUs",
+  "checked_files": [
+    "submission/design/poster-a3.jpg",
+    "submission/documents/previews/ruleshift-live-poster-a3-page-1.png",
+    "submission/documents/previews/ruleshift-live-project-brief-page-1.png"
+  ],
+  "result": "All three QR codes decode to the exact supplied YouTube URL.",
+  "environment_note": "Vision image processing failed inside the sandbox; the same local verification command succeeded with approved access."
+}

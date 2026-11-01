@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-10-31T20:53:48.377737+00:00",
+  "files": [
+    {
+      "file": "submission/design/youtube-thumbnail.jpg",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "bytes": 614453,
+      "sha256": "4c582854cc497f25183ccd2b6f415538a75e2e265b619b52af14ac35aab29140"
+    },
+    {
+      "file": "submission/design/youtube-thumbnail-1280.jpg",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "bytes": 146295,
+      "sha256": "3cb2b15a4e71bdafeabbb282cd9d0e0048306b259e69bb04fd34c79ae2dd2a95"
+    },
+    {
+      "file": "submission/design/devpost-cover.jpg",
+      "dimensions": [
+        1800,
+        1200
+      ],
+      "bytes": 253902,
+      "sha256": "5b6ca426d331ea25145dba362bea6cf0add9344e050d83af0f8f0b2ed41b901a"
+    },
+    {
+      "file": "submission/design/poster-a3.jpg",
+      "dimensions": [
+        3508,
+        4961
+      ],
+      "bytes": 1053833,
+      "sha256": "8cf113969774b5abc9394b13cb73345016de1a2563f87a9bf0a0d00c0a41f5b7"
+    },
+    {
+      "file": "submission/documents/ruleshift-live-project-brief.pdf",
+      "pages": 4,
+      "bytes": 1300011,
+      "sha256": "f7b192f70267307b9be6aa77b3546a06f214db51b0b5518a71f171ea06bc4f03",
+      "uri_annotations": [
+        "https://youtu.be/AvWHm6U2jUs",
+        "https://youtu.be/AvWHm6U2jUs",
+        "https://youtu.be/AvWHm6U2jUs",
+        "https://github.com/fadillaoegi/ruleshiftlive-twitchcodex",
+        "https://twitchcon-codex.devpost.com/rules"
+      ],
+      "embedded_font_subsets": [
+        "/AAAAAA+Arial-Black",
+        "/AAAAAA+Arial-BoldMT",
+        "/AAAAAA+ArialMT",
+        "/AAAAAA+CourierNewPS-BoldMT",
+        "/AAAAAA+CourierNewPSMT"
+      ]
+    },
+    {
+      "file": "submission/documents/ruleshift-live-poster-a3.pdf",
+      "pages": 1,
+      "bytes": 1252203,
+      "sha256": "a385a29c259c18235d548ad875e407a6461da0ea9cd8bf28135116b07c3d43a2",
+      "uri_annotations": [
+        "https://youtu.be/AvWHm6U2jUs"
+      ],
+      "embedded_font_subsets": []
+    }
+  ],
+  "remotion_typecheck": "passed",
+  "visual_review": "Passed after fixing a Devpost headline/frame overlap. All artwork and every PDF page inspected.",
+  "qr_review": {
+    "status": "passed",
+    "decoder": "macOS Vision VNDetectBarcodesRequest, CPU mode",
+    "expected_url": "https://youtu.be/AvWHm6U2jUs",
+    "checked_files": [
+      "submission/design/poster-a3.jpg",
+      "submission/documents/previews/ruleshift-live-poster-a3-page-1.png",
+      "submission/documents/previews/ruleshift-live-project-brief-page-1.png"
+    ],
+    "result": "All three QR codes decode to the exact supplied YouTube URL.",
+    "environment_note": "Vision image processing failed inside the sandbox; the same local verification command succeeded with approved access."
+  },
+  "youtube_metadata": "Official unauthenticated oEmbed reachable; title/channel match. Full playback and local-edit identity not verified.",
+  "gameplay_source": "Actual separate verified Twitch-source capture; promotional sprite/coin accents and perspective frame are illustrations.",
+  "application_changes": false,
+  "paid_generation_calls": 0
+}

@@ -298,3 +298,47 @@ Remotion typecheck and script syntax passed. The work uses actual captured
 Twitch/app/Codex footage, separately labelled rehearsal and diagram animation.
 Local transcription never uploaded the supplied audio, and no paid API,
 YouTube publication, Git operation or application/database change occurred.
+
+## November 1 — promotional package and project brief
+
+The user supplied the public repository
+`https://github.com/fadillaoegi/ruleshiftlive-twitchcodex`. Public metadata and
+README retrieval succeeded through unauthenticated GitHub REST calls. The
+project brief and form copy now include that URL. This checks viewing access,
+not independent installation or remote source/asset completeness. No Git or
+external submission action was performed.
+
+The subsequent `DEVPOST-FORM.md` provides English submission copy matched to
+implemented behavior and bounded evidence, plus video/asset field mapping.
+Official requirements and the public submission-management URL were checked.
+No authenticated form entry, repository action or final submission occurred.
+
+Codex created editable Remotion artwork and upload-ready exports under
+`design/`: a 4K YouTube thumbnail, 1280 x 720 alternative, 3:2 Devpost cover
+and A3 poster. The existing app logo, original sprite and actual verified
+gravity-reversal screenshot establish the visual identity. Large sprite/coin
+accents and the perspective screen frame are promotional illustrations.
+
+`documents/` contains a four-page English A4 brief plus an A3 poster PDF.
+Content explains chat intake, review, actual temporary gravity changes,
+storage, architecture, Codex assistance and local evaluation. The brief keeps
+public idle-app broadcast, separate Twitch-source gameplay, client-reported
+events and local rehearsal distinct. It does not invent an on-stream approval
+click, independent physics telemetry or a repository URL.
+
+Remotion typecheck, JPEG dimensions/size limits, PDF page counts, extracted
+content, embedded fonts and URI annotations passed. All artwork and five PDF
+pages were visually reviewed after native PDFKit rendering; a cover overlap
+was corrected. Reproduction scripts, platform sources and output hashes are
+included with the assets.
+
+The user supplied https://youtu.be/AvWHm6U2jUs. Official YouTube oEmbed is
+reachable without authentication and returns the expected title and FLdev
+channel. Complete playback and equivalence to the local final MP4 remain
+unverified. Repository/judge access, principal session selection, final
+Devpost fields and entrant eligibility remain separate. No publication,
+Git action, paid API or application/database mutation occurred in this work.
+
+The final poster and both rendered PDF QR codes also decoded successfully
+to the exact supplied YouTube URL using native Vision after approved local
+image-processing access. See `design/source/qr-check.json`.

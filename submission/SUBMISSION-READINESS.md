@@ -1,4 +1,4 @@
-# Submission readiness — updated October 31, 2026
+# Submission readiness — updated November 1, 2026
 
 **Latest video update — November 1:** [`video/final/ruleshift-demo-final.mp4`](video/final/ruleshift-demo-final.mp4) is the complete **02:42** Remotion film with eleven supplied voice clips, 41 English subtitle cues, original backsound and an informative 3D rule diagram. Final decode, timing, audio and encoded visual checks passed. Earlier `video/demo/` versions remain separate. Entry publication and non-video requirements below are still separate.
 
@@ -20,11 +20,11 @@ entrant eligibility and acceptance remain subject to the organizer's rules.
 | Twitch interaction built with Codex | Demonstrated | Real OAuth/EventSub, controlled chat intake, approval and a playable round; see CODEX-EVIDENCE.md and docs/evidence/twitch-*.json. |
 | Intended-platform functionality | Locally demonstrated | Go/Vite startup, PostgreSQL integration, web tests/build and Chrome rehearsal passed. The user played a real-source round; 45 coins and finished storage matched direct SQL. Independent installation remains unverified. |
 | New work during the entry period | Consistent with local records | Development evidence begins October 29, within the October 23–November 2 period. The entrant must confirm originality and provenance. |
-| Repository access for judges | Unverified | No submission repository URL or judge-access confirmation was found in project materials. Supply complete source/assets/setup instructions and keep access free during judging. Repository publication/settings belong to the user. |
-| Project description | Pending | README and development evidence exist, but no final Devpost description was found. Explain the experience and how Codex contributed; match actual behavior. |
+| Repository access for judges | Public metadata and README verified | User supplied https://github.com/fadillaoegi/ruleshiftlive-twitchcodex. Unauthenticated GitHub API returns public visibility and README content. Independent installation and completeness of remote source/assets remain unverified. Repository management belongs to the user. |
+| Project description | Draft prepared | `DEVPOST-FORM.md` contains English project name, tagline, story, Codex contribution, technology tags, video URL and upload mapping. Entrant review and saving/final submission in Devpost remain unverified. |
 | Codex session identifier | Needs selection check | codex-session.json records the initial implementation thread. The current continuation thread differs. Confirm the recorded identifier corresponds to the thread containing most of the build before entering it. |
-| YouTube demonstration | Actual Twitch capture and final edit prepared; publication pending | `video/demo/` contains the updated 158.5-second Remotion edit and timed English voice-over text, including eight seconds of actual public Twitch broadcast. The new real-source round has matching video/controller/PostgreSQL evidence; approval occurred before filming and is described accurately. The earlier 129.5-second archival review remains separate. No YouTube URL is verified. The FAQ permits public or unlisted viewing; private video is unsuitable. |
-| English submission materials | Partially ready | UI/docs and the timed spoken-narration script are English. No subtitles were requested or embedded. Final description and judge instructions remain to be completed. |
+| YouTube demonstration | User URL supplied; metadata reachable | User video: https://youtu.be/AvWHm6U2jUs. Official unauthenticated oEmbed returns the expected RuleShift Live title and FLdev channel. Complete playback and correspondence to the local 02:42 final MP4 remain unverified. `video/final/` includes English narration, subtitles, actual public broadcast footage and separate verified Twitch-source gameplay/Codex footage. |
+| English submission materials | Supporting package ready | English UI/docs, narration, 41 subtitle cues, promotional artwork and a four-page project brief are prepared. Final Devpost description/fields and repository access remain separate. See `design/README.md`. |
 | Participant eligibility | Unverified | Confirm age, legal residence, individual/team entry, conflicts and any team representative. No identity documents were requested or inspected. |
 | Ownership and third-party permissions | Partially assessed | Visual asset provenance is documented. Verify dependency terms, all submitted material permissions and ownership. Avoid unrelated streamer footage/music in the demo. No particular open-source license is mandated by this audit. |
 | Devpost registration/final submission | Unverified | Confirm joined status, fill required fields, and verify the project displays Submitted. A draft alone is insufficient. |
@@ -72,10 +72,10 @@ has not been measured.
 
 ## Remaining order of work
 
-1. Review the final demo and record/mix its separate English voice-over if desired.
+1. Review the complete narrated and subtitled 02:42 final demo.
 2. Prepare the English Devpost description using the verified behavior.
-3. Upload the actual Twitch/Codex demonstration to YouTube and verify viewing access.
-4. Supply the repository URL, confirm judge access and reproducible setup, and
+3. Verify complete unauthenticated playback of the supplied YouTube link and that it contains the final intended edit.
+4. Keep the supplied repository accessible, confirm reproducible setup, and
    review the user-managed export for credentials and third-party material.
 5. Confirm the principal Codex session, entrant eligibility and ownership, then
    complete Devpost and verify Submitted before the deadline.

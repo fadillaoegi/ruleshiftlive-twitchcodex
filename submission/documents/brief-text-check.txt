@@ -1,0 +1,122 @@
+RULESHIFT
+LIVE
+PROJECT BRIEF / 2026
+01 / THE EXPERIENCE
+Chat writes the rules.
+CODEX x TWITCHCON / RULESHIFT LIVE
+01 / 04
+You survive them.
+An interactive browser game for Twitch streamers. Viewers propose a supported rule; the
+streamer approves it; the arena changes its actual physics for a bounded time.
+Actual Twitch-source gameplay capture: the third coin has reversed gravity. The public broadcast excerpt is a separate recording.
+3
+COINS
+Triggers the demo rule
+4
+SECONDS
+Then gravity restores
+75
+SECOND ROUND
+One active rule at a time
+WATCH THE 02:42 DEMO
+youtu.be/AvWHm6U2jUs
+English narration, subtitles, real application footage and Codex development footage.
+
+RULESHIFT
+LIVE
+PROJECT BRIEF / 2026
+02 / INTERACTION AND CONTROL
+From chat to game physics.
+CODEX x TWITCHCON / RULESHIFT LIVE
+02 / 04
+01
+CHAT
+A real viewer sends a
+supported !rule
+proposal.
+02
+REVIEW
+The streamer inspects
+the trigger and effect.
+03
+PLAY
+One approved rule
+changes the active
+arena.
+04
+SAVE
+The completed result is
+acknowledged in
+PostgreSQL.
+THE DEMONSTRATED MESSAGE
+!rule Every third coin flips gravity for 4 seconds
+WHAT ACTUALLY CHANGES
+On each third coin, acceleration reverses and the player rises toward the solid ceiling. Four seconds
+later, normal gravity returns automatically. A repeat trigger refreshes the effect timer; it never stacks a
+permanent reversal.
+STREAMER CONTROL AND INPUT LIMITS
+Approval is explicit. Chat cannot activate a rule by itself. One approved rule controls one active round.
+The parser is constrained. Supported triggers are 2-10 coins and durations are 1-6 whole seconds.
+Unsupported requests cannot be approved; chat is never executed as code.
+Attribution stays attached. The proposal, rule, originating message and author remain traceable. A
+downloadable controller record preserves bounded observed events.
+Milestone scope: one local streamer, one backend process and one arena. No runtime AI provider or paid inference is
+required.
+
+RULESHIFT
+LIVE
+PROJECT BRIEF / 2026
+03 / IMPLEMENTATION AND VERIFICATION
+Built with Codex.
+CODEX x TWITCHCON / RULESHIFT LIVE
+03 / 04
+BROWSER CONTROLLER
+React + TypeScript + Canvas 2D: movement, collisions, gravity effects and observed events.
+GO APPLICATION AND DOMAIN
+Validated rules and round transitions. Application ports point inward; transport, Twitch and persistence are
+separate.
+INFRASTRUCTURE ADAPTERS
+Twitch OAuth + EventSub WebSocket chat intake. PostgreSQL 18 repositories persist proposals and
+results.
+HOW CODEX CONTRIBUTED
+Codex assisted with the Go boundaries, Twitch integration, TypeScript game engine, startup tooling and
+verification. Actual development footage shows source inspection and the verification commands running.
+Recorded checks cover race safety, persistence, HTTP behavior, constrained parsing, game behavior and
+the web build.
+Actual cropped Codex recording. It is development evidence, not a generated terminal interface.
+RECORDED IMPLEMENTATION SESSION
+01a18796-7169-7d23-a967-e2dd8079a7fb
+Source: submission/codex-session.json. Confirm that this is the thread containing most of the project build before selecting the
+principal session for the entry.
+
+RULESHIFT
+LIVE
+PROJECT BRIEF / 2026
+04 / WHAT IS VERIFIED
+Evidence and judge access.
+CODEX x TWITCHCON / RULESHIFT LIVE
+04 / 04
+Real Twitch-source round: 12 coins, four gravity shifts, automatic completion and a confirmed
+PostgreSQL result. The first third-coin effect expired after 4,002 ms. Downloaded controller events,
+backend state and a direct read-only database query match.
+EVIDENCE BOUNDARIES
+The public Twitch excerpt shows the app idle in a real broadcast. Gameplay close-ups are a separate verified
+Twitch-source round. The proposal was approved before filming. Rehearsal and 3D explanation are labelled
+separately. Scores and effect timestamps remain controller-reported observations.
+LOCAL EVALUATION
+Use Node 24+, Go 1.26+ and an existing PostgreSQL 18 server with dedicated application/test databases. Install
+web dependencies with npm ci in web/. Copy the backend environment example without overwriting existing
+settings, then configure database URLs and your own Twitch app credentials privately.
+node scripts/doctor.mjs
+node scripts/verify.mjs
+node scripts/dev.mjs --live
+Open http://localhost:5174, connect the broadcaster account, send the example rule in that real channel and use A/D or
+arrow keys plus Space. The exact OAuth callback is http://localhost:8080/auth/twitch/callback. Keep tokens and
+credentials out of submission materials.
+ENTRY REFERENCES
+Demo video: youtu.be/AvWHm6U2jUs
+Source: github.com/fadillaoegi/ruleshiftlive-twitchcodex
+Codex x TwitchCon - Official Rules
+The rules require the project, repository access, an English description, the principal Codex session ID and a YouTube demonstration
+shorter than three minutes. This PDF is supporting material, not a replacement for the entry form. Participant eligibility, ownership,
+viewing access and final Submitted status require entrant confirmation.

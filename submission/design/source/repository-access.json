@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-31T20:53:19.853Z",
+  "source": "Unauthenticated GitHub REST API",
+  "repository": "https://github.com/fadillaoegi/ruleshiftlive-twitchcodex",
+  "visibility": "public",
+  "private": false,
+  "default_branch": "main",
+  "readme_path": "README.md",
+  "readme_size": 11142,
+  "limits": [
+    "Public metadata and README retrieval verified; independent installation and remote source/assets completeness not audited."
+  ]
+}
